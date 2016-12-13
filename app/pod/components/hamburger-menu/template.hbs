@@ -1,0 +1,40 @@
+<div class="slide-left-menu">
+    <div class="profile-info">
+        <div class="text-center" style="padding-bottom: 20px">
+            <a href="javascript:void(0);" {{action 'hamburgerClose'}}><img src="assets/images/group-9-copy-12.png"/></a>
+        </div>
+        <ul>
+          {{#if session.isAuthenticated}}
+              <li><a {{action 'moveToProfile'}}>MI CUENTA</a></li>
+            {{#if isWebENV}}
+                <li><a {{action 'moveToCategories'}}>VER CATEGORÍAS</a></li>
+                <li>{{#link-to "home.my-accounts.cards"}}<a {{action 'hamburgerClose'}}>TARJETA DE
+                    CRÉDITO</a>{{/link-to}}
+                </li>
+            {{/if}}
+
+              <li>{{#link-to addressRoute}}<a {{action 'hamburgerClose'}}>CAMBIAR
+                  DIRECCIÓN</a>{{/link-to}}
+              </li>
+              <li><a {{action 'toggleCoupon'}}>INGRESAR CUPÓN</a></li>
+              <li><a {{action 'moveToWhyRappi'}}>¿POR QUÉ RAPPI?</a></li>
+            {{#if isWebENV}}
+                <li><a href="" {{action "logout"}} id="logout">CERRAR SESIÓN</a></li>
+            {{/if}}
+          {{else}}
+              <li><a href="" id="ingresar" {{action "showDialog"}}>INGRESAR</a></li>
+          {{/if}}
+        </ul>
+    </div>
+</div>
+{{#if showModalCoupon}}
+  {{#modal-dialog close="showModalCoupon" translucentOverlay=true}}
+    {{redeem-coupon showModalReg=showModalCoupon}}
+  {{/modal-dialog}}
+{{/if}}
+
+{{#if showModalReg}}
+  {{#modal-dialog close='showDialog' translucentOverlay=true}}
+    {{login-register paypalPanel=true showModalReg=showModalReg showPhoneNumberModel=showPhoneNumberModel showAddressListToUpdate=showAddressListToUpdate showAddAddressToUpdate=showAddAddressToUpdate showAddressList=showAddressList}}
+  {{/modal-dialog}}
+{{/if}}

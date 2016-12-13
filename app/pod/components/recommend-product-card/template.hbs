@@ -1,0 +1,28 @@
+<div class="recommend-product-container {{position}}">
+  <div class="product-image" style="background-image: url('{{url}}uploads/products/medium/{{product.image}}');">
+  </div>
+  <div class="recommend-product">
+    <p class="text-center" {{action 'seeAll' product.store_id product.store_id bubbles=false}}>{{product.store_name}}</p>
+    <h3 class="text-center">{{product.name}}</h3>
+    <p class="description">{{product.description}}</p>
+    <div class="price text-center">
+        <span>{{format-currency product.price}}</span>
+    </div>
+    <div class="toolbar {{if isProductAdded 'productAdded' ''}}">
+      <div class="quantity">
+        <div {{action 'removeFromCart' product bubbles=false}} class="btn-remove-product"><span>-</span></div>
+        <span id='recommend_{{product.id}}' class="preview-item shake shake-slow">
+          {{addedProduct.quantity}}
+        </span>
+        <div {{action 'addToCart' product bubbles=false}} class="btn-add-product"><span>+</span></div>
+      </div>
+      <button {{action 'addProductToCart' product bubbles=false}} class="btn-add">agregar</button>
+    </div>
+  </div>
+</div>
+
+{{#if isShowingModal}}
+  {{#modal-dialog id=product.id close='toggleModal' translucentOverlay=true}}
+    {{product-detail isShowingModal=isShowingModal product=productInfo isProductAdded=isProductAdded addToCart='addToCart'}}
+  {{/modal-dialog}}
+{{/if}}

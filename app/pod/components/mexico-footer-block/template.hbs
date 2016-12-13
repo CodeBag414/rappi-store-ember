@@ -1,0 +1,24 @@
+<div class="block-copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="hecho_con">
+                    <span>Hecho con</span>
+                    <span class="icon-heart"></span>
+                    <span>en Latinoamérica</span>
+                </div>
+            </div>
+            <div class="col-sm-12 text-center text-copyright">
+                <span>&#169; 2016 RAPPI. Todos los derechos reservados</span>
+                <br>
+              {{#unless serverUrl.payPalENV}}
+                <a {{action 'privacy'}}>Aviso de privacidad</a> | <a {{action 'terms'}}>Términos y condiciones</a>
+              {{/unless}}
+            </div>
+            <div class="col-sm-12 text-center" style="color: white;">
+                BOGOTÁ (1) 3163526 MEDELLIN (4) 6045664 BARRANQUILLA (5) 3853213 CALI (2) 4862047
+            </div>
+        </div>
+    </div>
+</div>
+{{yield}}

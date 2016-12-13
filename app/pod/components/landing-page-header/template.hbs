@@ -1,0 +1,99 @@
+<header id="mainHeader">
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img src="assets/images/logo-rappi.png" alt="logo-rappi"/>
+                    Getawey
+                </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="http://rappiteam.com/" target="_blank">¡ESTAMOS CONTRATANDO!</a></li>
+                    <li><a href="https://itunes.apple.com/us/app/rappi/id984044296?mt=8" target="_blank">iOS</a></li>
+                    <li><a href="https://play.google.com/store/apps/details?id=com.grability.rappi&hl" target="_blank">ANDROID</a>
+                    </li>
+                    <li><a href="http://blog.rappi.com/" target="_blank">BLOG</a></li>
+                </ul>
+            </div>
+            <div class="to-right" style="width:0;">
+              {{#if countryBanner}}
+                  <a href="#" {{action 'countryOption'}}><img src="assets/images/Colombia.png" title="Colombia" style="height: 20px;"></a>
+                  <ul class="landing-country">
+                    {{#if unSelectedCountry}}
+                        <li>
+                            <a href="javascript:void(0);" {{action 'selectCountry' 'mexico'}}>
+                                <img src="assets/images/Mexico.png" style="height: 20px;">
+                            </a>
+                        </li>
+                    {{/if}}
+                  </ul>
+              {{else}}
+              <a href="#" {{action 'countryOption'}}><img src="assets/images/Mexico.png" title="Mexico" style="height: 20px;"></a>
+                  <ul class="landing-country">
+                    {{#if unSelectedCountry }}
+                        <li>
+                            <a href="javascript:void(0);" {{action 'selectCountry' 'colombia'}}>
+                                <img src="assets/images/Colombia.png" style="height: 20px;">
+                            </a>
+                        </li>
+                    {{/if}}
+                  </ul>
+              {{/if}}
+
+            </div>
+            <div class="to-right">
+                <div class="sel-lang">
+                    <ul class="clearfix">
+                        <li>
+                          {{#if session.isAuthenticated}}
+                              Hola,  {{#link-to 'home.my-accounts.profile' class='logged-userName'}}{{session.currentUser.first_name}}{{/link-to}}
+                              <a href="" {{action "logout"}} id="logout">CERRAR SESIÓN</a>
+                          {{else}}
+                              <a href="" {{action "showDialog"}} id="ingresar">ingresar</a>
+                          {{/if}}
+                        </li>
+                    </ul>
+
+                  {{#if showModalReg}}
+                    {{#modal-dialog close='showDialog' translucentOverlay=true}}
+                      {{login-register showLogin=true showModalReg=showModalReg showPhoneNumberModel=showPhoneNumberModel showPhoneNumberVerifyModel=showPhoneNumberVerifyModel showAddressListToUpdate=showAddressListToUpdate showAddAddressToUpdate=showAddAddressToUpdate showAddressList=showAddressList}}
+                    {{/modal-dialog}}
+                  {{/if}}
+                </div>
+            </div>
+
+        </div>
+    </nav>
+</header>
+{{yield}}
+{{#if showAddressListToUpdate}}
+  {{#modal-dialog close='toggleAddressList' translucentOverlay=true}}
+    {{address-change-list toggleAddAddress='toggleAddAddress' showAddressListToUpdate=showAddressListToUpdate showReloadWarning=showReloadWarning}}
+  {{/modal-dialog}}
+{{/if}}
+{{#if showAddAddressToUpdate}}
+  {{#modal-dialog close='switchBWAddressListAddAddress' translucentOverlay=true}}
+    {{add-address flow='login' showAddAddressToUpdate=showAddAddressToUpdate showAddressList=showAddressList showReloadWarning=showReloadWarning showModal=showModal}}
+  {{/modal-dialog}}
+{{/if}}
+
+{{#if showAddressList}}
+  {{#modal-dialog translucentOverlay=true}}
+    {{address-list flow='login' showPopUp=showAddressList showModal=showModal showAddAddress='toggleAddAddress'}}
+  {{/modal-dialog}}
+{{/if}}
+
+{{#if showModal}}
+  {{#modal-dialog close='toggleModal' translucentOverlay=true}}
+    {{landing-page-search-block.store-type-popup latitude=storage.latitude longitude=storage.longitude stores=stores changeStoreType=changeStoreType}}
+  {{/modal-dialog}}
+{{/if}}
+

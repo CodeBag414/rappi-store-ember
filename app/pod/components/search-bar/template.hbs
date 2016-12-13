@@ -1,0 +1,27 @@
+<div class="search-input-container">
+  {{input  value=queryField class="form-control" id="listProductSearchField" class="search-input" placeholder="Agrega productos a tu lista"}}
+
+  {{#unless searching}}
+      <a class="search-button"></a>
+  {{else}}
+      <div class="searching-icon-wrapper">
+          <i class="searching"></i>
+      </div>
+  {{/unless}}
+
+  <ul class="auto-complete">
+    {{#each hits as |hit|}}
+        <li>
+            <div class="product-image">
+              <img src="/assets/images/spite.png" height="70" />
+            </div>
+            <div class="product-info">
+              <h3>{{hit.name}}</h3>
+              <span>500 GR</span>
+              <span class="price">{{format-currency 3000}}</span>
+              <img src="/assets/images/icon-more-white.svg" class="btn-add" {{action "addProduct" hit.id hit.name}}/>
+            </div>
+        </li>
+    {{/each}}
+  </ul>
+</div>

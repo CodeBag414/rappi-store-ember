@@ -1,0 +1,84 @@
+<div class="popUp-wrapper loginPopup">
+    <div class="popUp-Outer text-center">
+        <a href="javascript:void(0)" class="close-global-black" {{action 'closeDeliveryPopup'}}></a>
+
+        <div class="toTable">
+            <div class="loginForm">
+                <div class="formTitle">
+                    <span class=msg-error>{{errorMessage}}</span>
+                </div>
+                <div style={{if showTime 'display:block' 'display:none'}} class="formTitle">
+                    <h1>Programar para:</h1>
+                </div>
+                <form class="form">
+                    <div style={{if showTime 'display:block' 'display:none'}} class="form-group cust-twoArrows
+                    ">
+                    <select class="form-control">
+                        <option>Lo Antes Posible Aproxe 45 min</option>
+                        <option>08:30 PM - 09:00 PM</option>
+                        <option>09:00 PM - 09:30 PM</option>
+                        <option>09:30 PM - 10:00 PM</option>
+                        <option>10:00 PM - 10:30 PM</option>
+                    </select>
+            </div>
+            <div class="tags">
+                <h4>¿Quieres incluir propina?</h4>
+                <ul>
+                    <li>
+                        <a id="no"
+                           href="javascript:void(0)" {{action 'setTip' 0 'no'}} >No</a>
+                    </li>
+                    <li>
+                        <a id="one" class="active"
+                           href="javascript:void(0)" {{action 'setTip' tipValues.one 'one'}}>${{tipValues.one}}</a>
+                    </li>
+                    <li><a id="two"
+                           href="javascript:void(0)" {{action 'setTip' tipValues.two 'two'}}>${{tipValues.two}}</a>
+                    </li>
+                    <li>
+                      {{#if isOtherSelectd}}
+                        {{input class="otro" value=tip }}
+                        {{#if showErrorMessage}}
+                          {{fader-label showFaderLabel=showErrorMessage message='Tip no válido'}}
+                        {{/if}}
+                      {{else}}
+                          <a id="otro"
+                             href="javascript:void(0)" {{action 'setTip' 'Otro' 'otro'}}>Otro</a>
+                      {{/if}}
+                    </li>
+                </ul>
+            </div>
+            <div class="seprator mTop"></div>
+            <h4 class="form-heading">Modo de pago:</h4>
+
+            <div class="btn-block">
+              {{#if serverUrl.payPalENV}}
+                {{#if isTabIdUsed}}
+                    <span class="hvr-pulse-shrink text-danger">Lo sentimos, ya ha recibido el pedido con esta sesión. Por favor, de nuevo de aplicación para otro fin.</span>
+                {{else}}
+                  {{#if paypalProcess}}
+                      <div class="hvr-pulse-shrink btn btn-green">por favor espera...</div>
+                  {{else}}
+                      <input disabled={{disablePaypal}} type="image" src="assets/images/btn_13.png" {{action 'payPal' }}
+                             alt="Submit">
+                  {{/if}}
+                {{/if}}
+              {{else}}
+                {{#if creditProcess}}
+                    <div class="hvr-pulse-shrink btn btn-green" style="min-width:420px;">por favor espera...</div>
+                {{else}}
+                    <button type="submit" class="btn btn-green btn-greenMargin" {{action 'creditCard' 'cc'}}>TARJETA
+                        DE CRÉDITO
+                    </button>
+                    <button type="submit" class="btn btn-green btn-greenMargin" {{action 'creditCard' 'cash'}}>
+                        EFECTIVO
+                    </button>
+                {{/if}}
+              {{/if}}
+
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>

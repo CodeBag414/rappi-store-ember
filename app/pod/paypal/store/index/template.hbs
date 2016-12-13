@@ -1,0 +1,117 @@
+<!-- ..................................  main page content starts ..............................  -->
+<main {{ action "click" }} style="position:relative;">
+    <!-- ..................................  carousel section .................................... -->
+  {{#if restaurantsView}}
+    {{#if showAllRestaurantHere}}
+            <div class="product-listing restaurant-items">
+                <div class="container">
+                    <div class="breadcrumbBox row mt-Bottom30">
+                        <div class="col-sm-12">
+                            <ol class="breadcrumb">
+                                <li><a href="#">Inicio</a></li>
+                                <li>{{#link-to 'paypal.store' storeTypeName }}  {{storeTypeName}}{{/link-to}}</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="carrusel-products row">
+                      {{#each model.stores as |store|}}
+                        {{#unless store.empty}}
+                          {{#each store.corridors as |corridors|}}
+                            {{restaurant-home corridors=corridors productList='productList' routeName='paypal.corridor'}}
+                          {{else}}
+                              <h2>No se ha encontrado ningún restaurante aquí</h2>
+                          {{/each}}
+                        {{/unless}}
+                      {{else}}
+                          <h2 >Lo sentimos &#9785;, no tenemos restaurantes disponibles para este horario y ubicación</h2>
+                      {{/each}}
+                    </div>
+                </div>
+            </div>
+    {{else}}
+      <div class="product-listing restaurant-items">
+          <div class="container">
+              <div class="breadcrumbBox row mt-Bottom30">
+                  <div class="col-sm-12">
+                      <ol class="breadcrumb">
+                          <li><a href="#">Inicio</a></li>
+                          <li class="active">{{storeTypeName}}</li>
+                      </ol>
+                  </div>
+              </div>
+            {{#link-to 'paypal.store.all' storeTypeName }}
+                <button class="btn product-all hvr-bounce-to-bottom">ver todos</button>{{/link-to}}
+            {{#each model.stores as |store|}}
+              {{#unless store.empty}}
+                  <!-- ................  product listing head .....................  -->
+                  <div class="row row-product-head mt-top60">
+                      <div class="col-sm-12">
+                          <h2 id={{store.id}}>
+                            {{name-parser store.name}}
+                          </h2>
+                      </div>
+                  </div>
+                  <div class="carrusel-products row">
+                    {{#each store.corridors as |corridors|}}
+                      {{restaurant-home corridors=corridors productList='productList' routeName='paypal.corridor'}}
+                    {{else}}
+                        <h2>No se ha encontrado ningún restaurante aquí</h2>
+                    {{/each}}
+                  </div>
+              {{/unless}}
+            {{else}}
+                <h2>Lo sentimos &#9785;, no tenemos restaurantes disponibles para este horario y ubicación</h2>
+            {{/each}}
+          </div>
+      </div>
+    {{/if}}
+    {{else}}
+    {{#if corridorsCount}}
+
+      <div class="subcategory-menu">
+        <div class="arrow-top">
+        </div>
+        <div class="subcorridors-listing">
+        </div>
+      </div>
+    {{/if}}
+
+      <div class="product-listing">
+          <div class="container">
+              <div class="breadcrumbBox row mt-Bottom30">
+                  <div class="col-sm-12">
+                      <ol class="breadcrumb">
+                          <li><a href="#">Inicio</a></li>
+                          <li class="active">{{storeTypeName}}</li>
+                      </ol>
+                  </div>
+              </div>
+            {{#each model.stores as |store|}}
+              {{#each store.corridors as |corridors|}}
+                  <!-- ................  product listing head .....................  -->
+                  <div class="row row-product-head mt-top60">
+                      <div class="col-sm-12">
+                          <h2 id="sc{{corridors.id}}">{{name-parser corridors.name}}
+                                <button {{action 'seeAll' 'paypal.corridor' corridors.id store.store_id }} class="btn product-all hvr-bounce-to-bottom">ver todos</button>
+                          </h2>
+                      </div>
+                  </div>
+                  <div class="carrusel-products row">
+                    {{#each corridors.products as |product|}}
+                        <!-- ................  main product listing .....................  -->
+                      {{product-card product=product  newCartAdded='newCartAdded'}}
+                    {{/each}}
+                  </div>
+              {{/each}}
+            {{else}}
+                <h2>Lo sentimos &#9785;, no tenemos productos disponibles para este horario y ubicación</h2>
+            {{/each}}
+
+          </div>
+      </div>
+  {{/if}}
+</main>
+{{landing-page-popular-search-block storeType=storeType}}
+<div class="{{if basketOpenned 'basket-overlay' ''}}">
+  {{shopping-basket overflow=overflow storeType=storeType basketOpenned=basketOpenned}}
+</div>

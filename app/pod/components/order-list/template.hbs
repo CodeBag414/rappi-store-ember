@@ -1,0 +1,7 @@
+<div>
+    <ul class="list-group">
+      {{#each rappiOrder as |orderObj|}}
+          <li {{action 'showStatus' orderObj.id }} class="list-group-item">Order ID: {{orderObj.id}} </li>
+      {{/each}}
+    </ul>
+</div>

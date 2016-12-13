@@ -1,0 +1,128 @@
+.lists-container {
+  margin-top: 120px;
+  background-color: #ffffff;
+  position: relative;
+  .title-block {
+    width: 1130px;
+    margin: 0 auto;
+    padding-top: 70px;
+    h1 {
+      font-family: 'Montserrat' !important;
+			font-size: 32px;
+			font-weight: 500;
+			font-style: normal;
+			font-stretch: normal;
+			letter-spacing: 1px;
+			text-align: center;
+			color: #333333;
+			margin:0;
+		}
+		hr {
+			width: 60px;
+	  	height: 1px;
+	  	background-color: #a6a5a5;
+			margin-top: 25px;
+			margin-bottom: 30px;
+		}
+    p {
+      width: 400px;
+      margin: 0 auto;
+      font-family: 'Raleway' !important;
+      font-size: 14px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.43;
+      letter-spacing: 0.9px;
+      text-align: center;
+      color: #899195;
+    }
+  }
+  .list-cards-container {
+    width: 1160px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 60px auto;
+    .list-create-card {
+      width: 260px;
+      height: 340px;
+      background-color: #ffffff;
+      border: solid 1px #e1e1e1;
+      display: flex;
+      align-items: center;
+      margin: 15px;
+      transition: all 0.3s ease;
+      .icon-wrapper {
+        width: 122px;
+        margin:0 auto;
+        text-align: center;
+        p {
+          font-family: 'Montserrat' !important;
+          font-size: 14px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: 1.29;
+          letter-spacing: 1.5px;
+          text-align: center;
+          color: #333333;
+          margin-top: 29px;
+        }
+      }
+      &:hover {
+        border: solid 1px #44d481;
+        cursor: pointer;
+      }
+    }
+    .list-card {
+      width: 260px;
+      height: 340px;
+      background-color: #ffffff;
+      border: solid 1px #e1e1e1;
+      background-image: url('/assets/images/img_list_01.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      transition: all 0.3s ease;
+      margin: 15px;
+      .list-name {
+        width: 169px;
+        height: 18px;
+        margin: 60px auto 20px auto;
+        font-family: 'Montserrat' !important;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.29;
+        letter-spacing: 1.5px;
+        text-align: center;
+        color: #333333;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      .product-count {
+        margin: 0 auto;
+        font-family: 'Raleway' !important;
+        font-size: 14px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        letter-spacing: 1.1px;
+        text-align: center;
+        color: #899195;
+      }
+      hr {
+  			width: 80px;
+  	  	height: 1px;
+  	  	background-color: #333333;
+  			margin-top: 20px;
+  		}
+      &:hover {
+        border: solid 1px #44d481;
+        cursor: pointer;
+      }
+    }
+  }
+}

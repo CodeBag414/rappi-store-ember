@@ -1,0 +1,70 @@
+{{#if currentlyLoading}}
+<div class="main-loader"><img src="assets/images/loading.svg"></div>
+{{/if}}
+<div class="popUp-wrapper loginPopup">
+    <div class="popUp-Outer text-center">
+      {{#if closeButton}}
+          <a class="close-global-black" style="cursor: pointer;" onclick={{action "toggleView"}}></a>
+      {{/if}}
+        <div class="toTable">
+            <div class="toTable-cell map-popup">
+                <div class="map-wrap">
+                    <div class="main-map">
+                      {{map-component homeLatitude=latCurrentAddress homeLongitude=lngCurrentAddress address=currentAddress dragAllow=dragAllow}}
+                    </div>
+                    <a href="javascript:void(0);" {{action 'dragPermission'}} class="btn pin-map">¿está bien puesto el
+                        pin?</a>
+                </div>
+            </div>
+            <div class="toTable-cell loginForm">
+                <div class="formTitle">
+                    <h1>Llevaremos tu pedido a:</h1>
+                </div>
+                <form class="form" role="search">
+                    <div class="form-group formGroup-link" id="googlePlaceContainer">
+                      {{place-autocomplete-field
+                      value= currentAddress
+                      handlerController= this
+                      inputClass= 'form-control'
+                      focusOutCallback="onFocusOut"
+                      placeChangedCallback="findLatLong"
+                      restrictions=country
+                      
+                      }}
+
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="apto/oficina/piso"
+                               onblur={{action "addDetail" value="target.value"}}>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="Instrucción adicional"
+                                  onblur={{action "getDescription" value="target.value"}}></textarea>
+                    </div>
+                    <div class="tags">
+                        <h4>Selecciona un tag:</h4>
+                        <ul>
+                            <li><a id="casa" onclick={{action "selectTag" 'casa' }} class="active"
+                                   href="javascript:void(0)">casa</a></li>
+                            <li><a id="novi" onclick={{action "selectTag" 'novi@' }} href="javascript:void(0)">novi@</a>
+                            </li>
+                            <li><a id="oficina" onclick={{action "selectTag" 'oficina' }} href="javascript:void(0)">oficina</a>
+                            </li>
+                            <li><a id="otra" onclick={{action "selectTag" 'otra' }} href="javascript:void(0)">otra</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <button type="submit" {{action "submit" model}}
+                            class="btn btn-green btn-green-width2 btn-greenMargin">{{buttonText}}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{#if showReloadWarning}}
+  {{#modal-dialog container-class="overlapPop" translucentOverlay=true}}
+    {{reload-warning showReloadWarning=showReloadWarning showReloadWarning=showReloadWarning addressChangeAction='addressChangeAction'}}
+  {{/modal-dialog}}
+{{/if}}

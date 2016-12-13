@@ -1,0 +1,24 @@
+
+.btn + .btn {
+  margin-left: 15px;
+}
+
+.btn.btn-primary {
+  @include btnPrimary();
+}
+
+.btn.btn-primary.type-2 {
+  background-color: #FFE100;
+  border-color: #FFE100;
+  color: #FD6250;
+}
+
+@-webkit-keyframes hvr-ripple-out {
+  100% {
+    top: -12px;
+    right: -12px;
+    bottom: -12px;
+    left: -12px;
+    opacity: 0;
+  }
+}

@@ -1,0 +1,37 @@
+<div class="popUp-wrapper loginPopup">
+    <div class="popUp-Outer text-center">
+        <div class="formTitle padding-popup">
+            <h1>Verifica tu número de celular:</h1>
+        </div>
+        <div class="otpText">
+            <p class="max-width328">Por favor ingresa el número de 4 dígitos que te estamos enviando al
+                <span>{{phonePrefix}}-{{phoneNumber}}</span></p>
+        </div>
+        <div class="border-bottom padding-popup">
+            <form class="form" role="search">
+                <div class="form-group btn-greenMargin otpForm">
+                  {{input type="text" id="one" class="form-control inline-block remove-padding" maxlength="1" placeholder="0" key-press='onKeyPressOne' value=very0}}
+                  {{input type="text" id="two" class="form-control inline-block remove-padding" maxlength="1" placeholder="0" key-press='onKeyPressTwo' value=very1}}
+                  {{input type="text" id="three" class="form-control inline-block remove-padding" maxlength="1" placeholder="0" key-press='onKeyPressThree' value=very2}}
+                  {{input type="text" id="four" class="form-control inline-block remove-padding" maxlength="1" placeholder="0" key-press='onKeyPressFour' value=very3}}
+
+                </div>
+                <div class="form-group btn-greenMargin otpForm">
+                  {{#if error}}
+                      <span class=msg-error>{{error_message}}</span>
+                  {{/if}}
+                </div>
+                <div class="form-group">
+                  {{#if phoneVerifyProcess}}
+                      <div class="hvr-pulse-shrink btn btn-green">por favor espera...</div>
+                  {{else}}
+                      <button type="submit" {{action "submit"}} class="btn btn-green">VALIDAR</button>
+                  {{/if}}
+                </div>
+            </form>
+        </div>
+        <div class="registerLink inline-block">
+            <p>Ya tienes cuenta? <a href="">Ingresar</a></p>
+        </div>
+    </div>
+</div>

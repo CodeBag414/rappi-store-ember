@@ -1,0 +1,24 @@
+<div class="popUp-wrapper loginPopup reload-warning">
+    <div class="popUp-Outer ">
+        <a class="close-global-black" {{action 'closePopup'}}></a>
+
+        <div class="toTable">
+            <div class=" text-center confirmPopup">
+                <div class="text-center popup-msg padding-popup">
+                    <p>Al actualizar su dirección por defecto volverá a cargar los productos que tiene en la cesta.
+                        ¿Estás seguro de que deseas actualizar tu dirección por defecto?</p>
+                </div>
+
+            <p class="btnBox btn-greenMargin padding-popup">
+              {{#if updateProcess}}
+                  <div class="hvr-pulse-shrink btn btn-green">por favor espera...</div>
+              {{else}}
+                  <button type="submit" class="btn btn-green" {{action 'closePopup'}}>No</button>
+                  <button type="submit" class="btn btn-green" {{action 'proceedToUpdate'}}>SI, SEGURO</button>
+              {{/if}}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+

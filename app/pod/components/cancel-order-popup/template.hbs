@@ -1,0 +1,20 @@
+<div class="popUp-wrapper loginPopup">
+    <div class="popUp-Outer text-center searchingPopup padding-popup ">
+        <div class="formTitle">
+            <h1 id="username">¡Listo {{session.currentUser.name}}!</h1>
+        </div>
+        <div class="formSubTitle">
+            <p id="orderMessage1">Tu pedido ya está siendo tramitado,</p>
+            <p id="orderMessage2">estámos asignándote un Rappitendero</p>
+        </div>
+        <div class="mustache-biker">
+            <img id="image" src="assets/images/rappitender_mustache.gif">
+        </div>
+        <div class="contentMsg">
+            <p id="orderMessage3">En menos de dos minutos tendrás un Rappitendero</p>
+        </div>
+        <div class="btn-block">
+            <button type="submit" id="orderMessageButton" class="btn btn-primary btn-greenMargin btn-green-width2" {{action 'cancelOrder'}}>¿CANCELAR PEDIDO?</button>
+        </div>
+    </div>
+</div>

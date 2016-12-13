@@ -1,0 +1,48 @@
+<div class="wrap-product">
+    <div class="pro-summmry" {{action "toggleModal" product}}>
+        <div class="product-pic text-center">
+            {{#if product.image_low}}
+                <img src='{{url}}{{product.image_low}}'>
+            {{else}}
+                <img src='{{product.imagelow}}'>
+            {{/if}}
+        </div>
+        <div class="product-information">
+          <div class="product-name text-center">
+              <h3>{{product.name}}</h3>
+              <span>{{product.presentation}}</span>
+          </div>
+          <hr>
+          <div class="price text-center">
+              <span>{{format-currency product.price}}</span>
+          </div>
+
+          <div class="">
+              <a href="" class="icon-bookmark"></a>
+          </div>
+        </div>
+
+        <div class="toolbar {{if isProductAdded 'productAdded' ''}}">
+          <div class="quantity">
+            <div {{action 'removeFromCart' product bubbles=false}} class="btn-remove-product"><span>-</span></div>
+            <span id='span_{{product.id}}' class="preview-item shake shake-slow">
+              {{addedProduct.quantity}}
+            </span>
+            <div {{action 'addToCart' product bubbles=false}} class="btn-add-product"><span>+</span></div>
+          </div>
+          <button {{action 'addToCart' product bubbles=false}} class="btn-add">agregar</button>
+        </div>
+
+    </div>
+    {{#if addedProduct}}
+    <div class="product-quantity">
+      <span>{{addedProduct.quantity}}</span>
+    </div>
+    {{/if}}
+</div>
+
+{{#if isShowingModal}}
+  {{#modal-dialog id=product.id close='toggleModal' translucentOverlay=true container-class='fade-in-bottom-dialog'}}
+    {{product-detail isShowingModal=isShowingModal product=productInfo isProductAdded=isProductAdded addToCart='addToCart'}}
+  {{/modal-dialog}}
+{{/if}}

@@ -1,0 +1,80 @@
+<div class="popUp-wrapper loginPopup chatPopup">
+    <div class="popUp-Outer text-center">
+        <a onclick={{action 'deActivateChat'}} class="back-global-white"></a>
+
+        <div class="coralBox">
+            <div class="formTitle">
+                <h1>Chatea con el Rappitendero</h1>
+            </div>
+        </div>
+        <div class="chatHead">
+            <h2>Estás conectado con {{storekeeper.first_name}}</h2>
+        </div>
+
+        <div id="chatBox" class="chatRoom">
+          {{#if isLoading}}
+              <div class="loading"><img src="assets/images/loading.svg"></div>
+          {{/if}}
+          {{#each chatArray as |chatObj|}}
+            {{#if chatObj.isLast}}
+                <div id="end"></div>
+            {{else if chatObj.isSent}}
+                <!-- endUser Chat box starts -->
+                <div class="chatItem endUser toTable text-right">
+                    <div class="chatText toTable-cell">
+                        <p>{{chatObj.alert}}</p>
+                      {{#if chatObj.image}}
+                          <a href={{chatObj.image}} download="File"><img height="75px" width="75px" src={{chatObj.image}} /></a>
+                      {{/if}}
+                    </div>
+                    <div class="avatarPic toTable-cell">
+                        <img src={{currentUser.pic}} alt="avatar"/>
+                    </div>
+                </div>
+                <!-- endUser Chat box ends -->
+            {{else}}
+                <!-- avatar Chat box starts -->
+                <div class="chatItem avatar toTable text-left">
+                    <div class="avatarPic toTable-cell">
+                        {{#if storekeeper.profile_pic}}
+                            <img src={{storekeeper.profile_pic}} alt="avatar"/>
+                        {{else}}
+                            <img src="assets/images/avatar.png" alt="avatar"/>
+                        {{/if}}
+                    </div>
+                    <div class="chatText toTable-cell">
+                        <p>{{chatObj.alert}}</p>
+                        {{#if chatObj.image}}
+                            <a href={{chatObj.image}} download="File"><img height="75px" width="75px" src={{chatObj.image}} /></a>
+                        {{/if}}
+                    </div>
+                </div>
+                <!-- avatar Chat box ends -->
+            {{/if}}
+          {{/each}}
+        </div>
+
+        <div class="chatFormFeild">
+            <form class="">
+                <div class="form-group">
+                  {{input  value=message type="text" class="form-control"  placeholder="Escribe tu mensaje"}}
+                </div>
+                <div class="attachFile">
+                    <label for="#attachFile"></label>
+                  {{#if sendMediaMessageProcess}}
+                      <div class="hvr-pulse-shrink btn btn-green">por favor espera...</div>
+                  {{else}}
+                      <input type="file"
+                             onchange={{action "sendMediaMessage" this}} accept="image/x-png,image/gif,image/jpeg"/>
+                  {{/if}}
+                </div>
+              {{#if sendMessageProcess}}
+                  <div class="hvr-pulse-shrink btn btn-green">por favor espera...</div>
+              {{else}}
+                  <button {{action 'sendMessage'}} type="submit" class="btn btn-green">ENVIAR</button>
+              {{/if}}
+            </form>
+        </div>
+
+    </div>
+</div>

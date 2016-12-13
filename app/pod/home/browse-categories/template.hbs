@@ -1,0 +1,153 @@
+<!-- ..................................  carousel section .................................... -->
+<div class="product-listing categories">
+    <div class="container">
+        <div class="breadcrumbBox row mt-Bottom30">
+            <div class="col-sm-12">
+                <ol class="breadcrumb">
+                    <li><a href="#">Inicio</a></li>
+                    <li class="active">Nuestras categorías</li>
+                </ol>
+            </div>
+        </div>
+        <!-- ................  product listing head .....................  -->
+        <div class="row row-product-head">
+            <div class="col-sm-12">
+                <h2>Tienda express y cajero</h2>
+            </div>
+        </div>
+        <!-- ................  main product listing .....................  -->
+        <div class="row products-list" >
+          {{#each expressCorridors as |corridor|}}
+              <div class="col-md-3 col-sm-4">
+                {{#link-to 'home.corridor' corridor.id}}
+                    <div class="wrap-product">
+                        <div class="pro-summmry">
+                            <div class="product-pic text-center"><img src='{{url}}{{corridor.icon}}'>
+                            </div>
+                            <div class="product-name text-center">
+                                <h3>{{corridor.name}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                {{/link-to}}
+              </div>
+          {{else}}
+              <h4>No hay categorías para mostrar</h4>
+          {{/each}}
+        </div>
+        <!-- ................  product listing head .....................  -->
+        <div class="row row-product-head mt-top60">
+            <div class="col-sm-12">
+                <h2>Restaurantes y cafés</h2>
+            </div>
+        </div>
+        <!-- ................  main product listing .....................  -->
+        <div class="row products-list">
+          {{#each resturantCorridors as |corridor|}}
+              <div class="col-md-3 col-sm-4">
+                {{#link-to 'home.corridor' corridor.id}}
+                    <div class="wrap-product">
+                        <div class="pro-summmry">
+                            <div class="product-pic text-center"><img src='{{url}}{{corridor.icon}}'>
+                            </div>
+                            <div class="product-name text-center">
+                                <h3>{{corridor.name}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                {{/link-to}}
+              </div>
+          {{else}}
+              <h4>No hay categorías para mostrar</h4>
+          {{/each}}
+        </div>
+        <!-- ................  product listing head .....................  -->
+        <div class="row row-product-head mt-top60">
+            <div class="col-sm-12">
+                <h2>Farmacia y bienestar</h2>
+            </div>
+        </div>
+        <!-- ................  main product listing .....................  -->
+        <div class="row products-list">
+          {{#each farmatadoCorridors as |corridor|}}
+              <div class="col-md-3 col-sm-4">
+                {{#link-to 'home.corridor' corridor.id}}
+                    <div class="wrap-product">
+                        <div class="pro-summmry">
+                            <div class="product-pic text-center"><img src='{{url}}{{corridor.icon}}'>
+                            </div>
+                            <div class="product-name text-center">
+                                <h3>{{corridor.name}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                {{/link-to}}
+              </div>
+          {{else}}
+              <h4>No hay categorías para mostrar</h4>
+          {{/each}}
+        </div>
+        <!-- ................  product listing head .....................  -->
+      {{!--<div class="row row-product-head mt-top60">
+          <div class="col-sm-12">
+              <h2>Antojos y deseos</h2>
+          </div>
+      </div>
+      <!-- ................  main product listing .....................  -->
+      <div class="row products-list">
+          <div class="col-md-3 col-sm-4">
+              <div class="wrap-product">
+                  <div class="pro-summmry">
+                      <div class="product-pic text-center"><img src="assets/images/restaurantHomeList.jpg">
+                      </div>
+                      <div class="product-name text-center">
+                          <h3>Nombre del pasillo</h3>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-3 col-sm-4">
+              <div class="wrap-product">
+                  <div class="pro-summmry">
+                      <div class="product-pic text-center"><img src="assets/images/restaurantHomeList.jpg">
+                      </div>
+                      <div class="product-name text-center">
+                          <h3>Nombre del pasillo</h3>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>--}}
+        <!-- ................  product listing head .....................  -->
+        <div class="row row-product-head mt-top60">
+            <div class="col-sm-12">
+                <h2>Supermercado cercano</h2>
+            </div>
+        </div>
+        <!-- ................  main product listing .....................  -->
+        <div class="row products-list">
+          {{#each superCorridors as |corridor|}}
+              <div class="col-md-3 col-sm-4">
+                {{#link-to 'home.corridor' corridor.id}}
+                    <div class="wrap-product">
+                        <div class="pro-summmry">
+                            <div class="product-pic text-center"><img src='{{url}}{{corridor.icon}}'>
+                            </div>
+                            <div class="product-name text-center">
+                                <h3>{{corridor.name}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                {{/link-to}}
+              </div>
+          {{else}}
+              <h4>No hay categorías para mostrar</h4>
+          {{/each}}
+        </div>
+    </div>
+    <!-- ................  main product listing .....................  -->
+</div>
+{{landing-page-popular-search-block data=model.popularSearch}}
+<div class="{{if basketOpenned 'basket-overlay' ''}}">
+  {{shopping-basket basketOpenned=basketOpenned}}
+</div>

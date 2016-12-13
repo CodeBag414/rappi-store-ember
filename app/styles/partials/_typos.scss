@@ -1,0 +1,43 @@
+@font-face {
+    font-family: "Avenir Next";
+    src: url("/assets/fonts/AvenirNext-Medium.ttf");
+}
+@font-face {
+    font-family: "Avenir Next";
+    src: url("/assets/fonts/AvenirNext-Bold.ttf");
+    font-weight: bold;
+}
+
+// Font weights
+$light: 100;
+$regular: 400;
+$bold: 600;
+
+// Base Font
+$base-font-family: 'Avenir Next' !important;
+$base-font-weight: $regular;
+$base-font-size: 14px;
+$base-line-height: 1.4;
+
+body {
+	margin:0;
+	padding:0;
+	color: #4d4d4d;
+  -webkit-font-smoothing:antialiased;
+	}
+
+
+h1.page-heading {
+	font-size: 46px;
+	line-height: 62px;
+	color: #4d4d4d;
+	font-weight: 700;
+	margin: 0;
+}
+
+h5.sub-heading {
+	font-size: 16px;
+	color: #bbb;
+	line-height: 22px;
+	margin: 0;
+}

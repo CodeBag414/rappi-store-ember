@@ -1,0 +1,131 @@
+<div class="myAddressBlock">
+    <div class="breadcrumbBox">
+        <div class="col-sm-12">
+            <ol class="breadcrumb">
+                <li><a href="#">Inicio</a></li>
+                <li class="active">Mis direcciones</li>
+            </ol>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <h2 class="blockHeading block-heading-profile">
+            Mis direcciones
+            <a class="Cerrar-sesin "href="" {{action "logout"}} id="logout">Cerrar sesión</a>
+        </h2>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 pdRight30">
+            <!-- usedCardsPayment block starts -->
+          {{#each model as |addressObj|}}
+            {{#if addressObj.active}}
+                <div class="currentCards">
+                    <p class="cardsBlockTitle">Dirección por defecto:</p>
+
+                    <div class="cardView">
+
+                        <p class="directioLabel">{{addressObj.tag}}</p>
+
+                        <div class="cardItem">
+                            <div class="cardDetails">
+
+                                <p class="cardNo">{{addressObj.address}}</p>
+                            </div>
+                            <div class="CardBtnBlock">
+                                <span class="custome-radio">
+                                    <input disabled type="radio" name="selectCard" id="btnChecked" checked/>
+                                    <label for="#btnChecked"></label>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            {{/if}}
+          {{/each}}
+            <!-- usedCardsPayment block ends -->
+
+            <!-- Other address cards block starts -->
+            <div class="otherCards">
+                <p class="cardsBlockTitle">Otras direcciones:</p>
+
+                <div class="cardView">
+                  {{#each model as |addressObj|}}
+                    {{#unless addressObj.active}}
+                        <p class="directioLabel">{{addressObj.tag}}</p>
+
+                        <div class="cardItem">
+                            <div class="cardDetails">
+                                <p class="cardNo">{{addressObj.address}}</p>
+                            </div>
+                            <div class="CardBtnBlock">
+                                <a {{action "deleteAddressConfirmation" addressObj}} class="deleteBtn"></a>
+                                <span class="custome-radio">
+                                    <input type="radio" name="selectCard" id="btn1"
+                                           onclick={{action "getModel" addressObj}}/>
+                                    <label for="#btn1"></label>
+                                </span>
+                            </div>
+                        </div>
+                    {{/unless}}
+                  {{/each}}
+                  {{#if isError}}
+                      <span class="msg-error">{{errorMessage}}</span>
+                  {{/if}}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 pdLeft30">
+            <div class="map-myAccount">
+              {{map-component homeLatitude=0 homeLongitude=0 address='home address'}}
+              {{#each model as |addressObj|}}
+                {{#if addressObj.active}}
+                  {{map-component homeLatitude=addressObj.lat homeLongitude=addressObj.lng address=addressObj.address}}
+                {{/if}}
+              {{/each}}
+            </div>
+        </div>
+        <!-- Other address cards block ends -->
+    </div>
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <p class="btnBox">
+                <button type="submit" {{action "showDialog"}} class="btn btn-green-profile">AGREGAR</button>
+              {{#if model.length}}
+                  <button type="submit" {{action "updateActive"}} class="btn btn-green-profile">ACTUALIZAR</button>
+              {{/if}}
+              {{#if showPopUp}}
+                {{#modal-dialog close='showDialog' translucentOverlay=true}}
+                  {{add-address showPopUp=showPopUp isCheckout=false flow="profile" model=model}}
+                {{/modal-dialog}}
+              {{/if}}
+            </p>
+        </div>
+    </div>
+</div>
+{{#if showWarning}}
+  {{#modal-dialog close='' translucentOverlay=true}}
+    {{update-active-warning-popup updateActiveAddress='updateActiveAddress'showWarning=showWarning}}
+  {{/modal-dialog}}
+{{/if}}
+
+{{#if deleteAddressConfirmation}}
+  {{#modal-dialog translucentOverlay=true container-class="overlapPop"}}
+      <div class="popUp-wrapper loginPopup ember-modal-overlay translucent deleteAddressPopup">
+          <div class="popUp-Outer ">
+              <div class="toTable">
+                  <div class=" text-center confirmPopup">
+                      <div class="formTitle border-bottom padding-popup">
+                          <h1>¿Está seguro de que quiere borrar la dirección?</h1>
+                      </div>
+                      <p class="btnBox btn-greenMargin padding-popup">
+                          <button type="submit"
+                                  class="btn btn-green" {{action 'closeDeleteAddressConfirmationPopup'}}>NO, CONTINUAR
+                          </button>
+                          <button type="submit" class="btn btn-green" {{action 'deleteAddress'}}>SI, SEGURO</button>
+                      </p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  {{/modal-dialog}}
+{{/if}}

@@ -1,0 +1,40 @@
+{{#if currentlyLoading}}
+    <div class="main-loader"><img src="assets/images/loading.svg"></div>
+{{/if}}
+<div class="mexico-header">
+  <img src="/assets/images/logo-rappi-transparent.png" />
+  <div class="social-links">
+    <a href="" class="social-icons"><img src="/assets/images/icon_facebook.png" /></a>
+    <a href="" class="social-icons"><img src="/assets/images/icon_twitter.png" /></a>
+    <a href="" class="social-icons"><img src="/assets/images/icon_youtube.png" /></a>
+    <div class="country-selection">
+      {{#if countryBanner}}
+          <a href="#" {{action 'countryOption'}}><img src="assets/images/ico_flag_colombia.svg" title="Colombia"
+                                                      style="height: 25px;border-radius:12.5px;"></a>
+          <ul class="landing-country">
+            {{#if unSelectedCountry}}
+                <li>
+                    <a href="javascript:void(0);" {{action 'selectCountry' 'mexico'}}>
+                        <img src="assets/images/ico_flag_mexico.svg" style="height: 25px;border-radius:12.5px;">
+                    </a>
+                </li>
+            {{/if}}
+          </ul>
+      {{else}}
+          <a href="#" {{action 'countryOption'}}><img src="assets/images/ico_flag_mexico.svg" title="Mexico"
+                                                      style="height: 25px;border-radius:12.5px;"></a>
+          <ul class="landing-country">
+            {{#if unSelectedCountry }}
+                <li>
+                    <a href="javascript:void(0);" {{action 'selectCountry' 'colombia'}}>
+                        <img src="assets/images/ico_flag_colombia.svg"
+                             style="height: 25px;border-radius:12.5px;">
+                    </a>
+                </li>
+            {{/if}}
+          </ul>
+      {{/if}}
+
+    </div>
+  </div>
+</div>

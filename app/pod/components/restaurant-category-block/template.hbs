@@ -1,0 +1,19 @@
+<div class="restaurant-category-container">
+  <!-- ................  product listing head .....................  -->
+  <div class="title-block">
+      <h1 {{action 'seeAll' category.id}}>{{category.name}}</h1>
+      <hr>
+  </div>
+  <div class="ver-todos-block">
+    <div class="btn-todos" {{action 'seeAll' category.id}}>
+      <p>Ver todos</p>
+      <div class="right-arrow">
+      </div>
+    </div>
+  </div>
+  <div class="restaurant-list" id="restaurant-category-{{category.id}}">
+    {{#each category.stores as |store|}}
+        {{restaurant-home store=store productList='productList' routeName='home.subcorridor'}}
+    {{/each}}
+  </div>
+</div>

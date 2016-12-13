@@ -1,0 +1,60 @@
+{{#if currentlyLoading}}
+    <div class="main-loader"><img src="assets/images/loading.svg"></div>
+{{/if}}
+<main>
+    <div class="myAccountPage conntainer-fluid {{if rappiOrder.isNotEmpty 'with-fixed-order-panel' ''}}">
+        <div class="Table">
+            <div class="sideTabs tableCell" style=" background-color:#ffffff">
+                <ul class="nav nav-tabs">
+
+                    <li class={{if leftActive.profile "active" ''}}>
+                      {{#link-to "home.my-accounts.profile"}}
+                          <a data-toggle="tab">
+                              <span>MIS DATOS</span>
+                          </a>
+                      {{/link-to}}
+                    </li>
+                    <li class={{if leftActive.cards "active" ''}}>
+                      {{#link-to "home.my-accounts.cards"}}
+
+                          <a data-toggle="tab" href="#id2">
+                              MIS TARJETAS
+                          </a>
+
+                      {{/link-to}}
+                    </li>
+                    <li class={{if leftActive.address "active" ''}}>
+                      {{#link-to "home.my-accounts.address"}}
+
+                          <a data-toggle="tab" href="#id3">
+                              MIS DIRECCIONES
+                          </a>
+
+                      {{/link-to}}
+                    </li>
+                    <li class="cambiarClave {{if leftActive.change-password 'active' ''}}">
+                      {{#link-to "home.my-accounts.change-password"}}
+
+                          <a data-toggle="tab" href="#id4">
+                              CAMBIAR CLAVE
+                          </a>
+                      {{/link-to}}
+                    </li>
+                </ul>
+            </div>
+
+            <div class="tabContents tableCell">
+
+
+                <div class="tab-content">
+
+
+                  {{outlet}}
+
+
+                </div>
+            </div>
+            <!-- ..................................  breadcrumb section .................................... -->
+        </div>
+    </div>
+</main>

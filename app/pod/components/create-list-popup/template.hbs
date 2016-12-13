@@ -1,0 +1,17 @@
+<div class="create-list-popup-overlay" {{action "hideOverlay"}}>
+</div>
+<div class="create-list-popup-container">
+  <div class="top-banner-wrapper">
+    <h1>Crea tu lista</h1>
+  </div>
+  <div class="address-form-wrapper">
+    <div id="list-name-container" class="form-group" >
+      <input type="text" id="list-name" placeholder="Nombre de tu lista" />
+    </div>
+    {{#if showFaderLabel1}}
+      {{fader-label showFaderLabel=showFaderLabel1 message=message1}}
+    {{/if}}
+    <button class="btn-create" {{action 'createList'}}>CREAR LISTA</button>
+    <button class="btn-cancel" {{action 'closeCreateList'}}>CANCELAR</button>
+  </div>
+</div>

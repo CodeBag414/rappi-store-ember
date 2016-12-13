@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>bt_mosaic_off</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="50" height="50"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="50" height="50" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Restaurante_página" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="iconos_menu" transform="translate(-300.000000, -297.000000)">
+            <g id="icon_mosaic-copy" transform="translate(300.000000, 297.000000)">
+                <use id="Rectangle-8-Copy-3" stroke="#E4EDEE" mask="url(#mask-2)" stroke-width="2" fill="#FFFFFF" xlink:href="#path-1"></use>
+                <rect id="Rectangle-5" fill="#E4EDEE" x="8.33333333" y="8.33333333" width="15" height="15"></rect>
+                <rect id="Rectangle-5-Copy-4" fill="#E4EDEE" x="8.33333333" y="26.6666667" width="15" height="15"></rect>
+                <rect id="Rectangle-5-Copy-3" fill="#E4EDEE" x="26.6666667" y="8.33333333" width="15" height="15"></rect>
+                <rect id="Rectangle-5-Copy-5" fill="#E4EDEE" x="26.6666667" y="26.6666667" width="15" height="15"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

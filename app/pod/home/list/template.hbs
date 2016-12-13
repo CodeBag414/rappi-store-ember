@@ -1,0 +1,49 @@
+<div class="list-container">
+  <a class="btn-volver" {{action 'goToLists'}}>VOLVER</a>
+  <div class="list-content-container">
+      <h1 class="list-name">Cosas de aseo</h1>
+      <p class="list-info">Tienes 0 productos en esta lista</p>
+      {{search-bar addProduct="addProduct"}}
+
+      {{#if isEmpty}}
+        <p class="no-products-msg">Busca productos y agr&eacute;galos a tu lista</p>
+      {{else}}
+        <div class="product-list-container">
+          <div class="header-box">
+            <h1 class="quantity-field">CANTIDAD</h1>
+            <h1 class="product-field">PRODUCTO</h1>
+          </div>
+          <div class="product-card-list">
+          {{#each products as |product|}}
+            <div class="product-card">
+              <div class="quantity-box">
+                <div class="quantity">
+                  <div class="btn-remove-product"><span>-</span></div>
+                  <span id='span_{{product.id}}' class="preview-item shake shake-slow">
+                    {{product.quantity}}
+                  </span>
+                  <div class="btn-add-product"><span>+</span></div>
+                </div>
+              </div>
+              <div class="product-box">
+                <div class="product-image">
+                  <img src="/assets/images/spite.png" height="60" />
+                </div>
+                <div class="product-info">
+                  <h3>{{product.name}}</h3>
+                  <span>500 GR</span>
+                  <span class="price">{{format-currency 3000}}</span>
+                  <a class="btn-remove"></a>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+          </div>
+          <div class="footer-box">
+            <a class="btn-add-cart">AGREGAR PRODUCTOS A TU CANASTA</a>
+          </div>
+        </div>
+
+      {{/if}}
+  </div>
+</div>

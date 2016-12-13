@@ -1,0 +1,118 @@
+<div class="myCardsBlock">
+    <div class="breadcrumbBox">
+        <div class="col-sm-12">
+            <ol class="breadcrumb">
+                <li><a href="#">Inicio</a></li>
+                <li class="active">Mis tarjetas</li>
+            </ol>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <h2 class="blockHeading block-heading-profile">
+            Mis tarjetas
+            <a class="Cerrar-sesin " href="" {{action "logout"}} id="logout">Cerrar sesión</a>
+        </h2>
+    </div>
+    <div class="col-sm-8 ">
+        <!-- usedCardsPayment block starts -->
+        <div class="currentCards">
+            <p class="cardsBlockTitle">Tarjeta usada para pagos:</p>
+          {{#if creditcardInfoDefault }}
+
+              <div class="cardView">
+                  <div class="cardItem">
+                      <div class="cardDetails">
+                          <p class="cardNo">Tarjeta No: *******{{creditcardInfoDefault.termination}}</p>
+
+                          <p class="cardUserName">{{creditcardInfoDefault.name}}</p>
+                      </div>
+                      <div class="CardBtnBlock">
+					    								<span class="custome-radio">
+					    									<input type="radio" name="selectCard" id="btnChecked" checked/>
+					    									<label for="#btnChecked"></label>
+					    								</span>
+                      </div>
+                  </div>
+              </div>
+          {{else}}
+              Aún no tienes tarjetas registradas
+              Registra tu tarjeta y realiza tus pagos
+          {{/if}}
+        </div>
+        <!-- usedCardsPayment block ends -->
+
+        <!-- Other address cards block starts -->
+      {{#if creditcardDetails }}
+          <div class="otherCards">
+              <p class="cardsBlockTitle">Otras tarjetas de crédito:</p>
+
+              <div class="cardView">
+                {{#each creditcardDetails as |details|}}
+                    <div class="cardItem">
+                        <div class="cardDetails">
+                            <p class="cardNo">Tarjeta No: *******{{details.termination}}</p>
+
+                            <p class="cardUserName">{{details.name}}</p>
+                        </div>
+                        <div class="CardBtnBlock">
+                            <a {{action 'deleteCardConfirmation' details}} class="deleteBtn"></a>
+					    								<span class="custome-radio">
+					    									<input type="radio" name="selectCard" value="{{details.card_reference}}" id="btn1"/>
+					    									<label for="#btn1"></label>
+					    								</span>
+                        </div>
+                    </div>
+                {{else}}
+                    Aún no tienes tarjetas registradas
+                    Registra tu tarjeta y realiza tus pagos
+                {{/each}}
+
+
+              </div>
+          </div>
+      {{/if}}
+
+        <!-- Other address cards block ends -->
+    </div>
+    <div class="col-sm-12 text-center">
+    <p class="btnBox">
+      {{#if cardProcess}}
+          <div class="hvr-pulse-shrink btn btn-green">por favor espera...</div>
+      {{else}}
+          <button type="submit" {{action "addCard"}} class="btn btn-green-profile">AGREGAR</button>
+        {{#if creditcardDetails.length}}
+            <button type="submit" class="btn btn-green-profile" {{action "updateUserInfo" model}}>ACTUALIZAR</button>
+        {{/if}}
+      {{/if}}
+        </p>
+    </div>
+</div>
+
+{{#if creditCard}}
+  {{#modal-dialog close='toggleModal' translucentOverlay=true}}
+    {{credit-card-iframe-popup creditCard=creditCard redirectURL=redirectURL getCards='getCards' iFrameLoaded='iFrameLoaded'}}
+  {{/modal-dialog}}
+{{/if}}
+
+{{outlet}}
+{{#if deleteCardConfirmation}}
+  {{#modal-dialog translucentOverlay=true container-class="overlapPop"}}
+      <div class="popUp-wrapper loginPopup ember-modal-overlay translucent deleteAddressPopup">
+          <div class="popUp-Outer ">
+              <div class="toTable">
+                  <div class=" text-center confirmPopup">
+                      <div class="formTitle border-bottom padding-popup">
+                          <h1>¿Está seguro de que quiere borrar la credit card?</h1>
+                      </div>
+                      <p class="btnBox btn-greenMargin padding-popup">
+                          <button type="submit"
+                                  class="btn btn-green" {{action 'closeDeleteCardConfirmationPopup'}}>NO, CONTINUAR
+                          </button>
+                          <button type="submit" class="btn btn-green" {{action 'deleteCard'}}>SI, SEGURO</button>
+                      </p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  {{/modal-dialog}}
+{{/if}}

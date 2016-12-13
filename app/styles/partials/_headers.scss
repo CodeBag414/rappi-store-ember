@@ -1,0 +1,293 @@
+/* .....................   header styles ...........................  */
+#mainHeader {
+  width: 100%;
+  height: 80px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 0 0 #dcdcdc;
+}
+
+.navbar {
+  height: 100%;
+  margin-bottom: 0;
+}
+
+.navbar-header {
+  margin: 20px 0 20px 0 !important;
+}
+
+.navbar-brand {
+  font-size: 0;
+  margin: 0 !important;
+  padding: 0;
+  height: auto;
+  line-height: 0;
+  > img {
+    width: 93px;
+    height: 39.5px;
+    object-fit: contain;
+  }
+}
+
+#navbar {
+  position: absolute;
+  left: 46%;
+  margin-left: -232px;
+  top: 31px;
+}
+
+.navbar-nav {
+  > li {
+    > a {
+      border-right: 1px solid #E6E6E6;
+      color: #646464;
+      text-transform: uppercase;
+      font-size: 14px;
+      line-height: 14px;
+      padding: 0 30px;
+      &:hover {
+        background-color: transparent;
+        color: #FD6250;
+      }
+    }
+    &:last-child {
+      > a {
+        border-right: none;
+      }
+    }
+  }
+  > li.active {
+    > a {
+      background-color: transparent;
+      color: #FD6250;
+    }
+  }
+}
+
+.sel-lang {
+  ul {
+    li {
+      display: inline-block;
+      margin-left: 10px;
+      a {
+        color: #FD6250;
+        font-weight: 700;
+        text-transform: uppercase;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+.to-right {
+  float: right;
+  width: 200px;
+  margin: 27px 1% 27px 0;
+}
+
+/* header styles index page */
+
+.logo-header {
+  padding: 19px 0;
+}
+
+.current-order-panel {
+  background-color: lightgreen;
+  width: 100%;
+  height: 30px;
+  text-align: center;
+  padding: 5px;
+  cursor: pointer;
+}
+
+h1.logo {
+  margin: 0;
+  text-align: center;
+}
+
+.user-info {
+  position: absolute;
+  right: 15px;
+}
+
+.user-info {
+  top: 14px;
+  text-align: right;
+  max-width: 285px;
+  select {
+    width: 150px;
+    margin-top: 5px;
+    display: inline-block;
+  }
+  #logout {
+    color: rgb(253, 98, 80);
+    border-right: 1px solid #E6E6E6;
+    padding: 0 10px;
+  }
+  #ingresar {
+    color: rgb(253, 98, 80);
+    border-right: 1px solid #E6E6E6;
+    padding: 0 10px;
+  }
+  img {
+    padding-left: 10px;
+  }
+  .logged-userName {
+    border-right: 1px solid #E6E6E6;
+    padding-right: 10px;
+  }
+}
+
+.sel-lang {
+  text-align: right;
+  select {
+    display: block;
+  }
+}
+
+.user-info a {
+  display: inline-block;
+  color: gray;
+  text-transform: uppercase;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.logged-userName {
+  max-width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ....  secondry menu ...... */
+
+.sec-menu {
+  background-color: #fd6250;
+  border-top: 1px solid #E6E6E6;
+}
+
+.sec-menu ul {
+  display: table;
+  width: 100%;
+  height: 50px;
+}
+
+.sec-menu ul li {
+  display: table-cell;
+  vertical-align: middle;
+  margin-right: 150px;
+  cursor: pointer;
+}
+
+.sec-menu ul li a {
+  width: 152px;
+  height: 19px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.sec-menu ul li a:hover {
+  text-decoration: none;
+  width: 96px;
+  height: 19px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffe100;
+}
+
+/* ................ main menu / search bar styles .......... */
+.main-menuBar {
+  height: 66px;
+  background-color: #e6e6e6;
+  transition: 0.3s;
+}
+
+.main-menuBar .bannerForm-wrap {
+  display: table;
+  margin: 12px auto;
+  > form input[type="text"] {
+    min-width: 410px;
+    padding-left: 50px;
+  }
+  .btn {
+    @include btn();
+    //@include transition(all ease-in-out 0.3s);
+  }
+  .form-group {
+    position: relative;
+    &:before {
+      content: "";
+      width: 24px;
+      height: 24px;
+      display: block;
+      position: absolute;
+      left: 14px;
+      top: 8px;
+      background-image: url("images/icon-search.svg");
+    }
+  }
+}
+
+#productSearch {
+  width: 510px;
+  height: 40px;
+  border-radius: 100px;
+  background-color: #ffffff;
+  border: solid 1px #e6e6e6;
+
+}
+
+#productSearch::-webkit-input-placeholder {
+  font-size: 16px;
+  font-weight: 500;
+  color: #bbbbbb;
+}
+
+.fixed {
+  .main-menuBar {
+    width: 1300px;
+    height: 66px;
+    background-color: #e6e6e6;
+    padding: 9px 0;
+    .bannerForm-wrap {
+      display: table;
+      margin: 0 auto;
+      padding: 4px;
+      > form {
+        input[type="text"] {
+          min-width: 410px;
+          min-height: 30px;
+          height: 30px;
+          padding-left: 50px;
+        }
+        > .btn {
+          min-height: 30px;
+          height: 30px;
+          line-height: 1;
+          right: 4px;
+          top: 4px;
+        }
+      }
+    }
+    #nav-icon1 {
+      margin: 10px 0 0;
+    }
+    .basket {
+      margin: 4px 0 0;
+    }
+    .bannerForm-btn {
+      @include bannerFormBtn();
+    }
+  }
+}
+
+.header-hamburger {
+  position: absolute;
+  top: -8px;
+  display: none;
+}
+
+[data-ember-action] {
+  cursor: pointer;
+}

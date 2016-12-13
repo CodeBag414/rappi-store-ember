@@ -1,0 +1,17 @@
+{{#if show}}
+    <div class="promo-banner-container">
+        <div id="promo-banner">
+            <img {{action 'toggleShowTermConditions'}}  src={{promoBannerUrl}} alt="promo-banner">
+            <img  class="close-btn" {{action 'toggleShow'}} src="assets/images/_icon_close_white.svg" alt="promo-banner">
+            <span>* Aplica términos y condiciones</span>
+        </div>
+    </div>
+{{/if}}
+
+{{#if showTermConditions}}
+<div class="overlay-term-conditions" {{action 'toggleShowTermConditions'}}> </div>
+    <div class="promo-banner-term-conditions">
+            <img src={{promoModalUrl}} src="" alt="" />
+            <img  class="close-btn" {{action 'toggleShowTermConditions'}} src="assets/images/_icon_close_white.svg" alt="promo-banner">
+    </div>
+{{/if}}

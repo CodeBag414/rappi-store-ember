@@ -1,0 +1,8 @@
+<div class="dish-recommend-container">
+  <img class="title" src="assets/images/recommend-title.png" width="318" />
+  <div class="recommend-dish-list">
+    {{#each products as |product key|}}
+        {{recommend-product-card product=product pIndex=key corridorName=corridor.name corridorId=corridor.id rappi_store_id=corridor.rappi_store_id ourRecommendProduct=true}}
+    {{/each}}
+  </div>
+</div>

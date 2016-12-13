@@ -1,0 +1,92 @@
+{{#if loading}}
+<div class="main-loader"><img src="assets/images/loading.svg"></div>
+{{/if}}
+<!-- ..................................  main page content starts ..............................  -->
+<main {{ action "click" }} id="main-content">
+    <!-- ..................................  carousel section .................................... -->
+  {{#if restaurantsView}}
+      {{!-- <div class="todos-container {{if rappiOrder.isNotEmpty 'with-fixed-order-panel' ''}}">
+          <button class="btn-todos" {{action 'viewAllRestaurant' bubbles=false}}>VER TODOS</button>
+      </div> --}}
+      <div class="restaurant-home-block {{if rappiOrder.isNotEmpty 'with-fixed-order-panel' ''}}">
+        <div class="restaurant-categories {{if rappiOrder.isNotEmpty 'carrusel-categories-fixed-order-panel' ''}}">
+          <div class="restaurant-categories-header">
+            <h1>Categorías</h1>
+          </div>
+          <div class="restaurant-categories-list">
+            <div class="category {{if (eq selectedRestaurantCategory 0) 'selected' ''}}" {{action 'loadRestaurantCategory' 0}}>
+                <div class="icon" style="background-image:url('assets/images/cutlery.svg');background-size: 25px 25px;"></div>
+                <p>Todos</p>
+            </div>
+          {{#each categories as |category|}}
+            <div class="category {{if (eq selectedRestaurantCategory category.id) 'selected' ''}}" {{action 'loadRestaurantCategory' category.id}}>
+                <div class="icon" style="background-image:url('assets/images/restaurant_icons/ico_{{category.id}}_green.svg')"></div>
+                <p>{{name-parser category.name}}</p>
+            </div>
+          {{/each}}
+          </div>
+        </div>
+        <div class="restaurant-search-section">
+          {{restaurant-search-bar}}
+          {{popular-restaurants stores=popularStores}}
+        </div>
+      </div>
+      {{!-- {{most-purchased-dish products=mostPurchasedProducts}} --}}
+      {{dish-recommend products=recommendedProducts}}
+  {{else}}
+    {{#if corridorsCount}}
+      {{#if pharmacyView}}
+      <div class="empty-category-container {{if rappiOrder.isNotEmpty 'with-fixed-order-panel' ''}}">
+      </div>
+      {{else}}
+      <div class="category-container {{if rappiOrder.isNotEmpty 'with-fixed-order-panel' ''}}">
+          {{#if supermarketView}}
+          <div class="create-list-container">
+              <button class="btn-create-list" {{action 'showCreateListDialog'}}>CREA TU LISTA</button>
+          </div>
+          {{/if}}
+          <div class="title-block">
+              <h1>EXPLORA NUESTRAS CATEGORIAS</h1>
+              <hr>
+          </div>
+          <div class="category-list">
+            {{#each corridors as |corridor key|}}
+              {{#if (lt key 8)}}
+                <div class="category large-box" {{action 'seeAll' 'home.corridor' corridor.id corridor.rappi_store_id }}>
+                    <img src="/assets/images/category_{{corridor.id}}.png" />
+                    <p class="text-{{corridor.color}}">{{name-parser corridor.name}}</p>
+                </div>
+              {{else}}
+                <div class="category small-box" {{action 'seeAll' 'home.corridor' corridor.id corridor.rappi_store_id }}>
+                    <img src="/assets/images/category_{{corridor.id}}.png" />
+                    <p class="text-{{corridor.color}}">{{name-parser corridor.name}}</p>
+                </div>
+              {{/if}}
+            {{/each}}
+          </div>
+      </div>
+      {{/if}}
+      {{#unless pharmacyView}}
+        {{popular-search-block}}
+      {{/unless}}
+    {{/if}}
+
+    {{#each model.stores as |store|}}
+      {{#each store.corridors as |corridors|}}
+          {{corridor-block corridor=corridors seeAll='seeAll'}}
+      {{/each}}
+    {{else}}
+      <div class="error-msg-wrapper">
+        <h2>Lo sentimos &#9785;, no tenemos productos disponibles para este horario y ubicación</h2>
+      </div>
+    {{/each}}
+
+  {{/if}}
+</main>
+{{landing-page-popular-search-block data=model.popularSearch storeType=storeType}}
+<div class="{{if basketOpenned 'basket-overlay' ''}}">
+  {{shopping-basket overflow=overflow storeType=storeType basketOpenned=basketOpenned}}
+</div>
+{{#if showCreateListDialog}}
+{{create-list-popup showCreateListDialog=showCreateListDialog}}
+{{/if}}

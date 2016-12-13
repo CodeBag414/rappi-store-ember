@@ -1,0 +1,49 @@
+<div class="restaurant-search-input-container">
+  {{input  value=queryField class="form-control" id="restaurantSearchField" class="search-input" placeholder="Busca restaurantes o productos"}}
+
+  {{#unless searching}}
+      <a class="search-button" {{action 'searchKeyword'}}></a>
+  {{else}}
+      <div class="searching-icon-wrapper">
+          <i class="searching"></i>
+      </div>
+  {{/unless}}
+
+  <ul class="auto-complete">
+    {{#if (or hits.length restaurants.length)}}
+    <div class="restaurant-auto-complete">
+      <div class="restaurant-section">
+        {{#if restaurants.length}}
+          <h1>Restaurantes</h1>
+          <div class="restaurant-list">
+          {{#each restaurants as |restaurant|}}
+              <p {{action 'goToRestaurant' restaurant.id }} data="{{hit.id}}">
+                  {{restaurant.name}}
+              </p>
+          {{/each}}
+          </div>
+        {{else}}
+          <h1>Restaurantes </h1>
+          <div class="no-restaurant">
+            <p>Pide a:</p>
+            <p class="search-keyword">{{queryField}}</p>
+            <button class="btn-ask" {{action "selectMeaning" "place" queryField}}>PEDIR</button>
+          </div>
+        {{/if}}
+
+      </div>
+      <div class="divider-line"></div>
+      <div class="product-section">
+        <h1>Productos</h1>
+        <div class="product-list">
+        {{#each hits as |hit|}}
+            <li {{action 'search' '' hit.name hit.id }} data="{{hit.id}}">
+                <a href="javascript:void(0);">{{hit.name}}</a>
+            </li>
+        {{/each}}
+        </div>
+      </div>
+    </div>
+    {{/if}}
+  </ul>
+</div>

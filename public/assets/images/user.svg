@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>03BFAAF4-6A86-4133-9BA5-752E806D3AE3</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <rect id="path-1" x="61" y="282" width="689" height="289"></rect>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="25" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.300860969   0 0 0 0 0.233716657   0 0 0 0 0.226648834  0 0 0 0.53 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <rect id="path-3" x="0" y="0" width="811" height="570"></rect>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="811" height="570" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+    </defs>
+    <g id="Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Login-register" transform="translate(-1615.000000, -509.000000)">
+            <rect id="Rectangle-426" fill-opacity="0.5" fill="#FFFFFF" x="0" y="0" width="3372" height="2519"></rect>
+            <g id="modal-_morning" transform="translate(1195.000000, 174.000000)">
+                <g id="shadow" fill-opacity="1" fill="black">
+                    <use filter="url(#filter-2)" xlink:href="#path-1"></use>
+                </g>
+                <use id="Rectangle-Copy" stroke="#DDDDDD" mask="url(#mask-4)" stroke-width="2" fill="#FFFFFF" xlink:href="#path-3"></use>
+                <g id="Group-5" transform="translate(420.000000, 334.333333)" fill="#BBBBBB">
+                    <g id="_ico_person_gris">
+                        <path d="M1.40971466,16.2207202 L0.0346359528,20.3459564 C-0.0341179826,20.5559996 0.000258985105,20.7863253 0.130891462,20.9654293 C0.258086243,21.1452209 0.467785746,21.2511019 0.687798339,21.2511019 L21.313979,21.2511019 C21.5339916,21.2511019 21.7402534,21.1452209 21.8708858,20.9654293 C21.9980806,20.7863253 22.0358953,20.5559996 21.9637036,20.3459564 L20.5886249,16.2207202 C20.5164333,16.0058642 20.3445485,15.8398234 20.1279736,15.7772573 L15.3151981,14.4021786 C15.146751,14.3547384 14.9714284,14.3715831 14.8167321,14.4482438 L11.0008886,16.3571968 L7.18160754,14.4482438 C7.02691118,14.3715831 6.85158865,14.3547384 6.6865792,14.4021786 L1.87380372,15.7772573 C1.65379113,15.8398234 1.48190629,16.0058642 1.40971466,16.2207202 L1.40971466,16.2207202 Z M6.80689859,15.7978835 L10.6914959,17.7408697 C10.884007,17.8378128 11.1143326,17.8378128 11.3068437,17.7408697 L15.191441,15.7978835 L19.3991819,16.9997023 L20.3582993,19.8760232 L1.64004034,19.8760232 L2.59915774,16.9997023 L6.80689859,15.7978835 L6.80689859,15.7978835 Z M11.0008886,15.0632477 C13.8438639,15.0632477 16.1574338,12.1332988 16.1574338,8.53162386 C16.1574338,4.93029273 13.8438639,2 11.0008886,2 C8.15791342,2 5.84434349,4.93029273 5.84434349,8.53162386 C5.84434349,12.1332988 8.15791342,15.0632477 11.0008886,15.0632477 L11.0008886,15.0632477 Z M11.0008886,3.37507871 C13.0497559,3.37507871 14.7823551,5.73643262 14.7823551,8.53162386 C14.7823551,11.3268151 13.0497559,13.688169 11.0008886,13.688169 C8.94858368,13.688169 7.2194222,11.3268151 7.2194222,8.53162386 C7.2194222,5.73643262 8.94858368,3.37507871 11.0008886,3.37507871 L11.0008886,3.37507871 Z" id="58"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

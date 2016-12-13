@@ -1,0 +1,29 @@
+<img  {{action "goBack"}}class="forgot-password-back" src="/assets/images/back-arrow.png" alt=""/>
+{{#if forgotPasswordSuccess}}
+    <form class="form form-login" role="search" autocomplete='off'>
+        <div class="form-title">
+            <h1 class="forgot-password">Listo</h1>
+        </div>
+        <div class="form-group">
+            <span class="forgot-password-success">Te enviaremos a tu cuenta de correo electrónico una nueva contraseña.</span>
+        </div>
+    </form>
+{{else}}
+    <form class="form form-login" role="search" autocomplete='off'>
+        <div class="form-title">
+            <h1 class="forgot-password">Olividé mi contraseña</h1>
+        </div>
+        <div class="form-group">
+            <img class="input-icon" src="/assets/images/mail.svg" alt=""/>
+          {{input type="text" class="form-control" placeholder="Correo" key-press="onKeyPress" value=recoveryEmail}}
+          {{#if invalidEmail}}
+              <span class=msg-error>{{emailMessage}}</span>
+          {{/if}}
+        </div>
+      {{#if recoveryProgress}}
+          <div class="hvr-pulse-shrink btn btn-green forgot-button">por favor espera...</div>
+      {{else}}
+          <button type="submit" {{action 'forgotPassword'}} class="btn btn-green forgot-button">ENVIAR</button>
+      {{/if}}
+    </form>
+{{/if}}

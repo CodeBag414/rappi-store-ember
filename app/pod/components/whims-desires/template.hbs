@@ -1,0 +1,109 @@
+<div class="wrapper ">
+    <div class="inner-wrap">
+        <!-- ..................................  header starts ..............................  -->
+
+        <!-- ..................................  main page content starts ..............................  -->
+        <main>
+
+            <!-- .........................................  bg block block-two starts ......................................................... -->
+            <div class="bg-block block-two favorsHomePage {{if rappiOrder.isNotEmpty 'with-fixed-order-panel' ''}}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 pull-right text-right">
+                            <h2 class="blockheading" id="ele1">
+                                Antojos y deseos
+                            </h2>
+                            <h5 class="block-subHeading">
+                                ¿No encontraste lo que estabas buscando?
+                                ¡Pide un antojo! ¡Pide lo que necesites! ¡Enserio, cualquier cosa!: tu plato preferido
+                                de restaurante, cualquier Antojo o favor. Lo buscamos por ti y lo llevamos donde estés!
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ..................................  breadcrumb section .................................... -->
+            <div class="breadcrumbBox">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <ol class="breadcrumb">
+                                <li><a href="#">Inicio</a></li>
+                                <li class="active">Antojos y deseos</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ..................................  content section .................................... -->
+            <div class="queriesWrapper">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 queryForm pdRight30">
+                            <h2 class="blockHeading" id="ele2">
+                                ¿Qué quieres?
+                            </h2>
+                          {{textarea rows="5" placeholder="eg. Quiero cinco empanadas de carne de Doña María, con ají y limón ... Traeme un cargador para iPhone 6 se me va a morir el celular! :O… " id='what' value=what}}
+                        </div>
+
+                        <div class="col-sm-6 queryForm pdLeft30">
+                            <h2 class="blockHeading" id="ele3">
+                                ¿Dónde lo conseguimos?
+                            </h2>
+                          {{textarea rows="5" placeholder="eg. Puesto Doña María en la esquina de la 72 co 11... Cualquier Apple Store" id='where' value=where}}
+                        </div>
+                    </div>
+                  {{#if blankField}}
+                      <div class="row">
+                          <div class="col-sm-12 text-center">
+                              <span class={{color}}>
+                                {{message}}
+                              </span>
+                          </div>
+                      </div>
+                  {{/if}}
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <p class="btnBox">
+                                <button type="submit" class="btn btn-green" {{action 'addWhim'}}>AGREGAR</button>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row favorsHomePage">
+                        <div class="col-sm-12 productList-footer">
+                          {{#if model.whims}}
+                              <h2 class="blockHeading" id="ele4">Antojos / favores anteriores</h2>
+                          {{/if}}
+                          {{#if loading}}
+                              <div class="loading"><img src="assets/images/loading.svg"></div>
+                          {{/if}}
+                            <ul id="asd" class="scroller">
+                              {{#each model.whims as |whim|}}
+                                  <li>
+                                      <div class="toTable">
+                                          <div class="toTable-cell">
+                                              <div class="product-name">
+                                                  <h3>{{whim.what}}</h3>
+                                                  <span>{{whim.where}}</span>
+                                              </div>
+                                          </div>
+                                          <div class="toTable-cell timeLine">
+                                              <!--<span>hace 3 semanas</span>-->
+                                              <span>{{moment-from-now whim.created interval=1000}}</span>
+                                          </div>
+                                          <div class="toTable-cell text-right">
+                                              <a style={{if whim.isAdded 'pointer-events:none;' ''}} {{action 'addToBasket' whim}} class="accent-color">
+                                                {{whim.buttonText}}</a>
+                                          </div>
+                                      </div>
+                                  </li>
+                              {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+      {{landing-page-popular-search-block data=model.popularSearch}}
+    </div>
+</div>

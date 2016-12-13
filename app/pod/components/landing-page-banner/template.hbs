@@ -1,0 +1,232 @@
+<div class="banner-container">
+    <div class="backgraound-image"></div>
+    <div class="big-video">
+        <video preload="auto" autoplay loop muted>
+            <source src="assets/video/bg_video.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="video-overlay">
+    </div>
+    <div class="banner-menu">
+        <img src="assets/images/white_logo.png" alt="logo" width="121" height="51"/>
+
+        <div class="right-banner-menu">
+            <div class="signup-menu">
+                <ul class="clearfix">
+                    <li>
+                      {{#if session.isAuthenticated}}
+                          Hola,  {{#link-to 'home.my-accounts.profile' class='logged-userName'}}{{session.currentUser.first_name}}{{/link-to}}
+                      {{else}}
+                          <a href="" {{action "showDialog"}} id="ingresar">ingresar</a>
+                      {{/if}}
+                    </li>
+                </ul>
+
+              {{#if showModalReg}}
+                {{#modal-dialog close='showDialog' translucentOverlay=true}}
+                  {{login-register currentlyLoading=currentlyLoading showLogin=true showModalReg=showModalReg showPhoneNumberModel=showPhoneNumberModel showPhoneNumberVerifyModel=showPhoneNumberVerifyModel showAddressListToUpdate=showAddressListToUpdate showAddAddressToUpdate=showAddAddressToUpdate showAddressList=showAddressList}}
+                {{/modal-dialog}}
+              {{/if}}
+            </div>
+            <div class="country-selection">
+              {{#if countryBanner}}
+                  <a href="#" {{action 'countryOption'}}><img src="assets/images/ico_flag_colombia.svg" title="Colombia"
+                                                              style="height: 25px;border-radius:12.5px;"></a>
+                  <ul class="landing-country">
+                    {{#if unSelectedCountry}}
+                        <li>
+                            <a href="javascript:void(0);" {{action 'selectCountry' 'mexico'}}>
+                                <img src="assets/images/ico_flag_mexico.svg" style="height: 25px;border-radius:12.5px;">
+                            </a>
+                        </li>
+                    {{/if}}
+                  </ul>
+              {{else}}
+                  <a href="#" {{action 'countryOption'}}><img src="assets/images/ico_flag_mexico.svg" title="Mexico"
+                                                              style="height: 25px;border-radius:12.5px;"></a>
+                  <ul class="landing-country">
+                    {{#if unSelectedCountry }}
+                        <li>
+                            <a href="javascript:void(0);" {{action 'selectCountry' 'colombia'}}>
+                                <img src="assets/images/ico_flag_colombia.svg"
+                                     style="height: 25px;border-radius:12.5px;">
+                            </a>
+                        </li>
+                    {{/if}}
+                  </ul>
+              {{/if}}
+
+            </div>
+        </div>
+    </div>
+    <div class="caption-container">
+        <h2>PIDE TODO</h2>
+
+        <div class="middle-caption">
+            <hr/>
+            <h4>LO QUE</h4>
+            <hr/>
+        </div>
+        <h1>QUIERAS</h1>
+    </div>
+  {{#if blankField}}
+      <div class="row">
+          <div class="col-sm-12 text-center caption-container1-error" style="font-size: 18px">
+                              <span class={{color}}>
+                                {{message}}
+                              </span>
+          </div>
+      </div>
+  {{/if}}
+    <div class="caption-container-1">
+        <div class="search-bar-container">
+            <div class="search-input-container">
+              {{input  value=what class="form-control" id="what" enter="whatEnterAction" class="search-input" placeholder="¿Qué quieres?"}}
+            </div>
+            <div class="search-input-container">
+              {{input  value=where class="form-control" id="whim" enter="addWhim" class="search-input" placeholder="¿Dónde lo conseguimos?"}}
+                <a class="search-button" {{action "addWhim"}}><span>PEDIR</span></a>
+            </div>
+        </div>
+    </div>
+    <div class="banner-container ">
+        <div class="row">
+            <div class="col-xs-offset-2 col-xs-8 ">
+                <div class="input-group search-bar-container search-bar-transform {{if isWhimSelected 'antojos whim-search' ''}}">
+                    <div class="category-menu-container">
+                        <div class="selected-category" {{action "showSearchCategoryMenu"}}>
+                            <p>
+                                <span>{{currentCateogry}}</span>
+                            </p>
+                        </div>
+                      {{#if showSearchCategoryMenu}}
+                          <div class="category-list">
+                              <div class="category-item" {{action "selectSearchCategory" "super"}}>
+                                  <div class="selected-line"></div>
+                                  <p>Supermercado</p>
+                              </div>
+                              <div class="category-item" {{action "selectSearchCategory" "express"}}>
+                                  <div class="selected-line"></div>
+                                  <p>Tienda Express</p>
+                              </div>
+                              <div class="category-item" {{action "selectSearchCategory" "restaurant"}}>
+                                  <div class="selected-line"></div>
+                                  <p>Restaurantes</p>
+                              </div>
+                              <div class="category-item" {{action "selectSearchCategory" "farmacia"}}>
+                                  <div class="selected-line"></div>
+                                  <p>Farmacia</p>
+                              </div>
+                              <div class="category-item" {{action "selectSearchCategory" "whim"}}>
+                                  <div class="selected-line"></div>
+                                  <p>Antojos</p>
+                              </div>
+		 <div class="category-item" {{action "selectSearchCategory" "rappicode"}}>
+                    <div class="selected-line"></div>
+                    <p>RappiCode</p>
+                  </div>
+                          </div>
+                      {{/if}}
+                    </div>
+                  {{#if isWhimSelected}}
+                  <div class="search-input-container">
+                    {{input  value=what id="what1" class="form-control input-dropdown whim-input" placeholder="¿Qué quieres?"}}
+                <button  {{action "toggle" }} class="btn select-button button-whim-1" type="button">
+                    <!--<i class="fa fa-chevron-right" aria-hidden="true"></i>-->
+                    <img class="arrow-button" src="assets/images/arrow-right-new.png">
+                </button>
+                    </div>
+                  {{else}}
+                      <div class="search-input-container">
+                        {{input  value=queryField class="form-control" id="productSearchField" class="search-input" placeholder="¿Que estas buscando?"}}
+                        {{#unless searching}}
+                            <a class="search-button" {{action "search" queryField}}></a>
+                        {{else}}
+                            <div class="searching-icon-wrapper">
+                                <i class="searching"></i>
+                            </div>
+                        {{/unless}}
+
+                          <ul class="auto-complete">
+                            {{#if (eq currentType 'restaurant')}}
+                              {{#if (or hits.length restaurants.length)}}
+                              <div class="restaurant-auto-complete">
+                                <div class="restaurant-section">
+                                  {{#if restaurants.length}}
+                                    <h1>Restaurantes</h1>
+                                    <div class="restaurant-list">
+                                    {{#each restaurants as |restaurant|}}
+                                        <p {{action 'goToRestaurant' restaurant.id }} data="{{hit.id}}">
+                                            {{restaurant.name}}
+                                        </p>
+                                    {{/each}}
+                                    </div>
+                                  {{else}}
+                                    <h1>Restaurantes </h1>
+                                    <div class="no-restaurant">
+                                      <p>Pide a:</p>
+                                      <p class="search-keyword">{{queryField}}</p>
+                                      <button class="btn-ask" {{action "selectMeaning" "place" queryField}}>PEDIR</button>
+                                    </div>
+                                  {{/if}}
+
+                                </div>
+                                <div class="divider-line"></div>
+                                <div class="product-section">
+                                  <h1>Productos</h1>
+                                  <div class="product-list">
+                                  {{#each hits as |hit|}}
+                                      <li {{action 'search' '' hit.name hit.id }} data="{{hit.id}}">
+                                          <a href="javascript:void(0);">{{hit.name}}</a>
+                                      </li>
+                                  {{/each}}
+                                  </div>
+                                </div>
+                              </div>
+                              {{/if}}
+                            {{else}}
+                              {{#each hits as |hit|}}
+                                  <li {{action 'search' '' hit.name hit.id }} data="{{hit.id}}">
+                                      <div class="selected-line"></div>
+                                      <a href="javascript:void(0);">{{hit.name}}</a>
+                                  </li>
+                              {{/each}}
+                            {{/if}}
+                          </ul>
+
+                      </div>
+                  {{/if}}
+                </div>
+              {{#if isWhimSelected}}
+                  <div class="input-group search-bar-container whim-search antojos search-bar-transform-whim">
+                    {{input  value=where class="form-control input-dropdown" id="whim1" placeholder="¿Dónde lo conseguimos?"}}
+                <button {{action "addWhim" true}} class="btn btn-success select-button button-whim-2" type="button">
+                    Pedir
+                </button>
+                  </div>
+              {{/if}}
+            </div>
+        </div>
+    </div>
+  {{#each flashMessages.queue as |flash|}}
+      <div class="flash-message">{{flash-message flash=flash}}</div>
+  {{/each}}
+</div>
+
+{{yield}}
+{{#if showAddressListToUpdate}}
+  {{#modal-dialog close='toggleAddressList' translucentOverlay=true}}
+    {{address-change-list toggleAddAddress='toggleAddAddress' showAddressListToUpdate=showAddressListToUpdate showReloadWarning=showReloadWarning}}
+  {{/modal-dialog}}
+{{/if}}
+{{#if showAddAddressToUpdate}}
+  {{#modal-dialog close='switchBWAddressListAddAddress' translucentOverlay=true}}
+    {{add-address flow='login' showAddAddressToUpdate=showAddAddressToUpdate showAddressList=showAddressList showReloadWarning=showReloadWarning showModal=showModal}}
+  {{/modal-dialog}}
+{{/if}}
+
+{{#if showAddressList}}
+  {{#modal-dialog translucentOverlay=true}}
+    {{address-list flow='login' showPopUp=showAddressList showModal=showModal showAddAddress='toggleAddAddress'}}
+  {{/modal-dialog}}
+{{/if}}

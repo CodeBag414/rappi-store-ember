@@ -1,0 +1,45 @@
+<div class="popUp-wrapper loginPopup" >
+    <div class="popUp-Outer address-popup-new ">
+        <div class="toTable">
+            <div class="row text-center">
+                <div class="  inline-block  new-add-address-div col-xs-12 col-sm-5">
+                    <span class="new-address-text">¿A dónde llevamos</span>
+                    <span class="new-address-text">tu pedido?</span>
+                    <div class="seleted-address"></div>
+                    <div class="new-add-address">
+                        <button type="button" {{action "openAddAddress"}} class="btn btn-white">NUEVA DIRECCIÓN</button>
+                    </div>
+                    <div class="img-div">  <img src="assets/images/top-modal-address-new.png"></div>
+                </div>
+                <div id="address-a" class="  inline-block  new-address-list col-xs-12 col-sm-7">
+                    <ul class="queries-list">
+                      {{#each model as |addressObj index|}}
+                        {{#if addressObj.active}}
+                          <span {{action 'selectAddress' addressObj}}>
+                            {{list-item addressObj index}}
+                          </span>
+                        {{/if}}
+                      {{/each}}
+                      {{#each model as |addressObj index|}}
+                        {{#unless addressObj.active}}
+                            <span {{action 'selectAddress' addressObj}}>
+                              {{list-item addressObj index}}
+                            </span>
+                        {{/unless}}
+                      {{/each}}
+                    </ul>
+                  {{#if showRightBgImage}}
+                      <div class="right-side-bg">  <img src="assets/images/address-modal-right-bg.png"></div>
+                  {{/if}}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{{#if showReloadWarning}}
+  {{#modal-dialog container-class="overlapPop" translucentOverlay=true}}
+    {{reload-warning showReloadWarning=showReloadWarning showReloadWarning=showReloadWarning addressChangeAction='addressChangeAction'}}
+  {{/modal-dialog}}
+{{/if}}

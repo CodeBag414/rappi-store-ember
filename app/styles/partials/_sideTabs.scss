@@ -1,0 +1,185 @@
+.myAccountPage {
+    padding-top: 120px;
+    &.with-fixed-order-panel {
+      padding-top: 220px;
+    }
+    .blockHeading {
+        margin: 30px 0 50px;
+    }
+    .tableCell {
+        width: auto;
+        vertical-align: top;
+    }
+    .sideTabs {
+        width: 300px;
+        background: #fd6250;
+        .profile-info {
+            background-color: #e04a39;
+            min-width:300px;
+        }
+        .nav-tabs {
+            >li {
+                >a {
+                    margin-right: 0;
+                    border-right: 0;
+                }
+            }
+        }
+        ul {
+            li {
+                a {
+                    &:focus {
+                        border-bottom: 1px solid #e6e6e6;
+                        text-decoration: none;
+                        background-color: #fff;
+                        color: #FD6250;
+                        border-color: #fff;
+                    }
+                    &:hover {
+                        border-bottom: 1px solid #e6e6e6;
+                    }
+                }
+                &:hover {
+                    a {
+                        text-decoration: none;
+                        background-color: #fff;
+                        color: #FD6250;
+                        border-color: #fff;
+                        border-bottom: 1px solid #e6e6e6;
+                    }
+                    text-decoration: none;
+                    background-color: #fff;
+                    color: #FD6250;
+                    border-color: #fff;
+                }
+            }
+            li.active {
+                a {
+                    &:focus {
+                        border-bottom: 1px solid #e6e6e6;
+                    }
+                    text-decoration: none;
+                    background-color: #fff;
+                    color: #FD6250;
+                    border-color: #fff;
+                    border-bottom: 1px solid #e6e6e6;
+                }
+                text-decoration: none;
+                background-color: #fff;
+                color: #FD6250;
+                border-color: #fff;
+            }
+            padding: 19px 0px;
+            border: 0px;
+            >li {
+                float: none;
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+.changePwdPage {
+    .form-group {
+        input[type="password"] {
+            font-size: 22px;
+            letter-spacing: 5px;
+            color: #4d4d4d;
+            line-height: 12px;
+            font-weight: bold;
+            border: 0px solid #dadada;
+            border-bottom: 1px solid #dadada;
+        }
+    }
+    label {
+        font-size: 12px;
+        color: #bbbbbb;
+        font-weight: 500;
+    }
+    .borderLeft {
+        border-left: 1px solid #e6e6e6;
+    }
+}
+.sideTabs {
+    ul {
+        li {
+            padding-left: 50px;
+            a {
+                color: #4d4d4d;
+                display: block;
+                padding: 0px;
+                border-bottom: 1px solid #e6e6e6;
+                line-height: 76px;
+                border-radius: 0px;
+            }
+            .icon-coupanCode {
+                background-position: -224px -13px;
+            }
+            &:hover {
+                .icon-coupanCode {
+                    background-position: -269px -13px;
+                }
+                .icon-catagory {
+                    background-position: -269px -47px;
+                }
+                .icon-creditCard {
+                    background-position: -269px -85px;
+                }
+                .icon-schdule {
+                    background-position: -269px -129px;
+                }
+            }
+            .icon-catagory {
+                background-position: -224px -47px;
+            }
+            .icon-creditCard {
+                background-position: -224px -85px;
+            }
+            .icon-schdule {
+                background-position: -224px -129px;
+            }
+        }
+        li.cambiarClave {
+            a {
+                font-size: 14px;
+            }
+        }
+        li.active {
+            .icon-coupanCode {
+                background-position: -269px -13px;
+            }
+            .icon-catagory {
+                background-position: -269px -47px;
+            }
+            .icon-creditCard {
+                background-position: -269px -85px;
+            }
+            .icon-schdule {
+                background-position: -269px -129px;
+            }
+        }
+    }
+    .icon-cust {
+        margin-right: 20px;
+    }
+}
+.profileDtails {
+    .profileU-info {
+        font-size: 14px;
+        margin: 10px 0 50px;
+        font-weight: 300;
+    }
+}
+.custDATOS {
+    margin-bottom: 0;
+    vertical-align: middle;
+    span {
+        display: block;
+        line-height: 1.4;
+    }
+    span.subTitle {
+        font-weight: 300;
+    }
+}
+.block-heading-profile{
+  font-size: 20px;
+}

@@ -1,0 +1,27 @@
+<div class="wrap-product" {{action 'seeAll' routeName store.store_id store.store_id bubbles=false}}>
+    <div class="pro-summmry">
+        <div class="product-pic text-center">
+          <div class="background-restaurant" style="background-image: url({{imgRestaurant}}), url('assets/images/restaurant-dummy.jpg');">
+            <div class="overlay">
+            </div>
+            <div class="price-wrap">
+                <div class="add-product clearfix">
+                    <button class="btn btn-primary btn-block" {{action 'seeAll' routeName store.store_id store.store_id bubbles=false}}>ENTRAR</button>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="product-name">
+            <div class="logo-restaurant" style="background-image: url('{{logoRestaurant}}');"></div>
+            <h3>{{store.name}}</h3>
+            <span>
+              {{store.category.name}}
+            </span>
+            <hr>
+            <div class="delivery-time">
+              <img src="assets/images/ico-delivery-time.svg" />
+              <span>{{store.eta}} MIN</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="product-listing restaurant-items">
+    <div class="container">
+        <div class="breadcrumbBox row mt-Bottom30">
+            <div class="col-sm-12">
+                <ol class="breadcrumb">
+                    <li><a href="#">Inicio</a></li>
+                    <li>{{#link-to 'paypal.store' storeTypeName }}  {{storeTypeName}}{{/link-to}}</li>
+                    <li class="active">all</li>
+                </ol>
+            </div>
+            <div class="col-sm-12 padding-top20">
+              {{#link-to 'paypal.store' storeTypeName }}
+                  <button class="btn hvr-bounce-to-bottom product-back">Volver</button>
+              {{/link-to}}
+            </div>
+        </div>
+        <div class="row">
+          {{#each model.stores as |store|}}
+            {{#unless store.empty}}
+              {{#each store.corridors as |corridors|}}
+                {{restaurant-home corridors=corridors productList='productList'}}
+              {{else}}
+                  <h2>No se ha encontrado ningún restaurante aquí</h2>
+              {{/each}}
+            {{/unless}}
+          {{else}}
+              <h2>Lo sentimos &#9785;, no tenemos restaurantes disponibles para este horario y ubicación</h2>
+          {{/each}}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+
+.myAccountPage {
+	.tableCell {
+		/*width: auto;*/
+		vertical-align: top;
+	}
+	.tab-content {
+		min-width: 1px;
+		padding: 30px 60px;
+	}
+}
+.profileDtails {
+	.profileU-info {
+		font-size: 14px;
+		margin: 10px 0 50px;
+		font-weight: 300;
+	}
+}
+.cust-twoArrows {
+	position: relative;
+	&:after {
+		content: "";
+		width: 28px;
+		height: 38px;
+		position: absolute;
+		display: block;
+		right: 1px;
+		top: 1px;
+		background-image: url("images/app-sprite2x.png");
+		background-repeat: no-repeat;
+		background-size: 450px 450px;
+		background-position: -272px -161px;
+		pointer-events: none;
+		background-color: #FFF;
+	}
+}
+.custom-file-upload {
+	display: inline-block;
+	position: relative;
+	margin-bottom: 50px;
+	input[type="file"] {
+		display: block;
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+		z-index: 999;
+    cursor: pointer;
+	}
+}

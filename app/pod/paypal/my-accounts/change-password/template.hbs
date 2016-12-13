@@ -1,0 +1,56 @@
+<div class="breadcrumbBox">
+    <div class="col-sm-12">
+        <ol class="breadcrumb">
+            <li><a href="#">Inicio</a></li>
+            <li class="active">Cambiar clave</li>
+        </ol>
+    </div>
+</div>
+<div class="changePwdPage">
+    <div class="col-sm-12">
+        <h2 class="blockHeading block-heading-profile">
+            Cambiar clave
+        </h2>
+
+      {{#if changePasswordFailed}}
+          <span class="msg-error">{{errorMessage}}</span>
+      {{/if}}
+      {{#if changePasswordSuccess}}
+          <span class="msg-sucess">{{successMessage}}</span>
+      {{/if}}
+    </div>
+
+    <form {{action "submit" on="submit" bubbles = false}}>
+        <div class="col-sm-6 queryForm pdRight30 ">
+            <div class="form-group">
+                <label>Contraseña actual</label>
+              {{input type="password" class="form-control"  value=currentPwd key-press="onKeyPress" }}
+              {{#if invalidCurrentPassword}}
+                  <span class="msg-error">{{currentPasswordMessage}}</span>
+              {{/if}}
+            </div>
+        </div>
+
+        <div class="col-sm-6 queryForm pdLeft30 borderLeft">
+            <div class="form-group">
+                <label>Nueva contraseña</label>
+              {{input type="password" class="form-control" value=newPwd key-press="onKeyPress" }}
+              {{#if invalidNewPassword}}
+                  <span class="msg-error">{{newPasswordMessage}}</span>
+              {{/if}}
+            </div>
+            <div class="form-group">
+                <label>Confirmar contraseña</label>
+              {{input type="password" class="form-control"  value=confirmPwd key-press="onKeyPress" }}
+              {{#if invalidConfirmPassword}}
+                  <span class="msg-error">{{confirmPasswordMessage}}</span>
+              {{/if}}
+            </div>
+        </div>
+        <div class="col-sm-12 text-center">
+            <p class="btnBox">
+                <button class="btn btn-green-profile">ACTUALIZAR</button>
+            </p>
+        </div>
+    </form>
+</div>

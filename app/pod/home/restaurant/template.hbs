@@ -1,0 +1,12 @@
+<main {{ action "click" }}>
+  <div class="corridor-banner">
+    <div class="corridor-banner-bg" style="background-image:url('assets/images/banner-allRestaurants-min.png');"></div>
+  </div>
+  {{#each categories as |category|}}
+    {{restaurant-category-block category=category}}
+  {{/each}}
+  {{dish-recommend products=recommendedProducts}}
+</main>
+<div class="{{if basketOpenned 'basket-overlay' ''}}">
+  {{shopping-basket overflow=overflow storeType=storeType basketOpenned=basketOpenned}}
+</div>

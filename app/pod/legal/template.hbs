@@ -1,0 +1,44 @@
+{{#if currentlyLoading}}
+    <div class="main-loader"><img src="assets/images/loading.svg"></div>
+{{/if}}
+{{landing-page-header}}
+<main>
+    <div class="myAccountPage conntainer-fluid">
+        <div class="Table">
+            <div class="sideTabs tableCell" style=" background-color:#ffffff">
+                <ul class="nav nav-tabs">
+
+                    <li>
+                        <a href="#privacy-sub-menu" data-toggle="collapse" {{action 'collaspeTermsMenu'}}
+                           aria-expanded="false"
+                           aria-controls="privacy-sub-menu">
+                            <span>AVISO DE PRIVACIDAD</span>
+                        </a>
+                        <ul id="privacy-sub-menu" class={{if privacy "collapse in" "collapse"}}>
+                            <li class={{if privacyCol "active"}}><a {{action 'privacy' 'co'}}>Colombia</a></li>
+                            <li class={{if privacyMx "active"}}><a {{action 'privacy' 'mx'}}>México</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#terms-sub-menu" data-toggle="collapse" {{action 'collaspePrivacyMenu'}}
+                           aria-expanded="false"
+                           aria-controls="terms-sub-menu">
+                            <span>TÉRMINOS Y CONDICIONES</span>
+                        </a>
+                        <ul id="terms-sub-menu" class={{if terms "collapse in" "collapse"}}>
+                            <li class={{if termsCol "active"}}><a {{action 'terms' 'co'}}>Colombia</a></li>
+                            <li class={{if termsMx "active"}}><a {{action 'terms' 'mx'}}>México</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="tabContents tableCell">
+                <div class="tab-content">
+                  {{outlet}}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{{footer-block}}

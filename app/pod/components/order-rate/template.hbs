@@ -1,0 +1,45 @@
+<div class="popUp-wrapper loginPopup">
+    <div class="RateRappitendero popUp-Outer">
+        <a href="javascript:void(0);" class="close-global-black" {{action 'closeModal'}}></a>
+
+        <div class=" text-center">
+            <div class="border-bottom padding-popup">
+                <div class="formTitle ">
+                    <h1>Califica tu pedido:</h1>
+                </div>
+                <div class="chatStarRating">
+                  {{#if storekeeper.profile_pic}}
+                      <div class="profile-pic"><a href=""><img src={{storekeeper.profile_pic}} alt="user-rappi"/></a>
+                      </div>
+                  {{else}}
+                      <div class="profile-pic"><a href=""><img src="assets/images/avatar.png" alt="user-rappi"/></a>
+                      </div>
+                  {{/if}}
+                    <h4>{{storekeeper.name}}</h4>
+
+                    <div class="rating-wrapper">
+                        <ul class="star-rating bigStar">
+                            <li class="item app-sprite {{if stage0 '' 'off'}}" {{action 'rating' 0}}></li>
+                            <li class="item app-sprite {{if stage1 '' 'off'}}" {{action 'rating' 1}}></li>
+                            <li class="item app-sprite {{if stage2 '' 'off'}}" {{action 'rating' 2}}></li>
+                            <li class="item app-sprite {{if stage3 '' 'off'}}" {{action 'rating' 3}}></li>
+                            <li class="item app-sprite {{if stage4 '' 'off'}}" {{action 'rating' 4}}></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="padding-popup commentBox">
+                <p>Comentario:</p>
+
+                <form class="form" role="search">
+                  {{textarea class='form-control'  placeholder="¿Qué te encantó?" value=message}}
+                  {{#if sendProcess}}
+                      <div class="hvr-pulse-shrink btn btn-green">por favor espera...</div>
+                  {{else}}
+                      <button type="submit" class="btn btn-green btn-greenMargin" {{action 'send' true}}>ENVIAR</button>
+                  {{/if}}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

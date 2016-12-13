@@ -1,0 +1,47 @@
+<div class="popUp-wrapper loginPopup popUp-Outer ">
+    <div class="text-center listDetailPopup">
+        <a {{action "closeListPopup"}} class="close-global-black"></a>
+        <div class="formTitle">
+            <h1>Para el partido</h1>
+        </div>
+        <div class="text-left">
+            <div class="productList-footer">
+                <ul>
+                    {{#each popupDialogModel.list_product as |product|}}
+                    <li>
+                        <div class="toTable">
+                            <div class="toTable-cell">
+                                <div class="prod-thumb62"><img src={{product.image}}></div>
+                                <div class="product-name">
+                                    <h3>{{product.name}}</h3>
+                                    <span>450 gr</span>
+                                    <div class="paroduct-price">
+                                        <label class="accent-color">$5200</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="toTable-cell">
+                                <div>
+                                    <button class="btn-qty qty-dec"></button>
+                                    <span class="qty-footer">{{product.units}}</span>
+                                    <button class="btn-qty qty-inc"></button>
+                                </div>
+                                <div class="priceBasket-footer"><span class="accent-color">+ agregar a la canasta</span></div>
+                                <div class="cancel-orderWrap"><a href="" class="cancel-order"></a></div>
+                            </div>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="row actions-product padding-popup">
+                <div class="col-sm-4"><a >editar nombre de la lista</a></div>
+                <div class="col-sm-4 text-center"><a  class="accent-color">guardar cambios</a></div>
+                <div class="col-sm-4 text-right"><a {{action "removeList"}}>eliminar lista</a></div>
+            </div>
+        </div>
+        <div>
+            <button class="btn btn-lg btn-green-width2 btn-success btn-greenMargin ">AGREGAR TODO</button>
+        </div>
+    </div>
+</div>

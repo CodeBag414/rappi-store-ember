@@ -1,0 +1,27 @@
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>http://new-web.rappi.com/</loc>
+    <lastmod>2016-07-29T14:23:56+00:00</lastmod>
+    <changefreq>never</changefreq>
+  </url>
+  <url>
+    <loc>http://new-web.rappi.com/#!/home/store/super</loc>
+    <lastmod>2016-07-29T14:23:56+00:00</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>http://new-web.rappi.com/#!/home/store/express</loc>
+    <lastmod>2016-07-29T14:23:56+00:00</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>http://new-web.rappi.com/#!/home/store/restaurant</loc>
+    <lastmod>2016-07-29T14:23:56+00:00</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>http://new-web.rappi.com/#!/home/store/farmacia</loc>
+    <lastmod>2016-07-29T14:23:56+00:00</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+</urlset>

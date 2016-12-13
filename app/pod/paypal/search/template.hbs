@@ -1,0 +1,6 @@
+{{product-search-item routeName='paypal.store' searchItems=model.searchedPruduct searchItemsName=product isCartRemoved=isCartRemoved removedProductId=removedProductId showLoginPopUp='showLoginPopUp'}}
+{{landing-page-popular-search-block data=model.popularSearch}}
+
+<div class="{{if basketOpenned 'basket-overlay' ''}}">
+  {{shopping-basket setCartRemoved='setCartRemoved' setRemovedProductId='setRemovedProductId' basketOpenned=basketOpenned}}
+</div>

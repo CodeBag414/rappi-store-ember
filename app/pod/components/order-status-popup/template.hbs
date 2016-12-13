@@ -1,0 +1,116 @@
+<div class="popUp-wrapper">
+    <div class="popUp-Outer text-center">
+      {{#if closeButton}}
+          <a href="javascript:void(0)" data-dismiss="modal" {{action 'closeLoginPopup'}} class="close-global-black"></a>
+      {{/if}}
+        <div class="Table">
+            <div class="tableCell orderStatusLeft">
+              <div id="timer">
+              </div>
+                <div class="eta-container" style={{if isOrderClosed "visibility:hidden" "visibility:visible; margin-top: -135px; margin-left: -10px"}}>
+                    <p class="timer-min">{{takedAtParse}}</p>
+                    <span class="timer-min-text" >{{min}}</span>
+                </div>
+                <p style="padding-top:60px">Tiempo de entrega estimado</p>
+            </div>
+
+            <div class="tableCell loginForm orderStatusForm">
+
+              <img class="rappitenderoImage" src="assets/images/rappitendero.png" alt="rappitendero" />
+              <p class="rappitenderoName">{{orderObj.storekeeper.name}}</p>
+
+              {{#if isOrderClosed}}
+              <div class="rating-wrapper">
+                <span class="rating-count">{{orderObj.storekeeper.average_score}}</span>
+                <ul class="star-rating">
+                  {{#each starsRating as |star|}}
+                    <li {{action 'reviewOrder' star.index}} class={{if star.off "item app-sprite off" "item app-sprite"}}></li>
+                  {{/each}}
+                </ul>
+              </div>
+              {{/if}}
+
+                <button {{action 'activateChat'}} type="button" class="btn btn-chat">CHATEAR</button>
+              {{#if numberToCall}}
+                  <a href='tel:{{numberToCall}}'><img class="order-status-phone-call" src="/assets/images/iconWhitePhone.png"></a>
+              {{/if}}
+
+              <div class="orderStatusProducts">
+                <div class="orderStatusProductsTitle">
+                  <p>Resumen de productos</p>
+                </div>
+
+                <div class="productList-footer orders-list">
+                    <ul>
+                      {{#each orderObj.products as |product|}}
+                          <li>
+                              <div class="toTable">
+                                  <div class="toTable-cell text-left">
+                                      <div class="prod-thumb62"><img src={{product.imageHigh}}></div>
+                                      <div class="product-name">
+                                          <h3>{{product.name}}</h3>
+                                          <span>{{product.quantity}} {{product.unit_type}}</span>
+
+                                          <div class="priceBasket-footer"><label
+                                                  class="accent-color">{{format-currency product.total_price}}</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="toTable-cell text-right">
+                                      <div>
+                                          <span class="qty-footer">{{product.total_quantity}}</span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </li>
+                      {{/each}}
+                        {{#if isWhimOrdered}}
+                            <li>
+                                <div class="toTable">
+                                    <div class="toTable-cell text-left">
+                                        <div class="prod-thumb62 whim-thumb62"><img src='/assets/images/Donut.png'></div>
+                                        <div class="product-name whim-name">
+                                            <h3 class="order-popup-whim">{{orderedWhim.what}}</h3>
+                                            <span class="order-popup-whim">{{orderedWhim.where}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        {{/if}}
+
+                    </ul>
+                </div>
+              </div>
+
+              <div class="orderStatusCost">
+                  <div class="price-listing-wrapper">
+                      <ul class="price-listing">
+                          <li class="item">
+                              <p>Total de productos: {{format-currency orderObj.total_products}}</p>
+                          </li>
+                          <li class="item">
+                              <p>Propina: {{format-currency orderObj.tip}}</p>
+                          </li>
+                          <li class="item">
+                              <p>Valor del servicio: {{format-currency orderObj.total_charges}}</p>
+                          </li>
+                          <li class="item last">
+                              <p>Total final: {{format-currency orderTotalValueWithTip}}</p>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{{#if showTermConditions}}
+<div class="overlay-term-conditions" {{action 'toggleShowTermConditions'}}> </div>
+    <div class="promo-banner-term-conditions">
+            <img src={{promoCheckoutUrl}} src="" alt="" />
+            <img  class="close-btn" {{action 'toggleShowTermConditions'}} src="assets/images/_icon_close_white.svg" alt="promo-banner">
+    </div>
+{{/if}}

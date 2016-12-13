@@ -1,0 +1,19 @@
+<div class="order-section">
+  <div class="order-form">
+    <h1>¿ ALGO MÁS ?</h1>
+    <hr>
+    <p>&#191;No encontraste lo que buscabas de este restaurante&#63; &#161;No importa&#33; Pídenos lo que tenías en mente y te lo enviamos como un antojo.</p>
+    {{textarea value=what cols="80" rows="6"}}
+    {{#if blankField}}
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <span class={{color}}>
+                  {{message}}
+                </span>
+            </div>
+        </div>
+    {{/if}}
+    <button class="btn-order-extra" {{action 'addWhim'}}>AGREGAR</button>
+  </div>
+
+</div>

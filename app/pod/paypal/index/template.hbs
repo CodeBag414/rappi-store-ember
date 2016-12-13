@@ -1,0 +1,24 @@
+{{#each flashMessages.queue as |flash|}}
+    <div class="flash-message">{{flash-message flash=flash}}</div>
+{{/each}}
+{{#if showModalReg}}
+  {{#modal-dialog translucentOverlay=true}}
+    {{login-register showLogin=true showModalReg=showModalReg showPhoneNumberModel=showPhoneNumberModel showAddressListToUpdate=showAddressListToUpdate showAddAddressToUpdate=showAddAddressToUpdate params=params}}
+  {{/modal-dialog}}
+{{/if}}
+
+{{#if showAddressListToUpdate}}
+  {{#modal-dialog translucentOverlay=true}}
+    {{address-change-list toggleAddAddress='toggleAddAddress' showAddressListToUpdate=showAddressListToUpdate params=params storeType=storeType}}
+  {{/modal-dialog}}
+{{/if}}
+{{#if showAddAddressToUpdate}}
+  {{#modal-dialog translucentOverlay=true}}
+    {{add-address flow='login' showAddAddressToUpdate=showAddAddressToUpdate params=params storeType=storeType}}
+  {{/modal-dialog}}
+{{/if}}
+
+
+
+
+{{outlet}}

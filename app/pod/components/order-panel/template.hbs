@@ -1,0 +1,24 @@
+{{#if isOrderTaken}}
+  {{#if orderRatePanel}}
+    {{#modal-dialog close="togglePopUp" translucentOverlay=true}}
+      {{order-rate orderRatePanel=orderRatePanel closePopUp=closePopUp}}
+    {{/modal-dialog}}
+  {{else}}
+    {{#modal-dialog close="togglePopUp" translucentOverlay=true}}
+      {{order-status-popup orderObj=orderObj closePopUp=closePopUp isOrderClosed=isOrderClosed rate=rate message=message activateChat='activateChat'}}
+    {{/modal-dialog}}
+  {{/if}}
+{{else if isOrderCreated}}
+  {{#modal-dialog close="togglePopUp" translucentOverlay=true}}
+    {{#if isOrderCancelRequested}}
+      {{#modal-dialog translucentOverlay=true container-class="overlapPop"}}
+        {{order-cancel-confirm-popup  closePopUp=closePopUp }}
+      {{/modal-dialog}}
+    {{/if}}
+    {{cancel-order-popup orderCancelRequest='orderCancelRequest'}}
+  {{/modal-dialog}}
+{{else if isChatOn}}
+  {{#modal-dialog close="togglePopUp" translucentOverlay=true}}
+    {{order-chat-panel deActivateChat='deActivateChat' }}
+  {{/modal-dialog}}
+{{/if}}

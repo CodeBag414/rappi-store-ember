@@ -1,0 +1,32 @@
+{{#if isLoading}}
+    <div class="main-loader"><img src="assets/images/loading.svg"></div>
+{{/if}}
+
+{{#if showModalDelevery}}
+  {{#modal-dialog close="toggleLogin" translucentOverlay=true}}
+    {{schedule-delivery-popup removeAddressList=closeAllPopup showModalDelevery=showModalDelevery orderPlaced='orderPlaced' showCreditCardList='showCreditCardList'}}
+  {{/modal-dialog}}
+{{else if showCreditCardList}}
+  {{#modal-dialog close="toggleLogin" translucentOverlay=true}}
+    {{credit-card-list showCreditCardList=showCreditCardList tip=tipForOrder orderPlaced='orderPlaced' showAddCC='showAddCC'}}
+    {{#if showAddCC}}
+      {{#modal-dialog close="showAddCC" translucentOverlay=true}}
+        {{credit-card-iframe-popup creditCard=showAddCC redirectURL=CCURL}}
+      {{/modal-dialog}}
+    {{/if}}
+  {{/modal-dialog}}
+{{else if isOrderPlaced}}
+  {{order-panel closePopUp=closeAllPopup togglePopUp='toggleLogin'}}
+{{else if showAddAddress}}
+  {{#modal-dialog close="toggleLogin" translucentOverlay=true}}
+    {{add-address removeAddressList=closeAllPopup showPopUp=showAddAddress isCheckout=true showModalDelevery='showModalDelevery' flow="checkout"}}
+  {{/modal-dialog}}
+{{else if showAddressList}}
+  {{#modal-dialog translucentOverlay=true}}
+    {{address-list showPopUp=closeAllPopup showAddAddress='showAddAddress' showModalDelevery='showModalDelevery' isCheckout='true'}}
+  {{/modal-dialog}}
+{{else if openLoginView}}
+  {{#modal-dialog close="toggleLogin" translucentOverlay=true}}
+    {{login-register loggedIn='loggedIn' showLogin=true  showAddressList=showAddressList phoneVerification=phoneVerification loginFrom="checkout"}}
+  {{/modal-dialog}}
+{{/if}}

@@ -1,0 +1,128 @@
+.button-whim-1 {
+
+  color: #fff;
+  background-color: #43D2D4;
+  border-color: #43D2D4;
+  text-transform: uppercase;
+  min-height: 65px;
+  right: 0px;
+  position: absolute;
+  .arrow-button{
+    transition: 0.5s ease-in-out;
+    }
+  }
+
+.button-whim-2 {
+  text-transform: uppercase;
+  padding: 0 30px !important;
+  width: 120px !important;
+  right: 0;
+  position: absolute;}
+.banner-container .search-bar-container {
+  top: 215px;
+  }
+.banner-container .search-bar-container .select-dropdown {
+  width: 180px;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 0; }
+.input-dropdown {
+  height: 65px;
+  font-size: 18px; }
+.select-button {
+  width: 65px;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 0; }
+.antojos:last-child {
+  transform: translateX(150%); }
+.banner-container .banner-container.active .search-bar-container {
+  transform: translateX(-110%);
+  opacity: .5; }
+.banner-container .banner-container.active .antojos:last-child {
+  transform: translateX(0);
+  opacity: 1; }
+.banner-container .banner-container > .row > div {
+  display: table; }
+
+.search-bar-container {
+  .button-whim-2.btn.btn-success {
+    height: 65px;
+    border-radius: 0;
+    background-color: #43D480;
+    border-color: #43D480;
+    font-weight: normal;
+    font-size: 16px;
+  }
+
+  .btn-green:before, .btn-success:before {
+    border-color: #43D480;
+  }
+}
+.whim-input{
+  width: 73% !important;
+  border: none;
+}
+.search-bar-transform,.search-bar-transform-whim{
+  max-width: 700px;
+}
+#what1{
+  width: 84% !important;
+}
+@media (max-width:768px){
+  #what1 {
+    width: 78% !important;
+  }
+}
+@media (max-width:650px){
+  #what1 {
+    width: 73% !important;
+  }
+}
+#whim1{
+      width: 71.5%;
+  }
+@media (min-width:600px){
+  #whim1 {
+    width: 73.4%;
+  }
+}
+@media (min-width:650px){
+  #whim1 {
+    width: 75.4%;
+  }
+}
+@media (min-width:700px){
+  #whim1 {
+    width: 77.4%;
+  }
+}
+@media (min-width:768px){
+  #whim1 {
+    width: 78.7%;
+  }
+}
+@media (min-width:805px){
+  #whim1 {
+    width: 80%;
+  }
+}
+@media (min-width:850px){
+  #whim1 {
+    width: 82.5%;
+  }
+}
+@media (min-width:992px){
+  #whim1 {
+    width: 83%;
+  }
+}
+
+.whim-search{
+  transition: transform 0.3s ;
+}
+.whim-search-dynamic{
+  transition:transform 0.7s cubic-bezier(0.87, -0.41, 0.19, 1.44) !important
+}

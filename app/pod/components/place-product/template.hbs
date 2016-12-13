@@ -1,0 +1,39 @@
+<div class="inner-wrap">
+    <!-- ..................................  main page content starts ..............................  -->
+    <main>
+      <div class="place-and-product_bkg">
+        <div class="for_place_or_product">
+          <p>TU BÚSQUEDA</p>
+          <h3>{{keyword}}</h3>
+          <div class="place_or_product">
+              <div class="_green"></div>
+              <div class="place" {{action "selectMeaning" "place"}}>Lugar</div>
+              <div class="product" {{action "selectMeaning" "product"}}> Producto</div>
+          </div>
+          
+      {{#if isPlace}}
+          <p id="_want">¿Qué producto quieres de este establecimiento?</p>
+          {{textarea rows="5" id='what' value=what}}
+      {{else}}
+          <p id="_want">¿Dónde podemos encontrar este producto?</p>
+          {{textarea rows="5" id='where' value=where}}
+      {{/if}}
+
+      {{#if blankField}}
+          <div style="position: absolute; width: 420px; text-align: center; margin: auto">
+              <div class="col-sm-12 text-center">
+                  <span class={{color}}>
+                    {{message}}
+                  </span>
+              </div>
+          </div>
+      {{/if}}
+          <div class="row">
+              <div class="col-sm-12 text-center">
+                      <button type="submit" class="btn btn-green" {{action 'addWhim'}}>AGREGAR</button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </main>
+</div>

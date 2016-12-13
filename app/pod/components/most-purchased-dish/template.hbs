@@ -1,0 +1,14 @@
+<div class="most-purchased-container">
+  <!-- ................  product listing head .....................  -->
+  <div class="title-block">
+      <h1>LOS MÁS COMPRADOS</h1>
+      <hr>
+  </div>
+  <div class="most-purchased-products">
+    {{#each products as |product key|}}
+        {{#if (lt key 20)}}
+        {{restaurant-product-card product=product corridorName=corridor.name corridorId=corridor.id rappi_store_id=corridor.rappi_store_id mostPurchased=true}}
+        {{/if}}
+    {{/each}}
+  </div>
+</div>

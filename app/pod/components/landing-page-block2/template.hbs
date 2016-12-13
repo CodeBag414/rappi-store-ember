@@ -1,0 +1,35 @@
+<div class="bg-block block-vedio">
+    <div class="box-vedio" {{action "showDialog"}}></div>
+    {{#if showModalReg}}
+        {{#modal-dialog close='showDialog' translucentOverlay=true}}
+            <div class="popUp-wrapper loginPopup">
+                <div class="popUp-Outer text-center">
+                    <a href="javascript:void(0)" data-dismiss="modal" {{action 'closeLoginPopup'}} class="close-global-black"></a>
+                    <div class="Table">
+                        <iframe  width="{{videoPopupWidth}}" height="500" src="https://www.youtube.com/embed/GFxqtXRFr7I" frameborder="0" allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        {{/modal-dialog}}
+    {{/if}}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h5 class="block-subHeading uppercase">{{blockData.b2.title}}</h5>
+
+                <h2 class="block-heading">
+                  {{blockData.b2.text}}
+                </h2>
+                <h5 class="block-subHeading">
+                  {{blockData.description2}}
+                </h5>
+
+                <div class="btn-block">
+                    {{!-- <button class="btn btn-primary type-2">ver mas</button> --}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{yield}}

@@ -1,0 +1,55 @@
+<form class="form form-register" role="search">
+  {{#if registrationFailed}}
+      <span class=msg-error>{{errorMessage}}</span>
+  {{/if}}
+    <div class="form-group">
+      <img class="input-icon" src="/assets/images/mail.svg" alt="" />
+      {{input type="text" class="form-control" placeholder="Correo"  key-press="onKeyPress" value=email}}
+      {{#if invalidEmail}}
+          <span class=msg-error>{{emailMessage}}</span>
+      {{/if}}
+    </div>
+    <div class="form-group">
+      <img class="input-icon" src="/assets/images/candado.svg" alt="" />
+      <img class="input-icon-password" src={{passwordInput.src}} {{action 'setPasswordVisible'}} alt="" />
+      {{input type=passwordInput.type class="form-control" placeholder="Contraseña"  key-press="onKeyPress" value=password}}
+      {{#if invalidPassword}}
+          <span class=msg-error>{{passwordMessage}}</span>
+      {{/if}}
+    </div>
+    <div class="form-group">
+      <img class="input-icon" src="/assets/images/user.svg" alt="" />
+      {{input type="text" class="form-control" placeholder="Nombre"  key-press="onKeyPress" value=firstName}}
+      {{#if invalidFirstName}}
+          <span class=msg-error>{{firstNameMessage}}</span>
+      {{/if}}
+    </div>
+    <div class="form-group">
+      <img class="input-icon" src="/assets/images/user.svg" alt="" />
+      {{input type="text" class="form-control" placeholder="Apellido"  key-press="onKeyPress" value=lastName}}
+      {{#if invalidLastName}}
+          <span class=msg-error>{{lastNameMessage}}</span>
+      {{/if}}
+    </div>
+    <div class="form-group">
+      <img class="input-icon" src="/assets/images/phone.svg" alt="" />
+      {{input type="text" class="form-control" placeholder="Celular"  key-press="onKeyPress" value=phone}}
+      {{#if invalidPhone}}
+          <span class=msg-error>{{phoneMessage}}</span>
+      {{/if}}
+    </div>
+    <div class="form-group">
+      {{input type="checkbox" checked=acceptTerms}}
+      <a href="" {{action "showDialog"}}>Términos y condiciones</a>
+    </div>
+  {{#if authProcess}}
+      <div class="hvr-pulse-shrink btn btn-green">por favor espera...</div>
+  {{else}}
+      <button type="submit" {{action "submit"}} class="btn btn-green" style="{{if facebookAuthActive 'cursor: not-allowed;pointer-events: none;opacity: .7;' ''}}" >ENTRAR</button>
+  {{/if}}
+  {{#if showModalTC}}
+    {{#modal-dialog close='showDialog' container-class="overlapPop" translucentOverlay=true}}
+      {{terms-cond showModalTC=showModalTC}}
+    {{/modal-dialog}}
+  {{/if}}
+</form>

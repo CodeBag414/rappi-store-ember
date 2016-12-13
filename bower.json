@@ -1,0 +1,18 @@
+{
+  "name": "rappi",
+  "dependencies": {
+    "ember": "~2.5.0",
+    "ember-cli-shims": "0.1.1",
+    "ember-cli-test-loader": "0.2.2",
+    "ember-qunit-notifications": "0.1.0",
+    "bootstrap": "^3.3.6",
+    "bootstrap-datepicker": "^1.6.1",
+    "algoliasearch": "~3.16.0",
+    "socket.io-client": "1.4.8",
+    "urijs": "^1.18.1",
+    "slick-carousel": "^1.6.0",
+    "perfect-scrollbar": "^0.6.12",
+    "font-awesome": "~4.5.0",
+    "waypoints": "^4.0.1"
+  }
+}

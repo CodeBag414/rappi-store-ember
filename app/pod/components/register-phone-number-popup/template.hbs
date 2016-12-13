@@ -1,0 +1,36 @@
+<div class="popUp-wrapper loginPopup">
+    <div class="popUp-Outer text-center padding-popup ">
+        <div class="formTitle">
+            <h1>Verifica tu número de celular:</h1>
+        </div>
+        <form class="form" role="search">
+            <span class="text-black">¡Hey! &#9786; escribe tu teléfono por favor</span>
+
+            <div class="row">
+                <div class="col-xs-2">
+                     <span class="profile-country-code register-phone">
+                  <img src="assets/images/{{countryFlag}}" title={{countryName}}>
+                   <small>{{phonePrefix}}</small></span>
+                </div>
+                <div class="col-xs-10">
+                    <div class="form-group text-center">
+                      {{input type="text" class="form-control inline-block max-width328" placeholder="Celular" key-press='onKeyPress' value=phone}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group text-center">
+              {{#if invalidPhone}}
+                  <span class=msg-error>{{phoneMessage}}</span>
+              {{/if}}
+            </div>
+            <div class="form-group inline-block">
+              {{#if registerPhoneProcess}}
+                  <div class="hvr-pulse-shrink btn btn-green">por favor espera...</div>
+              {{else}}
+                  <button type="submit" {{action "submit" }} class="btn btn-green">VALIDAR</button>
+              {{/if}}
+            </div>
+        </form>
+    </div>
+</div>

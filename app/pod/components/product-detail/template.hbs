@@ -1,0 +1,47 @@
+<div class="popUp-wrapper loginPopup">
+    <div class="popUp-Outer">
+        <a {{action 'close'}} class="close-global-black"></a>
+
+        <div class="Table">
+            <div  class="tableCell imgProduct-popup">
+              {{#if product.image_high}}
+                  <img id="productimagehigh" src='{{url}}{{product.image_high}}'>
+              {{else}}
+                  <img id="productImageHigh" src='{{product.imageHigh}}'>
+              {{/if}}
+            </div>
+            <div class="tableCell loginForm proDetail-popup">
+                <div class="formTitle">
+                    <h1>{{product.name}}</h1>
+                    <span>{{product.presentation}}</span>
+                </div>
+                <div class="price">
+                    <span>{{format-currency product.price}}</span>
+                </div>
+                <div class="tabs-popUp">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#Detalle" aria-controls="Detalle" role="tab"
+                                                                  data-toggle="tab">Detalles</a></li>
+                        <!--<li role="presentation"><a href="#Ingredientes" aria-controls="profile" role="tab"-->
+                        <!--data-toggle="tab">Ingredientes</a></li>-->
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="Detalle">
+                            <p>{{product.description}}</p>
+                        </div>
+                        <!--<div role="tabpanel" class="tab-pane" id="Ingredientes">-->
+                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nulla dui, tempor vel-->
+                        <!--vehicula at, sollicitudin vitae mi. Vestibulum ante ipsum primis in faucibus orci-->
+                        <!--luctus.</p>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+                <!--<div class="text-center">+ añadir a una lista</div>-->
+                <!--<button disabled={{isProductAdded}} {{action 'addToCart' product}} type="submit" class="btn btn-block btn-green">AGREGAR A LA CANASTA</button>-->
+                <button {{action 'addToCart' product}} type="submit" class="btn btn-block btn-green">AGREGAR A LA
+                    CANASTA
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

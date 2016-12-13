@@ -1,0 +1,38 @@
+<div class="col-md-3 col-sm-4 col-product">
+    <div class="wrap-product">
+        <div class="pro-summmry" {{action "toggleModal" product}}>
+            <div class="product-pic text-center">
+                {{#if product.image_low}}
+                        <img src='{{url}}{{product.image_low}}'>
+                  {{else}}
+                    <img src='{{product.imagelow}}'>
+                {{/if}}
+            </div>
+            <div class="price text-center">
+                <span>{{format-currency product.price}}</span>
+            </div>
+            <div class="product-name text-center">
+                <h3>{{product.name}}</h3>
+                <span>{{product.presentation}}</span>
+            </div>
+            <div class="">
+                <a href="" class="icon-bookmark"></a>
+            </div>
+        </div>
+        <div class="price-wrap">
+            <div id ={{product.id}} class="add-product clearfix {{if isProductAdded 'productAdded' ''}}">
+                <div class="btn-quantity">
+                  <button {{action 'removeFromCart' product}} class="btn btn-primary btn-block btn-remove-product">-</button>
+                  <span id='span_{{product.id}}' class="preview-item shake shake-slow">{{addedProduct.quantity}}</span>
+                  <button {{action 'addToCart' product}} class="btn btn-primary btn-block btn-add-product">+</button>
+                </div>
+                <button {{action 'addToCart' product}} class="btn btn-primary btn-block btn-addToCart">agregar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{#if isShowingModal}}
+  {{#modal-dialog id=product.id close='toggleModal' translucentOverlay=true}}
+    {{product-detail isShowingModal=isShowingModal product=productInfo isProductAdded=isProductAdded addToCart='addToCart'}}
+  {{/modal-dialog}}
+{{/if}}

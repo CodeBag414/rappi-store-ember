@@ -1,0 +1,293 @@
+/********* Button hover effect **********/
+
+@keyframes hvr-ripple-out {
+  100% {
+    top: -12px;
+    right: -12px;
+    bottom: -12px;
+    left: -12px;
+    opacity: 0;
+  }
+}
+
+.btn-success,
+.btn-primary,
+.btn-green-profile,
+.btn-white,
+.btn-green {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+.btn-success:before,
+.btn-primary:before,
+.btn-green-profile:before,
+.btn-white:before,
+.btn-green:before {
+  content: '';
+  position: absolute;
+  border: solid 5px;
+  border-radius: 100px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  -webkit-animation-duration: 0.8s;
+  animation-duration: 0.8s;
+}
+.btn-ellipse100:before {
+  border-radius:100px;
+}
+.btn-success:hover:before, .btn-success:focus:before, .btn-success:active:before,
+.btn-primary:hover:before, .btn-primary:focus:before, .btn-primary:active:before,
+.btn-green-profile:hover:before, .btn-green-profile:focus:before, .btn-green-profile:active:before,
+.btn-white:hover:before, .btn-white:focus:before, .btn-white:active:before,
+.btn-green:hover:before, .btn-green:focus:before, .btn-green:active:before {
+  -webkit-animation-name: hvr-ripple-out;
+  animation-name: hvr-ripple-out;
+}
+
+.btn-green:before, .btn-success:before{
+  border-color: #45d482;
+}
+.btn-primary:before{
+  border-color: #fd6250;
+}
+
+/***********  underline hover effect    **********/
+.registerLink a {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  overflow: hidden;
+}
+.registerLink a:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 100%;
+  right: 0;
+  bottom: 0;
+  background: #fd6250;
+  height: 2px;
+  -webkit-transition-property: left;
+  transition-property: left;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.registerLink a:hover:before, .registerLink a:focus:before, .registerLink a:active:before {
+  left: 0;
+}
+
+.fbBigButton a {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.fbBigButton a:before {
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  content: '';
+  top: 100%;
+  left: 5%;
+  height: 10px;
+  width: 90%;
+  opacity: 0;
+  background: -webkit-radial-gradient(center, ellipse, rgba(204, 204, 204, 0.60) 0%, rgba(0, 0, 0, 0) 80%);
+  background: radial-gradient(ellipse at center, rgba(204, 204, 204, 0.60) 0%, rgba(0, 0, 0, 0) 80%);
+  /* W3C */
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform, opacity;
+  transition-property: transform, opacity;
+}
+.fbBigButton a:hover, .fbBigButton a:focus, .fbBigButton a:active {
+  -webkit-transform: translateY(-5px);
+  transform: translateY(-5px);
+  /* move the element up by 5px */
+}
+.fbBigButton a:hover:before, .fbBigButton a:focus:before, .fbBigButton a:active:before {
+  opacity: 1;
+  -webkit-transform: translateY(5px);
+  transform: translateY(5px);
+  /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */
+}
+
+.wrap-product, .recommend-product {
+  .add-product {
+    button {
+      &:after {
+        content: none !important;
+      }
+      &:before {
+        content: none !important;
+      }
+    }
+    .btn-quantity {
+      position : absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      margin: auto;
+      opacity: 0;
+      width: 0px !important;
+      @include transition(all ease-in-out 0.4s);
+    }
+    .btn-addToCart {
+      opacity: 1;
+      @include transition(all ease-in-out 0.4s);
+    }
+  }
+
+  .productAdded {
+    .btn-quantity {
+      opacity: 1;
+      width: 190px !important;
+      @include transition(all ease-in-out 0.4s);
+    }
+    .btn-addToCart {
+      opacity: 0;
+      width: 0px !important;
+      top: 60px;
+      @include transition(all ease-in-out 0.4s);
+    }
+  }
+
+  .toolbar {
+    .quantity {
+      position : absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      margin: auto;
+      opacity: 0;
+      width: 0px !important;
+      @include transition(all ease-in-out 0.4s);
+    }
+    .btn-add {
+      opacity: 1;
+      @include transition(all ease-in-out 0.4s);
+    }
+  }
+  .productAdded {
+    .quantity {
+      opacity: 1;
+      width: 190px !important;
+      @include transition(all ease-in-out 0.4s);
+    }
+    .btn-add {
+      opacity: 0;
+      width: 0px !important;
+      left: -80px !important;
+      @include transition(all ease-in-out 0.4s);
+    }
+  }
+}
+.menu-list {
+  .wrap-product {
+    .productAdded {
+      .quantity {
+        opacity: 1;
+        width: 275px !important;
+        @include transition(all ease-in-out 0.4s);
+      }
+      .btn-add {
+        opacity: 0;
+        width: 0px !important;
+        @include transition(all ease-in-out 0.4s);
+      }
+    }
+  }
+}
+
+.btn-quantity:before {
+  content: "-";
+  color: #fff;
+  font-size: 20px;
+  position: absolute;
+  left: 20px;
+  top: 9px;
+  font-weight: bold;
+  opacity: 0;
+  pointer-events: none;
+  @include transition(all ease-in-out 0s);
+}
+.btn-quantity:after {
+  content: "+";
+  color: #fff;
+  font-size: 20px;
+  position: absolute;
+  right: 20px;
+  top: 9px;
+  font-weight: bold;
+  opacity: 0;
+  pointer-events: none;
+  @include transition(all ease-in-out 0s);
+}
+.product-plus .btn-quantity:after {
+  right: 90px;
+  opacity:1;
+  @include transition(all ease-in-out 0.6s);
+}
+.product-minus .btn-quantity:before {
+  left: 90px;
+  opacity:1;
+  @include transition(all ease-in-out 0.6s);
+}
+
+.product-shake span {
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  -o-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-animation-iteration-count: 3; /* Chrome, Safari, Opera */
+  animation-iteration-count: 3;
+
+}
+
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}

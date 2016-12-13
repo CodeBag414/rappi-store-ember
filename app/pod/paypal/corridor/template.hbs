@@ -1,0 +1,68 @@
+<!-- ..................................  main page content starts ..............................  -->
+<main {{ action "click" }}>
+    <!-- ..................................  carousel section .................................... -->
+
+      <div class="bg-block block-two favorsHomePage">
+          <div class="container">
+              <div class="row">
+                  <div class="logo-restaurant pull-left">
+
+                  </div>
+                  <div class="col-sm-12 pull-right text-right text-restaurant">
+                      <h2 class="blockheading" id="ele1">
+                        {{model.corridor.name}}
+                      </h2>
+                      <h5 class="block-subHeading">
+                        {{model.corridor.description}}
+                      </h5>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+    <div class="product-listing">
+        <div class="container">
+            <div class="breadcrumbBox row mt-Bottom30">
+                <div class="col-sm-6">
+                    <ol class="breadcrumb">
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#" {{action 'change'}}>{{storeTypeName}}</a></li>
+                        <li class="active">{{name-parser model.corridor.name}}</li>
+                    </ol>
+                </div>
+            </div>
+
+          {{#each model.corridor.sub_corridors as |subCorridor|}}
+            {{#if subCorridor.products.length}}
+                <!-- ................  product listing head .....................  -->
+                <div class="row row-product-head mt-top60">
+                    <div class="col-sm-12">
+                        <h2 id={{subCorridor.id}}>
+                          {{#if mobileView}}
+                              <p>{{name-parser subCorridor.name}}</p>
+                          {{else}}
+                            {{name-parser subCorridor.name}}
+                          {{/if}}
+                            <button {{action 'change'}} class="btn product-back hvr-bounce-to-bottom">Volver</button>
+                          {{#link-to 'paypal.subcorridor' subCorridor.id }}
+                              <button class="btn product-all pull-right hvr-bounce-to-bottom">ver todos</button>
+                          {{/link-to}}
+                        </h2>
+                    </div>
+                </div>
+                <div class="carrusel-products row paypal-product">
+                  {{#each subCorridor.products as |product|}}
+                      <!-- ................  main product listing .....................  -->
+                    {{product-card product=product showLoginPopUp='showLoginPopUp'}}
+                  {{/each}}
+                </div>
+            {{/if}}
+          {{else}}
+              <h2>Lo sentimos &#9785;, no tenemos productos disponibles para este horario y ubicación</h2>
+          {{/each}}
+        </div>
+    </div>
+</main>
+<div class="{{if basketOpenned 'basket-overlay' ''}}">
+  {{shopping-basket overflow=overflow basketOpenned=basketOpenned}}
+</div>

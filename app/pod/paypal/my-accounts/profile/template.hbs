@@ -1,0 +1,81 @@
+<!--<div id="id1" class="tab-pane fade row">-->
+
+<div class="breadcrumbBox">
+    <div class="col-sm-12">
+        <ol class="breadcrumb">
+            <li><a href="#">Inicio</a></li>
+            <li class="active">Mis datos</li>
+        </ol>
+    </div>
+</div>
+
+<div class="changePwdPage">
+    <div class="col-sm-12">
+        <h2 class="blockHeading block-heading-profile">
+            Mis datos
+        </h2>
+
+    </div>
+    <div class="profileDtails col-sm-12  text-center">
+        <div class="custom-file-upload ">
+            <div class="profile-pic thumb74">
+                <a href="">
+                    <img src={{model.pic}} alt="user-rappi">
+                </a>
+            </div>
+            <div class=" text-center">
+
+                <input title="Haga clic para cambiar de imagen" type="file" id="profile_image_45g7"
+                       onchange={{action "onImageSelect" this}} accept="image/x-png,image/gif,image/jpeg">
+                <span>Edita tu foto</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 queryForm pdRight30 ">
+        <div class="form-group profile-input">
+            <img class="input-icon " src="/assets/images/user.svg" alt="" />
+          {{input type="text" class="form-control form-control-profile"  placeholder="nombre" value=model.first_name}}
+        </div>
+        <div class="form-group profile-input">
+            <img class="input-icon " style="background-color: #eee; opacity: 1" src="/assets/images/mail.svg" alt="" />
+          {{input type="text" class="form-control form-control-profile"  placeholder="email" value=model.email disabled=true}}
+        </div>
+        <div class="form-group cust-twoArrows profile-input">
+          {{bootstrap-datepicker placeholder="Fecha de nacimiento" class="form-control form-control-profile" autoclose=true todayBtn=true orientation="right" value=model.birth_date}}
+        </div>
+    </div>
+
+    <div class="col-sm-6 queryForm pdLeft30">
+        <div class="form-group profile-input">
+            <img class="input-icon " src="/assets/images/user.svg" alt="" />
+          {{input type="text" class="form-control form-control-profile" placeholder="apellido" value=model.last_name}}
+        </div>
+        <div class="form-group profile-input">
+            <img class="input-icon " src="/assets/images/phone.svg" alt="" />
+          {{input type="text" class="form-control form-control-profile" placeholder="teléfono no" value=model.phone}}
+        </div>
+        <div class="form-group cust-twoArrows profile-input">
+            <select placeholder="Sexo" class="form-control form-control-profile" onchange={{action "onSelectGender" value="target.value"}}>
+                <option value="" disabled selected>Sexo</option>
+              {{select-option model.gender 'M' 'Masculino'}}
+              {{select-option model.gender 'F' 'Femenino'}}
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-12 text-center">
+    <p class="btnBox">
+      {{#if updateProcess}}
+          <div class="hvr-pulse-shrink btn btn-green">por favor espera...</div>
+      {{else}}
+          <button type="button" {{action "submit" model}} class="btn btn-green-profile">ACTUALIZAR</button>
+      {{/if}}
+        </p>
+    </div>
+</div>
+
+
+{{#if phoneVerification}}
+  {{#modal-dialog translucentOverlay=true}}
+    {{phone-number-verification-popup phoneNumber=phoneNumber showPhoneNumberVerifyModel=phoneVerification}}
+  {{/modal-dialog}}
+{{/if}}

@@ -1,0 +1,12 @@
+<div class="popular-restaurants-container">
+  <div class="restaurant-list">
+    {{#each stores as |store index|}}
+      {{#if (lt index maxShow)}}
+        {{restaurant-home store=store productList='productList' routeName='home.subcorridor' mostPopular=true}}
+      {{/if}}
+    {{/each}}
+  </div>
+  {{#if (lt maxShow stores.length)}}
+  <div class="btn-see-more" {{action 'seeMore'}}>VER MÁS</div>
+  {{/if}}
+</div>

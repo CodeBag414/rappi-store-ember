@@ -1,0 +1,14 @@
+<div class="most-popular-dish-container">
+  <!-- ................  product listing head .....................  -->
+  <div class="title-block">
+      <h1>LO MÁS POPULAR</h1>
+      <hr>
+  </div>
+  <div class="most-popular-dishes">
+    {{#each products as |product key|}}
+        {{#if (lt key 8)}}
+          {{restaurant-product-card product=product corridorName=corridorName corridorId=corridorId rappi_store_id=storeId inSpecificRestaurant=inSpecificRestaurant}}
+        {{/if}}
+    {{/each}}
+  </div>
+</div>

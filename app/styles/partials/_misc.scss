@@ -1,0 +1,156 @@
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.btn {
+	&:focus {
+		outline: none;
+	}
+	&:active {
+		outline: none;
+		&:focus {
+			outline: none;
+		}
+	}
+}
+
+/* ..................  sprite image ............... */
+
+.icon-plane, a.icon-lock, .icon-map:before,
+.it-next, .it-prev {
+	background-image: url("images/app-sprite.png");
+	background-repeat: no-repeat;
+}
+
+/* ............  retina sprit and image adjustments .............. */
+
+.social-footer-links ul li a, span.icon-heart,
+.btn-qty, a.cancel-order, a.close-global, .icon-cust,
+a.icon-bookmark, .custome-radio label:before, a.close-global-black,
+.popUp-Outer.blockList .item .imgIcon, .app-sprite{
+	background-image: url("images/app-sprite2x.png");
+	background-repeat: no-repeat;
+	background-size: 450px 450px;
+}
+
+.basket > ul > li > a {
+	background-image: url("images/icon-basket.svg");
+	width: 34px;
+  height: 34px;
+}
+
+.ret-2x {
+	width: 50%;
+	height: auto;
+}
+input[type="text"] {
+
+	background-color: #ffffff;
+}
+input[type="email"] {
+	border-radius: 0;
+	border: 1px solid #dadbdd;
+	box-shadow: none;
+}
+input[type="date"] {
+	border-radius: 0;
+	border: 1px solid #dadbdd;
+	box-shadow: none;
+	width:100%;
+}
+input[type="password"] {
+	border-radius: 0;
+	border: 1px solid #dadbdd;
+	box-shadow: none;
+}
+.form-control {
+	&:focus {
+		border-color: #4a90e2;
+		box-shadow: none;
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+	}
+}
+.mt-top10 {
+	margin-top: 10px !important;
+}
+.mt-top60 {
+	margin-top: 40px;
+}
+.main-content-margin {
+	margin-top: 60px;
+	position: relative;
+}
+.mt-top30 {
+	margin-top: 30px;
+}
+.mt-top20 {
+	margin-top: 20px;
+}
+.mt-Bottom30 {
+	margin-bottom: 30px;
+}
+.accent-color {
+	color: #fd6250;
+}
+a.accent-color {cursor:pointer;}
+
+/* color error message */
+
+.msg-error {
+  color: red;
+}
+.msg-sucess {
+  color: green;
+}
+
+iframe {
+  display: block;
+}
+
+/*Timer css*/
+.timer-min-text {
+  font-size: 24.1px;
+  text-align: center;
+  color: #ffffff;
+}
+.timer-min {
+  font-size: 56.3px;
+  text-align: center;
+  color: #ffffff;
+}
+#timer{
+  padding-top:190px;
+}
+.eta-container{
+  p{
+    margin-bottom: -6px !important;
+  }
+
+}
+
+.basket-badge {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  bottom: 0px;
+  margin-left: 18px;
+  position: absolute;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: #fd6250;
+  border-radius: 10px;
+}

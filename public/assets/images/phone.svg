@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>AEA93469-4013-47AB-A130-D072D35C25BC</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <rect id="path-1" x="61" y="282" width="689" height="289"></rect>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="25" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.300860969   0 0 0 0 0.233716657   0 0 0 0 0.226648834  0 0 0 0.53 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <rect id="path-3" x="0" y="0" width="811" height="570"></rect>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="811" height="570" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+    </defs>
+    <g id="Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Login-register" transform="translate(-1615.000000, -576.000000)">
+            <rect id="Rectangle-426" fill-opacity="0.5" fill="#FFFFFF" x="0" y="0" width="3372" height="2519"></rect>
+            <g id="modal-_morning" transform="translate(1195.000000, 174.000000)">
+                <g id="shadow" fill-opacity="1" fill="black">
+                    <use filter="url(#filter-2)" xlink:href="#path-1"></use>
+                </g>
+                <use id="Rectangle-Copy" stroke="#DDDDDD" mask="url(#mask-4)" stroke-width="2" fill="#FFFFFF" xlink:href="#path-3"></use>
+                <g id="Group-5" transform="translate(420.000000, 402.000000)" fill="#BBBBBB">
+                    <g id="_ico_phone_gris">
+                        <path d="M16.2133125,1 L6.7866875,1 C5.80275,1 5,1.83273077 5,2.8585 L5,19.8200385 C5,20.8417692 5.80275,21.6785385 6.7866875,21.6785385 L16.2133125,21.6785385 C17.2005,21.6785385 18,20.8417692 18,19.8200385 L18,2.8585 C18,1.83273077 17.2005,1 16.2133125,1 L16.2133125,1 Z M16.698375,19.8200385 C16.698375,20.1318077 16.4798125,20.3846154 16.2133125,20.3846154 L6.7866875,20.3846154 C6.5201875,20.3846154 6.301625,20.1318077 6.301625,19.8200385 L6.301625,17.1538462 L16.698375,17.1538462 L16.698375,19.8200385 Z M6.301625,15.8599231 L16.698375,15.8599231 L16.698375,6.16761538 L6.301625,6.16761538 L6.301625,15.8599231 Z M16.698375,4.87773077 L6.301625,4.87773077 L6.301625,2.8585 C6.301625,2.54592308 6.5201875,2.29392308 6.7866875,2.29392308 L16.2133125,2.29392308 C16.4798125,2.29392308 16.698375,2.54592308 16.698375,2.8585 L16.698375,4.87773077 Z M11.5,19.7376538 C12.0395,19.7376538 12.4741875,19.3055385 12.4741875,18.7692308 C12.4741875,18.2329231 12.0395,17.8008077 11.5,17.8008077 C10.9605,17.8008077 10.5258125,18.2329231 10.5258125,18.7692308 C10.5258125,19.3055385 10.9605,19.7376538 11.5,19.7376538 L11.5,19.7376538 Z M12.801625,2.93684615 L10.198375,2.93684615 C9.8400625,2.93684615 9.551625,3.22761538 9.551625,3.58380769 C9.551625,3.94080769 9.8400625,4.23076923 10.198375,4.23076923 L12.801625,4.23076923 C13.1599375,4.23076923 13.448375,3.94080769 13.448375,3.58380769 C13.448375,3.22761538 13.1599375,2.93684615 12.801625,2.93684615 L12.801625,2.93684615 Z" id="Fill-1"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

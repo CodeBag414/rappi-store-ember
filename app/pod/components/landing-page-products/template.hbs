@@ -1,0 +1,30 @@
+<div class="most-purchased-products-section">
+  <div class="title-block">
+    <h1>{{firstTitle}}</h1>
+    <hr/>
+  </div>
+  <div class="most-purchased-products-container">
+    <div class="carrusel-products most-purchased-products-list" id="home-most-purchased-products">
+      {{#each firstProducts as |product|}}
+          <!-- ................  main product listing .....................  -->
+        {{new-product-card product=product  newCartAdded='newCartAdded'}}
+      {{/each}}
+    </div>
+  </div>
+
+</div>
+
+<div class="cheapest-products-section">
+  <div class="title-block">
+    <h1>{{secondTitle}}</h1>
+    <hr/>
+  </div>
+  <div class="cheapest-products-container">
+    <div class="carrusel-products cheapest-products-list row">
+      {{#each secondProducts as |product|}}
+          <!-- ................  main product listing .....................  -->
+        {{new-product-card product=product  newCartAdded='newCartAdded'}}
+      {{/each}}
+    </div>
+  </div>
+</div>

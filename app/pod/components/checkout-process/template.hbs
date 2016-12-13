@@ -1,0 +1,27 @@
+{{#if isLoading}}
+    <div class="main-loader"><img src="assets/images/loading.svg"></div>
+{{/if}}
+{{#if showModalDelevery}}
+  {{#modal-dialog close="togglePopUp" translucentOverlay=true}}
+    {{schedule-delivery-popup removeAddressList=showPopUp showModalDelevery=showModalDelevery orderPlaced='orderPlaced' showCreditCardList='showCreditCardList' isLoading=isLoading}}
+  {{/modal-dialog}}
+{{else if showCreditCardList}}
+  {{#modal-dialog close="togglePopUp" translucentOverlay=true}}
+    {{credit-card-list showCreditCardList=showCreditCardList tip=tipForOrder orderPlaced='orderPlaced' showAddCC='showAddCC' isLoading=isLoading}}
+    {{#if showAddCC}}
+      {{#modal-dialog close="showAddCC" translucentOverlay=true}}
+        {{credit-card-iframe-popup creditCard=showAddCC redirectURL=CCURL iFrameLoaded='iFrameLoaded'}}
+      {{/modal-dialog}}
+    {{/if}}
+  {{/modal-dialog}}
+{{else if isOrderPlaced}}
+    {{order-panel closePopUp=showPopUp togglePopUp='togglePopUp'}}
+{{else if showAddAddress}}
+  {{#modal-dialog close="togglePopUp" translucentOverlay=true}}
+    {{add-address removeAddressList=showPopUp showPopUp=showAddAddress isCheckout=true showModalDelevery='showModalDelevery' flow="checkout"}}
+  {{/modal-dialog}}
+{{else}}
+  {{#modal-dialog close="togglePopUp" translucentOverlay=true}}
+    {{address-list showPopUp=orderAllowed showAddAddress='showAddAddress' showModalDelevery='showModalDelevery' isCheckout='true'}}
+  {{/modal-dialog}}
+{{/if}}

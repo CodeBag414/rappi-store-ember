@@ -1,0 +1,87 @@
+<div class="banner-index">
+    <div class="toTable-cell">
+        <div class="banner-index-form">
+            <h2 class="block-heading">
+                <span>{{search_block.h2.s1}}</span>
+            </h2>
+            <h5 class="block-subHeading">
+                <span>{{search_block.h5.s1}}</span>
+            </h5>
+
+            <div class="bannerForm-wrap">
+                <form onsubmit={{action 'prevent'}} class="form-inline">
+                    <div id="googlePlaceContainer" class="form-group" >
+                      {{place-autocomplete-field
+                      value= completeAddress
+                      handlerController= this
+                      inputClass= 'styles__input___2FfzQ'
+                      focusOutCallback="focusOut"
+                      placeChangedCallback="placeChanged"
+                      restrictions=country
+                      }}
+                    </div>
+                    <button type="button" {{action 'findStoreTypes' }} id="ENTRAR"
+                            class="btn btn-primary btn-ellipse100 btn-request-now">
+                      {{#if isFindingStore}}
+                          <img alt="Loader" src="assets/images/loading.svg"/>
+                      {{else}}
+                          ¡PEDIR YA!
+                      {{/if}}
+                    </button>
+                  {{#if showAddressHistory}}
+                    <div id="addressHistory" class="pac-container-address " style="width: 800px; display:none">
+                      {{#each addressHistory as |address| }}
+                          <div class="pac-item" {{action 'addressHistoryClick' address}}>
+                                <span class="pac-icon pac-icon-marker"></span><span>{{address.formatted_address}}</span>
+                          </div>
+                      {{/each}}
+                        <span style="float: right; padding:5px">búsqueda reciente</span>
+                    </div>
+                  {{/if}}
+                  {{#if showFaderLabel}}
+                    {{fader-label showFaderLabel=showFaderLabel message=message}}
+                  {{/if}}
+                  {{#if isShowingModal}}
+                    {{#modal-dialog close='toggleModal' container-class="storePopupModal" translucentOverlay=true}}
+                      {{landing-page-search-block.store-type-popup latitude=storage.latitude longitude=storage.longitude stores=stores changeStoreType=changeStoreType}}
+                    {{/modal-dialog}}
+                  {{/if}}
+                </form>
+            </div>
+            <div class="types-store text-center">
+                <ul>
+                    <li class="li-express">
+                        <div></div>
+                        <img src="assets/images/icon-express.svg" alt="Apple App Store"/>
+
+                        <p>Tienda express</p></li>
+                    <li class="li-restaurant">
+                        <div></div>
+                        <img src="assets/images/icon-restaurant.svg" alt="Google Play Store"/>
+
+                        <p>Restaurantes</p></li>
+                    <li class="li-market">
+                        <div></div>
+                        <img src="assets/images/icon-market.svg" alt="Apple App Store"/>
+
+                        <p>Supermercado</p></li>
+                    <li class="li-pharmacy">
+                        <div></div>
+                        <img src="assets/images/icon-pharmacy.svg" alt="Google Play Store"/>
+
+                        <p>Farmacia</p></li>
+                </ul>
+            </div>
+            <div class="app-store text-center">
+                <ul>
+                    <li><a href="https://itunes.apple.com/us/app/rappi/id984044296?mt=8" target="_blank"><img
+                            src="assets/images/apple-store.png" alt="Apple App Store"/></a></li>
+                    <li><a href="https://play.google.com/store/apps/details?id=com.grability.rappi&hl"
+                           target="_blank"><img
+                            src="assets/images/google-play.png" alt="Google Play Store"/></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{{yield}}

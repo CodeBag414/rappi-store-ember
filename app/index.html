@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="google-site-verification" content="PSTY4bf8oaFG80C2RcNXbuc6P_6KqyU9cieJ1GlGS3M" />
+  <meta charset="utf-8">
+  <meta name="fragment" content="!">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Rappi</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{content-for "head"}}
+
+  <style>
+    /** Load font-family for all website */
+    *{
+        font-family: 'Avenir Next' !important;
+    }
+  </style>
+
+  <link rel="stylesheet" href="assets/vendor.css">
+  <link rel="stylesheet" href="assets/rappi.css">
+  <link rel="icon" href="assets/images/rappi_favicon.png">
+  <link rel="canonical" href="https://www.rappi.com"/>
+  {{content-for "head-footer"}}
+  <script src="intercom.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"
+          integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY"
+          crossorigin="anonymous"></script>
+
+  <!-- Facebook Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1054156144703544');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1054156144703544&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- DO NOT MODIFY -->
+  <!-- End Facebook Pixel Code -->
+
+<!-- script tag for accountkit-->
+  <script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
+
+</head>
+<body id="container">
+{{content-for "body"}}
+
+<div id="preloader">
+  <div class="preloader-bkg">
+    <div class="circle" id="cc1"></div>
+    <div class="circle" id="cc2"></div>
+    <div class="circle" id="cc3"></div>
+    <div class="circle" id="cc4"></div>
+  </div>
+
+  <div id="loading">
+    <div id="loading-center">
+      <div id="loading-center-absolute">
+        <img class="object" id="object_one"   src='assets/images/pictogramloader-01.svg'>
+        <img class="object" id="object_two"   src='assets/images/pictogramloader-02.svg' style="left: 20px;">
+        <img class="object" id="object_three" src='assets/images/pictogramloader-03.svg' style="left: 40px;">
+        <img class="object" id="object_four"  src='assets/images/pictogramloader-04.svg' style="left: 60px;">
+        <img class="object" id="object_five"  src='assets/images/pictogramloader-05.svg' style="left: 80px;">
+        <img class="object" id="object_six"   src='assets/images/pictogramloader-09.svg' style="left:100px;">
+        <img class="object" id="object_seven" src='assets/images/pictogramloader-06.svg' style="left:120px;">
+        <img class="object" id="object_eight" src='assets/images/pictogramloader-07.svg' style="left:140px;">
+        <img class="object" id="object_nine"  src='assets/images/pictogramloader-08.svg' style="left:160px;">
+        <img class="object" id="object_ten"   src='assets/images/pictogramloader-05.svg' style="left:180px;">
+        <p>Cargando tu experiencia Rappi</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="assets/vendor.js"></script>
+<script src="assets/rappi.js"></script>
+<script src="assets/js/ppbridge.min.js"></script>
+<!--Google analtics script-->
+<script>
+  var PayPalApp = $.NativeBridge,
+    bridgeConfig = {
+      actions: {
+        /**
+         * action for displaying the AlertView in the PayPal Client App
+         */
+        "MaxOrderReached": {
+          func: "ShowAlert",
+          args: {
+            title: "Your Cart Is Full",
+            message: "You can add up to 7 items to an order. If you have more, please place another order for the remaining items.",
+            buttons: [{text: "OK", style: {}, type: "CANCEL"}]
+          }
+        },
+        /**
+         * action for setting the TitleBar, Left Button (Back), the Right Button is disregarded because the PayPal Client App controls it
+         * when the back button is clicked, the PayPal Client App will call handler tag 3
+         */
+        "MerchantTitleBar": {
+          func: "SetTitleBar",
+          args: {
+            WindowTitle: window.document.title,
+            LeftButton: {
+              text: "Back",
+              type: "BACK",
+              tag: 3
+            }
+          }
+        },
+        /**
+         * action for setting the TitleBar, Left Button (Back), Right Button is disregarded because the PayPal Client App controls it.
+         * when the back button is clicked, tha PayPal Client App will call handler tag 1
+         */
+        "MerchantTitleBarBackToPP": {
+          func: "SetTitleBar",
+          args: {
+            WindowTitle: window.document.title,
+            LeftButton: {
+              text: "Back",
+              type: "BACK",
+              tag: 1
+            }
+          }
+        },
+        /**
+         * action for setting the TitleBar, Left Button (Back)
+         * additional setting is applied to the back button as it is disabled, it is being shown in PayPal Client App but not clickable
+         */
+        "MerchantTitleBarDisabledBack": {
+          func: "SetTitleBar",
+          args: {
+            WindowTitle: window.document.title,
+            LeftButton: {
+              text: "Back",
+              type: "BACK",
+              style: {disabled: true},
+              tag: 1
+            }
+          }
+        },
+        /**
+         * action for setting the TitleBar, Left Button (Back), Right Button is disregarded because the PayPal Client App controls it.
+         * when the back button is clicked, tha PayPal Client App will call handler tag 3
+         */
+        "MerchantTabTitleBar": {
+          func: "SetTitleBar",
+          args: {
+            WindowTitle: window.document.title,
+            LeftButton: {
+              text: "Back",
+              type: "BACK",
+              tag: 3
+            }
+          }
+        },
+        /**
+         * action to display the ActionSheet on the PayPal Client App
+         * when a button is clicked, the PayPal Client App will execute the callback handler function "PlaceOrderCB" in the callbacks object.
+         */
+        "PlaceOrder": {
+          func: "ShowActionSheet",
+          args: {
+            title: "Please Confirm",
+            buttons: [
+              {text: "Place order", type: "DESTRUCTIVE"},
+              {text: "CANCEL", type: "CANCEL"}
+            ]
+          },
+          cb: "PlaceOrderCB"
+        },
+        /**
+         * action to direct the PayPal Client App to go to the native page
+         */
+        "GotoCheckinPage": {
+          func: "GotoPage",
+          args: {page: "CheckIn"}
+        }
+      },
+      handlers: {
+        1: function (e) {
+          PayPalApp.call({func: "DismissWebView"});
+        },
+        2: function (e) {
+          PayPalApp.call({
+            func: "GotoPage",
+            args: {page: "MerchantDetailsPage"}
+          });
+        },
+        3: function (e) {
+          window.history.back();
+        }
+      },
+      callbacks: {
+        "PlaceOrderCB": function (index) {
+          if (index.data == 0) {
+            PayPalApp.call("GotoCheckinPage");
+          }
+        }
+      }
+    };
+  PayPalApp.init(bridgeConfig);
+  PayPalApp.call("MerchantTitleBar");
+</script>
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-64467188-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<!-- start Mixpanel --><script type="text/javascript">(function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+mixpanel.init("ee00f91d0724a201fd2c0e02d3f1ad96");
+mixpanel.track("session");
+mixpanel.track("pre_loader_display");
+</script><!-- end Mixpanel -->
+
+{{content-for "body-footer"}}
+
+<script type="text/javascript">
+  adroll_adv_id = "ASMXUUHEH5F27MNPHXQYBP";
+  adroll_pix_id = "QJQZSKPQAZH4TBO4WM3WQ6";
+  /* OPTIONAL: provide email to improve user identification */
+  /* adroll_email = "username@example.com"; */
+  (function () {
+    var _onload = function(){
+      if (document.readyState && !/loaded|complete/.test(document.readyState))
+      {setTimeout(_onload, 10);return}
+      if (!window.__adroll_loaded){__adroll_loaded=true;setTimeout(_onload, 50);return}
+      var scr = document.createElement("script");
+      var host = (("https:" == document.location.protocol) ? "https://s.adroll.com" :
+        "http://a.adroll.com");
+      scr.setAttribute('async', 'true');
+      scr.type = "text/javascript";
+      scr.src = host + "/j/roundtrip.js";
+      ((document.getElementsByTagName('head') || [null])[0] ||
+      document.getElementsByTagName('script')[0].parentNode).appendChild(scr);
+    };
+    if (window.addEventListener) {window.addEventListener('load', _onload, false);}
+    else {window.attachEvent('onload', _onload)}
+  }());
+</script>
+
+<!-- Begin Inspectlet Embed Code -->
+<script type="text/javascript" id="inspectletjs">
+window.__insp = window.__insp || [];
+__insp.push(['wid', 1330285453]);
+(function() {
+function ldinsp(){if(typeof window.__inspld != "undefined") return; window.__inspld = 1; var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); };
+setTimeout(ldinsp, 500); document.readyState != "complete" ? (window.attachEvent ? window.attachEvent('onload', ldinsp) : window.addEventListener('load', ldinsp, false)) : ldinsp();
+})();
+</script>
+<!-- End Inspectlet Embed Code -->
+
+<div class="mobile-banner">
+  <div class="mobile-banner_top">
+    <button id="mobile-banner-top_hide"></button>
+    <p class="rappi_for_mobile"> Rappi para Android </p>
+    <a class="rappi-app-download" href="https://play.google.com/store/apps/details?id=com.grability.rappi&amp;hl" target="_blank">Instalar</a>
+  </div>
+
+  <div class="mobile-banner_body">
+    <img class="logo" src="/assets/images/logo-rappi-2@2x.png" alt="logo-rappi"/>
+    <p>Todo lo que necesites en <b>minutos</b></p>
+    <img class="phone" src="/assets/images/mobile-banner-main.png"/>
+    <a class="rappi-app-download" href="https://play.google.com/store/apps/details?id=com.grability.rappi&amp;hl" target="_blank" id="rappi-app-download">IR A DESCARGAR EL APP</a>
+    <a id="remove-banner">ir a versión móvil de <b>Rappi.com</b></a>
+  </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $('img.phone').on('load', function() {
+    if ( window.localStorage.getItem('es_fromMobile') == null ) {
+      if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        Ember.$(".mobile-banner").css('display', 'block');
+        window.localStorage.setItem('es_fromMobile', true);
+
+        if( /iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+          Ember.$(".rappi_for_mobile").text("Rappi para iPhone");
+          Ember.$(".rappi-app-download").attr("href", "https://itunes.apple.com/us/app/rappi/id984044296?mt=8");
+        }
+      }
+    } else {
+      Ember.$(".mobile-banner").remove();
+    }
+  });
+
+  $("#mobile-banner-top_hide").click(function(){
+    $(".mobile-banner_top").hide();
+  });
+
+  $("#remove-banner").click(function() {
+    Ember.$(".mobile-banner").remove();
+  });
+
+  $(window).on("load", function() {
+    Ember.$("#preloader").one('transitionend', function () {
+      Ember.$("#preloader").css('display', 'none');
+      Ember.$("#preloader").remove();
+    })
+    .css('opacity', 0);
+  });
+  $(window).on("beforeunload",function () {
+    mixpanel.track("left_site");
+  });
+
+});
+</script>
+</body>
+</html>

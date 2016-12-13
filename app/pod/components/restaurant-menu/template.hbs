@@ -1,0 +1,21 @@
+<div class="restaurant-menu-container {{if (eq viewMode 'list') 'list' 'grid'}}" id="restaurant-menu-container">
+  <div class="title-block">
+    <h1>MENÚ</h1>
+    <hr>
+    <div {{action 'switchVideMode' 'list'}} class="list-view  {{if (eq viewMode 'list') 'active' ''}}"></div>
+    <div {{action 'switchVideMode' 'grid'}} class="grid-view {{if (eq viewMode 'grid') 'active' ''}}"></div>
+  </div>
+  <div class="menu-list {{if (eq viewMode 'list') 'list' 'grid'}}">
+    {{#each products as |product key|}}
+      {{#if (eq viewMode 'list')}}
+        {{recommend-product-card product=product pIndex=key corridorName=corridorName corridorId=corridorId rappi_store_id=product.store_id inSpecificRestaurant=inSpecificRestaurant}}
+      {{else}}
+        {{dish-product-card product=product corridorName=corridorName corridorId=corridorId rappi_store_id=product.store_id inSpecificRestaurant=inSpecificRestaurant}}
+      {{/if}}
+    {{/each}}
+  </div>
+  <div class="scroll-progress-bar">
+    <div class="progress-line"></div>
+    <div class="background-line"></div>
+  </div>
+</div>

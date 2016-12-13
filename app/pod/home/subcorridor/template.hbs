@@ -1,0 +1,104 @@
+<!-- ..................................  main page content starts ..............................  -->
+<main {{ action "click" }}>
+    <!-- ..................................  carousel section .................................... -->
+  {{#unless isRestaurant}}
+      <div class="carousel carousel-corridor">
+          <div class="container">
+              <div class="row">
+                  <div class="col-sm-12">
+                      <ul id='corridorStart' class="clearfix">
+                          <li>{{#scroll-to href=(concat '#' model.subcorridor.id) offset=-140}}
+                            {{name-parser model.subcorridor.name}}
+                          {{/scroll-to}}</li>
+
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="product-listing">
+          <div class="container">
+              <div class="breadcrumbBox row mt-Bottom30">
+                  <div class="col-sm-6">
+                      <ol class="breadcrumb">
+                          <li><a href="#">Inicio</a></li>
+                          <li><a href="#" {{action 'change'}}>{{storeTypeName}}</a></li>
+                        {{#unless isRestaurant}}
+                            <li>
+                              {{#link-to 'home.corridor' model.subcorridor.corridor_id }}
+                                {{name-parser model.subcorridor.corridor.name}}
+                              {{/link-to}}
+                            </li>
+                        {{/unless}}
+                          <li class="active">{{name-parser model.subcorridor.name}}</li>
+                      </ol>
+                  </div>
+                {{#if isRestaurant}}
+                    <div class="col-sm-6">
+                        <div class="form-group pull-right products-search">
+                            <img src="assets/images/icon-search.svg">
+                          {{input type="text" class="form-control" placeholder="Buscar en este restaurante" value=filterProducts}}
+                        </div>
+                    </div>
+                {{/if}}
+              </div>
+              <!-- ................  product listing head .....................  -->
+              <div class="row row-product-head mt-top60">
+                  <div class="col-sm-12">
+                      <h2 id={{model.subcorridor.id}}>
+                        {{#if mobileView}}
+                            <p>{{name-parser model.subcorridor.name}}</p>
+                        {{else}}
+                          {{name-parser model.subcorridor.name}}
+                        {{/if}}
+                        {{#if isRestaurant}}
+                          {{#link-to 'home.store' 'restaurant'}}
+                              <button class="btn hvr-bounce-to-bottom product-back">Volver</button>
+                          {{/link-to}}
+                        {{else}}
+                          {{#link-to 'home.corridor' model.subcorridor.corridor_id }}
+                              <button class="btn hvr-bounce-to-bottom product-back">Volver</button>
+                          {{/link-to}}
+                        {{/if}}
+                      </h2>
+                  </div>
+              </div>
+
+              <div class="row">
+                {{#each model.subcorridor.products as |product|}}
+                    <!-- ................  main product listing .....................  -->
+                  {{product-card product=product}}
+                {{/each}}
+              </div>
+          </div>
+      </div>
+  {{else}}
+      <div class="bg-block favorsHomePage {{if rappiOrder.isNotEmpty 'with-fixed-order-panel' ''}}">
+          <div class="background-restaurant"
+               style="background-color: #FAFAFA; background-image: url('{{background}}'); background-position: center;">
+          </div>
+          <div class="dish-image" style="background-image: url('{{dishImage}}');">
+          </div>
+          <div class="restaurant-information">
+            <div class="logo-restaurant">
+                <img src={{logo}} alt=""/>
+            </div>
+            <hr class="first-line">
+            <p class="category">{{categoryName}}</p>
+            <hr class="second-line">
+            <p class="delivery-time">ENTREGA: {{model.subcorridor.store.eta}} MIN</p>
+          </div>
+      </div>
+      {{#if products}}
+      {{most-popular-dish products=popularProducts corridorName=model.subcorridor.store.name corridorId=model.subcorridor.store.id storeId=model.subcorridor.store.store_id inSpecificRestaurant=true}}
+      {{/if}}
+      {{#if products}}
+      {{restaurant-menu products=products corridorName=model.subcorridor.store.name corridorId=model.subcorridor.store.id storeId=model.subcorridor.store.store_id inSpecificRestaurant=true}}
+      {{/if}}
+      {{restaurant-whims-desires where=model.subcorridor.store.name}}
+  {{/unless}}
+
+</main>
+<div class="{{if basketOpenned 'basket-overlay' ''}}">
+  {{shopping-basket overflow=overflow basketOpenned=basketOpenned}}
+</div>

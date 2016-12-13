@@ -1,0 +1,47 @@
+<div class="explore-sections">
+  {{#if showBurgerDay}}
+  <div class="burder-day-banner">
+    <img src="/assets/images/burger_banner_home.jpg" {{action "redirectToBurgerDay"}}/>
+  </div>
+  {{/if}}
+  <div class="title-block">
+    <h1>EXPLORA NUESTRAS SECCIONES</h1>
+    <hr/>
+  </div>
+  <div class="section-block">
+    <div class="section-tiendaexpress" {{action "redirectToHome" "express"}}>
+      <div>
+
+      </div>
+      <h1>TIENDA EXPRESS</h1>
+      <p>TU TIENDA DE BARRIO EN 30 MIN</p>
+    </div>
+    <div class="section-restaurantes" {{action "redirectToHome" "restaurant"}}>
+      <div>
+      </div>
+      <h1 class="text-right">RESTAURANTES</h1>
+      <p class="text-right">TODOS LOS RESTAURANTES DE LA CIUDAD</p>
+    </div>
+  </div>
+  <div class="section-block">
+    <div class="section-farmacia" {{action "redirectToHome" "farmacia"}}>
+      <div>
+      </div>
+      <h1>FARMACIA</h1>
+      <p>TU BIENESTAR A UN CLIC</p>
+    </div>
+    <div class="section-super" {{action "redirectToHome" "super"}}>
+      <div>
+      </div>
+      <h1>SUPERMERCADO</h1>
+      <p>LOS MEJORES PRECIOS DEL PAÍS</p>
+    </div>
+    <div class="section-antojos" {{action "redirectToHome" "whim"}}>
+      <div>
+
+      </div>
+      <h1>ANTOJOS</h1>
+      <p>LO QUE QUIERAS, LITERALMENTE</p>
+    </div>
+  </div>
+</div>

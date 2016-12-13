@@ -1,0 +1,27 @@
+<div class="store-types">
+  <div class="title">
+    <h1>¿Qué necesitas hoy?</h1>
+  </div>
+  <div class="stores">
+    <div class="store" {{action "redirectToHome" stores.expressStore}}>
+      <div class="icon express"></div>
+      <p>Tienda Express</p>
+    </div>
+    <div class="store" {{action "redirectToHome" stores.farmatodoStore}}>
+      <div class="icon pharmacy"></div>
+      <p>Farmacia</p>
+    </div>
+    <div class="store" {{action "redirectToHome" stores.restaurantStore}}>
+      <div class="icon restaurant"></div>
+      <p>Restaurantes</p>
+    </div>
+    <div class="store" {{action "redirectToHome" stores.superStore}}>
+      <div class="icon supermarket"></div>
+      <p>Mercado</p>
+    </div>
+    <div class="store" {{action "redirectToHome" "whim"}}>
+      <div class="icon whim"></div>
+      <p>Antojos</p>
+    </div>
+  </div>
+</div>

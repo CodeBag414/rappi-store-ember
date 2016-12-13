@@ -1,0 +1,88 @@
+<div class="popUp-wrapper loginPopup">
+    <div class="popUp-Outer padding-popup">
+      {{#if closeButton}}
+          <a class="close-global-black" style="cursor: pointer;" onclick={{action "toggleView"}}></a>
+      {{/if}}
+        <div class="col-sm-12 pdRight30">
+            <h2 class="blockHeading">
+                Mis direcciones
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 pdRight30">
+                <!-- usedCardsPayment block starts -->
+              {{#each model as |addressObj|}}
+                {{#if addressObj.active}}
+                    <div class="currentCards ">
+                        <p class="cardsBlockTitle ">Dirección por defecto:</p>
+
+                        <div class="cardView">
+
+                            <p class="directioLabel">{{addressObj.tag}}</p>
+
+                            <div class="cardItem">
+                                <div class="cardDetails">
+
+                                    <p class="cardNo">{{addressObj.address}}</p>
+                                </div>
+                                <div class="CardBtnBlock">
+                                <span class="custome-radio">
+                                    <input type="radio" name="selectedCard" id="btnChecked" checked/>
+                                    <label for="#btnChecked"></label>
+                                </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                {{/if}}
+              {{/each}}
+                <!-- usedCardsPayment block ends -->
+
+                <!-- Other address cards block starts -->
+                <div class="otherCards">
+                    <p class="cardsBlockTitle">Otras direcciones:</p>
+
+                    <div class="cardView">
+                      {{#each model as |addressObj|}}
+                        {{#unless addressObj.active}}
+                            <p class="directioLabel">{{addressObj.tag}}</p>
+
+                            <div class="cardItem">
+                                <div class="cardDetails">
+                                    <p class="cardNo">{{addressObj.address}}</p>
+                                </div>
+                                <div class="CardBtnBlock">
+                                <span class="custome-radio">
+                                    <input type="radio" name="selectCard" id="btn1"
+                                           onclick={{action "getModel" addressObj}}/>
+                                    <label for="#btn1"></label>
+                                </span>
+                                </div>
+                            </div>
+                        {{/unless}}
+                      {{/each}}
+                      {{#if isError}}
+                          <span class="msg-error">{{errorMessage}}</span>
+                      {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <p class="btnBox">
+                    <button type="submit" {{action "showDialog"}} class="btn btn-green">AGREGAR</button>
+                    <button type="submit" {{action "updateActive"}} class="btn btn-green">ACTUALIZAR</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{#if showReloadWarning}}
+  {{#modal-dialog container-class="overlapPop" translucentOverlay=true}}
+    {{reload-warning showReloadWarning=showReloadWarning showReloadWarning=showReloadWarning addressChangeAction='addressChangeAction'}}
+  {{/modal-dialog}}
+{{/if}}

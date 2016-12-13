@@ -1,0 +1,33 @@
+<div class="lists-container">
+  <div class="title-block">
+      <h1>TUS LISTAS</h1>
+      <hr>
+      <p>Aqui encuentras registro de tus productos favoritos e historial de compras para comprar a un clic.</p>
+  </div>
+  <div class="list-cards-container">
+    <div class="list-create-card" {{action 'showCreateListDialog'}}>
+      <div class="icon-wrapper">
+        <img src="/assets/images/icon-more-green.svg" />
+        <p>CREAR NUEVA LISTA</p>
+      </div>
+    </div>
+    <div class="list-card">
+      <p class="list-name">PRODUCTOS PARA</p>
+      <p class="product-count">25 Items</p>
+      <hr>
+    </div>
+    <div class="list-card">
+      <p class="list-name">PRODUCTOS PARA</p>
+      <p class="product-count">25 Items</p>
+      <hr>
+    </div>
+    <div class="list-card">
+      <p class="list-name">PRODUCTOS PARA</p>
+      <p class="product-count">25 Items</p>
+      <hr>
+    </div>
+  </div>
+</div>
+{{#if showCreateListDialog}}
+{{create-list-popup showCreateListDialog=showCreateListDialog}}
+{{/if}}

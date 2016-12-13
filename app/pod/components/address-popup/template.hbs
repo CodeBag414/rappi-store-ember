@@ -1,0 +1,53 @@
+<div class="address-popup-overlay">
+</div>
+<div class="address-popup-container">
+  <div class="top-banner-wrapper">
+    <div class="current-city" {{action 'toggleCityList'}}>
+      <p>{{currentCity}}<span class="arrow-down"></span></p>
+
+    </div>
+    {{#if showCityList}}
+      <ul class="city-list">
+        <li {{action 'selectCity' 'Bogotá'}}><div class="selected-line"></div><p>Bogotá</p></li>
+        <li {{action 'selectCity' 'Barranquilla'}}><div class="selected-line"></div><p>Barranquilla</p></li>
+        <li {{action 'selectCity' 'Medellín'}}><div class="selected-line"></div><p>Medellín</p></li>
+        <li {{action 'selectCity' 'D.F. de México'}}><div class="selected-line"></div><p>D.F. de México</p></li>
+        <li {{action 'selectCity' 'Pereira'}}><div class="selected-line"></div><p>Pereira</p></li>
+        <li {{action 'selectCity' 'Cali'}}><div class="selected-line"></div><p>Cali</p></li>
+      </ul>
+    {{/if}}
+  </div>
+  <div class="address-form-wrapper">
+    <h1>Agrega tu dirección</h1>
+    <div id="googlePlaceContainer" class="form-group" >
+      {{place-autocomplete-field
+      value= completeAddress
+      handlerController= this
+      focusOutCallback="focusOut"
+      placeChangedCallback="placeChanged"
+      restrictions=country
+      }}
+    </div>
+    {{#if showAddressHistory}}
+      <div id="addressHistory" class="pac-container-address " style="width: 280px; display:none">
+        {{#each addressHistory as |address| }}
+            <div class="pac-item" {{action 'addressHistoryClick' address}}>
+                  <span class="pac-icon pac-icon-marker"></span><span>{{address.formatted_address}}</span>
+            </div>
+        {{/each}}
+          <span style="float: right; padding:5px">búsqueda reciente</span>
+      </div>
+    {{/if}}
+    {{#if showFaderLabel}}
+      {{fader-label showFaderLabel=showFaderLabel message=message}}
+    {{/if}}
+    <div id="apartmentFloorContainer" class="form-group" >
+      <input type="text" id="apto" placeholder="apto/oficina/piso" />
+    </div>
+    {{#if showFaderLabel1}}
+      {{fader-label showFaderLabel=showFaderLabel1 message=message1}}
+    {{/if}}
+    <button class="btn btn-primary search-button btn-ellipse100 btn-continue" {{action 'saveAddress'}}>CONTINUAR</button>
+  </div>
+  <a {{action 'showLogin'}}>Ingresar / Registrarse</a>
+</div>

@@ -1,0 +1,79 @@
+<!-- ..................................  main page content starts ..............................  -->
+<main>
+    <!-- ..................................  carousel section .................................... -->
+    <div class="product-listing restaurant-items">
+        <div class="container">
+            <div class="breadcrumbBox row mt-Bottom30">
+                <div class="col-sm-12">
+                    <ol class="breadcrumb">
+                        <li><a href="#">Inicio</a></li>
+                        <li class="active">Listas</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- ................  product listing head .....................  -->
+            <div class="row row-product-head">
+                <div class="col-sm-12 addNewList">
+                    <h2>Mis listas
+                        <div class="addNewListRight pull-right">
+                            <a href="#" class="accent-color">+ agregar nueva lista</a>
+
+                            <div class="addNewListForm">
+                                <form class="">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Nombre">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">AGREGAR</button>
+                                </form>
+                            </div>
+                        </div>
+                    </h2>
+                </div>
+            </div>
+            <!-- ................  main product listing .....................  -->
+            <div class="row products-list storeListPage">
+              {{#each lists as |obj|}}
+                  <div class="col-md-3 col-sm-4">
+                      <div class="wrap-product">
+                          <div class="pro-summmry">
+                              <div class="product-pic text-center">
+                                  <div class="imgListBox">
+                                    {{#each obj.list_product as |item|}}
+                                        <div class="item" ><img src="{{item.imagelow}}" alt="small-Image"/></div>
+                                    {{/each}}
+                                  </div>
+                                  <div class="product-detailOverlay">
+                                      <a href="" class="icon-bookmark"></a>
+
+                                      <div class="toTable">
+                                          <div class="toTable-cell text-center">
+                                              <button class="btn prduct-showMore" {{action "showListItemDialog" obj.id}}>ver lista</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="product-name text-center">
+                                  <h3>{{obj.name}}</h3>
+                                  <span>{{obj.itemNumber}} items</span>
+                              </div>
+                          </div>
+                          <div class="price-wrap">
+                              <div class="add-product border-top pd-top20 clearfix">
+                                  <button class="btn btn-primary btn-block" {{action "showListItemDialog" obj.id}}>VER LISTA</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              {{/each}}
+              {{#if showItemDialog}}
+                {{#modal-dialog close='closeListItemDialog' translucentOverlay=true}}
+                  {{mylist-items showItemDialog=showItemDialog popupDialogModel=popupDialogModel removeList='removeList'}}
+                {{/modal-dialog}}
+              {{/if}}
+            </div>
+            <!-- ................  product listing head .....................  -->
+        </div>
+    </div>
+
+    <!-- ................  main product listing .....................  -->
+</main>

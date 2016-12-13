@@ -1,0 +1,1563 @@
+.marBottom0 {
+  margin-bottom: 0;
+}
+
+.pd-top20 {
+  padding-top: 20px;
+}
+
+.border-top {
+  border-top: 1px solid #e6e6e6;
+}
+
+.todos-container {
+  margin-top: 380px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  .btn-todos {
+    width: 201px;
+    height: 60px;
+    background-color: #fd6250;
+    font-family: Montserrat !important;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: 1.5px;
+    text-align: center;
+    color: #ffffff;
+    border: none;
+    position: relative;
+    top: -30px;
+  }
+  &.with-fixed-order-panel {
+    margin-top: 480px;
+  }
+}
+.restaurant-home-block {
+  display: flex;
+  margin-top: 380px;
+  background-color: #f5f5f5;
+  &.with-fixed-order-panel {
+    margin-top: 480px;
+  }
+  .restaurant-categories {
+    width: 280px;
+    background-color: #ffffff;
+    .restaurant-categories-header {
+      height: 68px;
+      border-bottom: solid 2px #e4edee;
+      padding-top: 26px;
+      padding-left: 26px;
+      h1 {
+        font-family: 'Raleway' !important;
+        font-size: 22px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        letter-spacing: 1.5px;
+        color: #44d481;
+        margin: 0;
+      }
+    }
+    .restaurant-categories-list{
+      width: 100%;
+      .category {
+        height: 55px;
+        display: flex;
+        align-items: center;
+        color: #899195;
+        transition: all 0.3s ease;
+        padding-left: 20px;
+        .icon {
+          width: 50px;
+          height: 50px;
+          //background-color: #899195;
+          //-webkit-mask: url(images/icon-subcorridor-cat.svg) no-repeat center;
+          background-repeat: no-repeat;
+          background-position: center center;
+          background-size: cover;
+          -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
+        }
+        p {
+          margin: 0;
+          padding-right: 15px;
+          font-family: Raleway !important;
+          font-size: 13px;
+          font-weight: 500;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: 1.54;
+          letter-spacing: 1px;
+          text-align: left;
+          color: #333333;
+        }
+        &:hover, &.selected {
+          color: #44d481;
+          background-color: #f5f5f5;
+          .icon {
+            //background-color: #44d481;
+            -webkit-filter: grayscale(0%);
+            filter: grayscale(0%);
+          }
+          p {
+            color: #44d481;
+          }
+        }
+      }
+
+    }
+    &.fixed {
+      position: fixed;
+      top: 70px;
+      margin-top: 0px;
+      width: 100%;
+      z-index: 101;
+    }
+  }
+  .restaurant-search-section {
+    width: 900px;
+    padding-top: 40px;
+    padding-left: 90px;
+    padding-bottom: 107px;
+    flex-grow: 1;
+
+    .restaurant-search-input-container {
+      width: 620px;
+			height: 65px;
+			border-radius: 2px;
+			background-color: #ffffff;
+			display: flex;
+			flex-flow: row nowrap;
+			border-radius: 2px;
+			box-shadow: 0 14px 28px rgba(0,0,0,0.11), 0 10px 10px rgba(0,0,0,0.11);
+			position: relative;
+      border: solid 1px #e1e1e1;
+      margin-bottom: 75px;
+			.search-input {
+				width: 100%;
+				height: 100%;
+				border: none;
+				outline: 0;
+				font-size: 18px;
+				padding-left: 26.5px;
+				font-weight: 500;
+				font-style: normal;
+				font-stretch: normal;
+        letter-spacing: 1px;
+        color: #a6a5a5;
+			}
+			.search-input::-webkit-input-placeholder {
+				font-size: 18px;
+				font-weight: 500;
+				font-style: normal;
+				font-stretch: normal;
+        letter-spacing: 1px;
+				color: #a6a5a5;
+			}
+			.search-button {
+				width:65px;
+				height: 65px;
+				background-color: #44d481;
+				background-image: url('images/icon-search-white.svg');
+				background-position: center center;
+				background-size: 33%;
+				display: block;
+				background-repeat: no-repeat;
+				position: absolute;
+				top: -1px;
+				right: 0px;
+				&:hover {
+					cursor: pointer;
+				}
+			}
+			.searching-icon-wrapper {
+				width:65px;
+				height: 100%;
+				background-color: #44d481;
+				position: absolute;
+				top: 0px;
+				right: 0px;
+				display: flex;
+				align-items: center;
+				.searching {
+				  height: 22px;
+				  width: 22px;
+				  animation: rotation 1s infinite linear;
+				  border: 2px solid rgba(255, 255, 255, 0.2);
+				  border-top-color: rgba(255, 255, 255, 0.7);
+				  border-radius: 50%;
+					margin: 0 auto;
+					display: block;
+				}
+			}
+			.auto-complete {
+				width: 100%;
+				top: 70px;
+				left: 0px;
+				padding: 0;
+				border-radius: 2px;
+        max-height: 330px;
+        .restaurant-auto-complete {
+          display: flex;
+          padding: 30px 0px 0px 0px;
+          height: 290px;
+          overflow: hidden;
+          .restaurant-section {
+            width: 254px;
+            padding: 0px 30px;
+            h1 {
+              font-family: 'Montserrat' !important;
+              font-size: 15px;
+              font-weight: normal;
+              font-style: normal;
+              font-stretch: normal;
+              letter-spacing: 1.9px;
+              color: #44d481;
+              margin: 0;
+              margin-bottom: 25px;
+            }
+            .restaurant-list {
+              height: 195px;
+              overflow-y: scroll;
+              p {
+                font-family: 'Raleway' !important;
+                font-size: 14px;
+                font-weight: 500;
+                font-style: normal;
+                font-stretch: normal;
+                letter-spacing: 0.9px;
+                color: #a6a5a5;
+                margin-bottom: 20px;
+              }
+            }
+
+            .no-restaurant {
+              width: 100%;
+              height: 150px;
+              background-image: url('/assets/images/img-buscador-rest.jpg');
+              background-repeat: no-repeat;
+              padding: 68px 15px 0px 15px;
+              p:nth-child(1) {
+                font-family: 'Raleway' !important;
+                font-size: 14px;
+                font-weight: 500;
+                font-style: normal;
+                font-stretch: normal;
+                letter-spacing: 0.9px;
+                text-align: center;
+                color: #ffffff;
+                margin: 0px 0px 5px 0px;
+              }
+              p:nth-child(2) {
+                font-family: 'Raleway' !important;
+                font-size: 18px;
+                font-weight: bold;
+                font-style: normal;
+                font-stretch: normal;
+                letter-spacing: 1.2px;
+                text-align: center;
+                color: #ffffff;
+              }
+              .btn-ask {
+                width: 100%;
+                height: 50px;
+                background-color: #fd6250;
+                border: none;
+                font-family: 'Montserrat' !important;
+                font-size: 15px;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                letter-spacing: 1.9px;
+                text-align: center;
+                color: #ffffff;
+              }
+            }
+          }
+          .divider-line {
+            width: 1px;
+            height: 220px;
+            background-color: #e1e1e1;
+          }
+          .product-section {
+            width: 348px;
+            padding: 0px 0px 30px 30px;
+            h1 {
+              font-family: 'Montserrat' !important;
+              font-size: 15px;
+              font-weight: normal;
+              font-style: normal;
+              font-stretch: normal;
+              letter-spacing: 1.9px;
+              color: #44d481;
+              margin: 0;
+              margin-bottom: 15px;
+            }
+            .product-list {
+              height: 195px;
+              overflow-y: scroll;
+              li {
+                height: auto;
+                border: 1px solid transparent;
+                a {
+                  font-family: 'Raleway' !important;
+                  font-size: 14px;
+                  font-weight: 500;
+                  font-style: normal;
+                  font-stretch: normal;
+                  letter-spacing: 0.9px;
+                  color: #a6a5a5;
+                  padding: 0;
+                  margin: 10px 0px;
+                }
+              }
+            }
+          }
+        }
+			}
+		}
+
+  }
+}
+
+
+
+.popular-restaurants-container, .category-restaurants-container {
+  width: 1222px;
+  margin: 0 auto;
+  .title-block {
+    h1 {
+      font-size: 15px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #333333;
+      margin:0;
+    }
+    hr {
+      width: 60px;
+      height: 1px;
+      border-top: 1px solid #e1e1e1;
+      margin-top: 25px;
+      margin-bottom: 40px;
+    }
+  }
+
+  .ver-todos-block {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    .btn-todos {
+      width: 83px;
+      height: 16px;
+      position: relative;
+      p {
+        font-family: Raleway !important;
+        font-size: 14px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        letter-spacing: 1.1px;
+        color: #44d481;
+        margin: 0;
+      }
+      .right-arrow {
+        position: absolute;
+        right: 0px;
+        width: 10px;
+        height: 10px;
+        border-right: 1px solid #44d481;
+        border-bottom: 1px solid #44d481;
+        top: 5px;
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+  .restaurant-list {
+    display: flex;
+    overflow: hidden;
+    padding-left: 22px;
+  }
+
+  .btn-see-more {
+    width: 213px;
+    height: 50px;
+    background-color: #44d481;
+    font-family: 'Montserrat' !important;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: 1.5px;
+    text-align: center;
+    padding-top: 17px;
+    color: #ffffff;
+    margin-left: 300px;
+  }
+
+  .wrap-product {
+    width: 380px;
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: 30px;
+    background-color: #ffffff;
+    border: solid 1px #f0f4f5;
+    position: relative;
+    .pro-summmry {
+      position: relative;
+      padding: 0px 0px;
+      cursor: pointer;
+      display:flex;
+
+
+      .product-pic {
+        width: 200px;
+        height: 300px;
+        margin-bottom: 0px;
+        .background-restaurant {
+          height: 100%;
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: 50% 50%;
+          display: flex;
+          align-items: center;
+          .overlay {
+            position: absolute;
+            height: 100%;
+            width: 200px;
+            background-color: #ffffff;
+            opacity: 0;
+            transition: all 0.4s ease;
+          }
+          .price-wrap {
+            width: 100%;
+            padding: 0;
+            .btn {
+              border-color: #fd6250;
+            }
+            .add-product {
+              .btn.btn-primary {
+                font-family: 'Montserrat' !important;
+                font-size: 12px;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                letter-spacing: 1.5px;
+                text-align: center;
+                &:after {
+                  content: none;
+                }
+              }
+            }
+          }
+
+        }
+
+      }
+
+      .product-name {
+        width: 180px;
+        padding: 62px 20px 34px 20px;
+        .logo-restaurant {
+          width:100%;
+          height:67px;
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+        h3 {
+          font-family: 'Montserrat' !important;
+          font-size: 13px;
+          font-weight: 500;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: 1.29;
+          letter-spacing: 1.1px;
+          text-transform: uppercase;
+          text-align: left;
+          color: #899195;
+          margin:20px 0px;
+        }
+        span {
+          font-family: 'Raleway' !important;
+          font-size: 14px;
+          font-weight: 500;
+          font-style: normal;
+          font-stretch: normal;
+          letter-spacing: 1.1px;
+          color: #899195;
+          margin-bottom: 20px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+        hr {
+          width: 100px;
+          height: 1px;
+          border-top: 1px solid #333 !important;
+          margin:20px 0px;
+        }
+        .delivery-time {
+          display: flex;
+          align-items: center;
+          span {
+            font-family: 'Montserrat' !important;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.29;
+            letter-spacing: 1.2px;
+            margin: 0px 5px;
+            color: #44d481;
+          }
+        }
+      }
+
+      &:hover {
+        .product-pic .background-restaurant {
+          .overlay {
+            opacity: 0.5;
+          }
+        }
+      }
+      .add-product .btn.btn-primary {
+        width: 110px;
+        height: 50px;
+        font-size: 12px;
+        border-radius: 0px;
+      }
+    }
+
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.popular-restaurants-container {
+    width: 100%;
+    margin: 0;
+    .restaurant-list {
+      flex-wrap: wrap;
+      padding:0;
+      .wrap-product {
+        margin-bottom: 30px;
+      }
+    }
+}
+
+.addCradMsg {
+  p {
+    margin: 0;
+    line-height: 19px;
+    span {
+      font-weight: bold;
+    }
+  }
+}
+
+.most-purchased-container, .most-popular-dish-container {
+  padding: 70px 0px 40px 0px;
+  width: 1152px;
+  margin: 0 auto;
+  .title-block {
+    h1 {
+      font-size: 15px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #333333;
+      margin:0;
+    }
+    hr {
+      width: 60px;
+      height: 1px;
+      background-color: #e1e1e1;
+      margin-top: 25px;
+      margin-bottom: 40px;
+    }
+  }
+  .most-purchased-products, .most-popular-dishes {
+    display: flex;
+    overflow: hidden;
+    padding-left: 22px;
+    .wrap-product {
+      width: 260px;
+      height: 410px;
+      border:solid 1px #f0f4f5;
+      margin-right: 30px;
+      padding: 35px 34px;
+      position: relative;
+      .pro-summmry {
+        padding: 0;
+        .product-pic {
+          height: 190px;
+          margin-bottom: 10px;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+
+        }
+        .product-information {
+          background-color: #ffffff;
+          position: relative;
+          z-index: 11;
+          -webkit-transition: all ease-in-out 0.4s;
+          transition: all ease-in-out 0.4s;
+          padding-top:20px;
+          .product-name {
+            h3 {
+              font-family: Montserrat !important;
+              font-size: 14px;
+              font-weight: 500;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: 1.29;
+              letter-spacing: 1.3px;
+              text-align: center;
+              color: #333333;
+              text-transform: uppercase;
+            }
+            p {
+              font-family: Raleway !important;
+              font-size: 14px;
+              font-weight: 500;
+              font-style: normal;
+              font-stretch: normal;
+              letter-spacing: 1.1px;
+              text-align: center;
+              color: #899195;
+              margin-bottom: 20px;
+              &:hover {
+                color: #fd6250;
+              }
+            }
+          }
+          hr {
+            width: 100px;
+            height: 1px;
+            border-top: 1px solid #333333;
+          }
+          .price {
+            padding: 0;
+            span {
+              font-family: 'Montserrat' !important;
+              font-size: 18px;
+              font-weight: normal;
+              font-style: normal;
+              font-stretch: normal;
+              text-align: center;
+              color: #44d481;
+            }
+          }
+        }
+
+        .toolbar {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+          bottom: 0px;
+          width: 190px;
+          .quantity {
+            width: 0px;
+            height: 50px;
+            position: relative;
+            background-color: #ffffff;
+            border: solid 1px #e4edee;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            justify-content: center;
+            span {
+              width: 50px;
+              position: absolute;
+              font-size: 18px;
+              font-weight: bold;
+              font-style: normal;
+              font-stretch: normal;
+              letter-spacing: 6px;
+              text-align: center;
+            }
+            .btn-add-product {
+              width: 50px;
+              height: 50px;
+              position: absolute;
+              border-left: solid 1px #e4edee;
+              right: 0px;
+              top: 0px;
+              display: flex;
+              align-items: center;
+              background-color: #f0f4f5;
+              span {
+                font-family: Montserrat !important;
+                font-size: 28px;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                letter-spacing: 3.5px;
+                text-align: center;
+                color: #fd6250;
+              }
+            }
+            .btn-remove-product {
+              width: 50px;
+              height: 50px;
+              position: absolute;
+              border-right: solid 1px #e4edee;
+              left: 0px;
+              top: 0px;
+              display: flex;
+              align-items: center;
+              background-color: #f0f4f5;
+              span {
+                font-family: Montserrat !important;
+                font-size: 28px;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                letter-spacing: 3.5px;
+                text-align: center;
+                color: #fd6250;
+              }
+            }
+          }
+
+        }
+        .btn-add {
+          width: 190px;
+          height: 50px;
+          background-color: #fd6250;
+          font-size: 12px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          letter-spacing: 1.5px;
+          text-transform: uppercase;
+          border: none;
+          color: #ffffff;
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          z-index: 10;
+          padding:0;
+        }
+
+        &:hover {
+          .product-information {
+            background-color: rgba(255, 255, 255, 0.71);
+            transform: translateY(-60px);
+          }
+        }
+      }
+      .product-quantity {
+        width: 0px;
+        height: 0px;
+        border-left: 60px solid transparent;
+        border-top: 60px solid #fd6250;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        span {
+          font-family: Montserrat !important;
+          font-size: 15px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          color: #ffffff;
+          position: relative;
+          left: -27px;
+          top: -53px;
+        }
+      }
+    }
+  }
+}
+
+.most-popular-dish-container {
+  padding-top: 109px;
+}
+
+.dish-recommend-container {
+  background-image: url('images/woods-min.jpg');
+  background-repeat: repeat-y;
+  background-size: 100%;
+  background-position: center center;
+  padding-top: 60px;
+  padding-bottom: 126px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  .title {
+    margin: 0 auto;
+    display: block;
+  }
+}
+.recommend-dish-list {
+  .recommend-product-container {
+    transition: transform 0.2s;
+  }
+}
+
+.recommend-product-container {
+  display: flex;
+  position: relative;
+  height: 430px;
+  margin-top: 60px;
+  direction: ltr;
+
+  .recommend-product {
+    width: 337px;
+    p:first-child {
+      font-family: Raleway !important;
+      font-size: 15px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.2;
+      letter-spacing: 1.6px;
+      color: #333333;
+      text-transform: uppercase;
+      &:hover {
+        color: #fd6250;
+      }
+    }
+    h3 {
+      font-family: Montserrat !important;
+      font-size: 26px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.15;
+      letter-spacing: 2.8px;
+      color: #333333;
+      text-transform: uppercase;
+    }
+    .description {
+      font-size: 14px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 2.14;
+      letter-spacing: 1.5px;
+      text-align: center;
+      color: #333333;
+      margin-top: 15px;
+    }
+
+    .price {
+      span {
+        font-family: Montserrat !important;
+        font-size: 15px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        text-align: center;
+        color: #656667;
+      }
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      left: 74px;
+      width: 190px;
+      .quantity {
+        width: 0px;
+        height: 50px;
+        position: relative;
+        background-color: #ffffff;
+        border: solid 1px #e4edee;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        justify-content: center;
+        span {
+          width: 50px;
+          position: relative;
+          font-size: 18px;
+          font-weight: bold;
+          font-style: normal;
+          font-stretch: normal;
+          letter-spacing: 6px;
+          text-align: center;
+        }
+        .btn-add-product {
+          width: 50px;
+          height: 50px;
+          position: absolute;
+          border-left: solid 1px #e4edee;
+          right: 0px;
+          top: 0px;
+          display: flex;
+          align-items: center;
+          background-color: #f0f4f5;
+          span {
+            font-family: Montserrat !important;
+            font-size: 28px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            letter-spacing: 3.5px;
+            text-align: center;
+            color: #fd6250;
+          }
+        }
+        .btn-remove-product {
+          width: 50px;
+          height: 50px;
+          position: absolute;
+          border-right: solid 1px #e4edee;
+          left: 0px;
+          top: 0px;
+          display: flex;
+          align-items: center;
+          background-color: #f0f4f5;
+          span {
+            font-family: Montserrat !important;
+            font-size: 28px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            letter-spacing: 3.5px;
+            text-align: center;
+            color: #fd6250;
+          }
+        }
+      }
+
+    }
+    .btn-add {
+      width: 190px;
+      height: 50px;
+      background-color: #fd6250;
+      font-size: 12px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border: none;
+      color: #ffffff;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      z-index: 10;
+      padding: 0;
+    }
+
+
+  }
+  .product-image {
+    width: 430px;
+    height: 430px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+  &.float-right {
+    .recommend-product {
+      position: absolute;
+      right: 450px;
+    }
+    .product-image {
+      position: absolute;
+      right: 0px;
+    }
+  }
+  &.float-left {
+    .recommend-product {
+      position: absolute;
+      left: 470px;
+      bottom: 120px;
+    }
+    .product-image {
+      position: absolute;
+      left: 0px;
+      bottom: 100px;
+    }
+  }
+}
+.restaurant-menu-container.list {
+  background-image: url('images/woods-min.jpg');
+  background-repeat: repeat-y;
+  background-size: 100%;
+  background-position: center center;
+}
+.restaurant-menu-container {
+  padding-top: 70px;
+  background-color: #ffffff;
+  .title-block {
+    position: relative;
+    h1 {
+      font-family: Montserrat !important;
+      font-size: 32px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      letter-spacing: 2.1px;
+      text-align: center;
+      color: #333333;
+    }
+    hr {
+      margin-top: 28px;
+      margin-bottom: 59px;
+      width: 60px;
+      height: 1px;
+      border-top: 1px solid #a6a5a5;
+    }
+    .list-view {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      left: 79px;
+      top: 0px;
+      background-image:url('images/bt_list_off.svg');
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      &.active {
+        background-image:url('images/bt_list_on.svg');
+      }
+      &.fixed {
+        position: fixed;
+        top: 130px;
+        z-index: 200;
+      }
+    }
+    .grid-view {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      left: 149px;
+      top: 0px;
+      background-image:url('images/bt_mosaic_off.svg');
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      &.active {
+        background-image:url('images/bt_mosaic_on.svg');
+      }
+      &.fixed {
+        position: fixed;
+        top: 130px;
+        z-index: 200;
+      }
+    }
+  }
+}
+
+.scroll-progress-bar {
+  width: 3px;
+  height: 100px;
+  position: fixed;
+  top: 130px;
+  left: 15px;
+
+  display: none;
+
+  .progress-line {
+    height: 0px;
+    background-color: #44d481;
+    -webkit-transition: height .3s ease-out;
+    transition: height .3s ease-out;
+    z-index: 1000;
+  }
+  .background-line {
+    width: 1px;
+    height: 100%;
+    background-color: #979797;
+    margin: 0 auto;
+  }
+
+}
+
+.menu-list {
+  &.list {
+    display: block;
+  }
+
+  &.grid {
+    width:960px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    .wrap-product {
+      width: 380px;
+      height: 562px;
+      border:solid 1px #f0f4f5;
+      margin-right: 50px;
+      margin-left: 50px;
+      margin-bottom: 70px;
+      padding: 30px;
+      position: relative;
+      .pro-summmry {
+        padding: 0;
+        .product-pic {
+          height: 318px;
+          margin-bottom: 10px;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+
+        }
+        .product-information {
+          background-color: #ffffff;
+          position: relative;
+          z-index: 11;
+          -webkit-transition: all ease-in-out 0.4s;
+          transition: all ease-in-out 0.4s;
+          padding-top:20px;
+          .product-name {
+            h3 {
+              font-family: Montserrat !important;
+              font-size: 14px;
+              font-weight: 500;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: 1.29;
+              letter-spacing: 1.3px;
+              text-align: center;
+              color: #333333;
+              text-transform: uppercase;
+            }
+            p {
+              font-family: Raleway !important;
+              font-size: 14px;
+              font-weight: 500;
+              font-style: normal;
+              font-stretch: normal;
+              letter-spacing: 1.1px;
+              text-align: center;
+              color: #899195;
+              margin-bottom: 20px;
+              &:hover {
+                color: #fd6250;
+              }
+            }
+          }
+          hr {
+            width: 100px;
+            height: 1px;
+            border-top: 1px solid #333333;
+          }
+          .price {
+            padding: 0;
+            span {
+              font-family: 'Montserrat' !important;
+              font-size: 18px;
+              font-weight: normal;
+              font-style: normal;
+              font-stretch: normal;
+              text-align: center;
+              color: #44d481;
+            }
+          }
+        }
+
+        .toolbar {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+          bottom: 0px;
+          width: 275px;
+          left: 21px;
+          .quantity {
+            width: 0px;
+            height: 50px;
+            position: relative;
+            background-color: #ffffff;
+            border: solid 1px #e4edee;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            justify-content: center;
+            span {
+              width: 50px;
+              position: absolute;
+              font-size: 18px;
+              font-weight: bold;
+              font-style: normal;
+              font-stretch: normal;
+              letter-spacing: 6px;
+              text-align: center;
+            }
+            .btn-add-product {
+              width: 50px;
+              height: 50px;
+              position: absolute;
+              border-left: solid 1px #e4edee;
+              right: 0px;
+              top: 0px;
+              display: flex;
+              align-items: center;
+              background-color: #f0f4f5;
+              span {
+                font-family: Montserrat !important;
+                font-size: 28px;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                letter-spacing: 3.5px;
+                text-align: center;
+                color: #fd6250;
+              }
+            }
+            .btn-remove-product {
+              width: 50px;
+              height: 50px;
+              position: absolute;
+              border-right: solid 1px #e4edee;
+              left: 0px;
+              top: 0px;
+              display: flex;
+              align-items: center;
+              background-color: #f0f4f5;
+              span {
+                font-family: Montserrat !important;
+                font-size: 28px;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                letter-spacing: 3.5px;
+                text-align: center;
+                color: #fd6250;
+              }
+            }
+          }
+
+        }
+        .btn-add {
+          width: 275px;
+          height: 50px;
+          background-color: #fd6250;
+          font-size: 12px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          letter-spacing: 1.5px;
+          text-transform: uppercase;
+          border: none;
+          color: #ffffff;
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          z-index: 10;
+          padding: 0;
+        }
+
+        &:hover {
+          .product-information {
+            background-color: rgba(255, 255, 255, 0.71);
+            transform: translateY(-60px);
+          }
+        }
+      }
+      .product-quantity {
+        width: 0px;
+        height: 0px;
+        border-left: 60px solid transparent;
+        border-top: 60px solid #fd6250;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        span {
+          font-family: Montserrat !important;
+          font-size: 15px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          color: #ffffff;
+          position: relative;
+          left: -27px;
+          top: -53px;
+        }
+      }
+    }
+  }
+
+}
+
+.order-section {
+  padding-top: 34px;
+  position: relative;
+
+  .order-form {
+    width: 724px;
+    margin:0 auto;
+    text-align: center;
+    h1 {
+      font-family: Montserrat !important;
+      font-size: 15px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #333333;
+      margin: 0;
+    }
+    hr {
+      width: 60px;
+      height: 1px;
+      border-top: 1px solid #a6a5a5;
+      margin-top: 25px;
+      margin-bottom: 50px;
+    }
+    p {
+      width: 724px;
+      font-family: Raleway !important;
+      font-size: 14px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.43;
+      letter-spacing: 0.9px;
+      text-align: center;
+      color: #899195;
+    }
+    textarea {
+      resize: none;
+      border: solid 1px #dadada;
+      margin-top: 30px;
+    }
+    .btn-order-extra {
+      width: 200px;
+      height: 50px;
+      border-radius: 100px;
+      background-color: #fd6250;
+      font-size: 14px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      text-align: center;
+      color: #ffffff;
+      border: none;
+      margin-top: 20px;
+      margin-bottom: 75px;
+    }
+  }
+
+}
+
+.restaurant-all-margin {
+  margin-top: 120px;
+}
+
+.restaurant-category-container {
+  width: 1222px;
+  margin: 0 auto;
+  padding-top: 70px;
+
+  .title-block {
+    h1 {
+      font-size: 15px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #333333;
+      margin:0;
+    }
+    hr {
+      width: 60px;
+      height: 1px;
+      border-top: 1px solid #e1e1e1;
+      margin-top: 25px;
+      margin-bottom: 40px;
+    }
+  }
+
+  .restaurant-list {
+    display: flex;
+    overflow: hidden;
+    padding-left: 22px;
+  }
+
+  .ver-todos-block {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    .btn-todos {
+      width: 83px;
+      height: 16px;
+      position: relative;
+      p {
+        font-family: Raleway !important;
+        font-size: 14px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        letter-spacing: 1.1px;
+        color: #44d481;
+        margin: 0;
+      }
+      .right-arrow {
+        position: absolute;
+        right: 0px;
+        width: 10px;
+        height: 10px;
+        border-right: 1px solid #44d481;
+        border-bottom: 1px solid #44d481;
+        top: 5px;
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+  .wrap-product {
+    width: 380px;
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: 30px;
+    background-color: #ffffff;
+    border: solid 1px #f0f4f5;
+    position: relative;
+    .pro-summmry {
+      position: relative;
+      padding: 0px 0px;
+      cursor: pointer;
+      display:flex;
+
+
+      .product-pic {
+        width: 200px;
+        height: 300px;
+        margin-bottom: 0px;
+        .background-restaurant {
+          height: 100%;
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: 50% 50%;
+          display: flex;
+          align-items: center;
+          .overlay {
+            position: absolute;
+            height: 100%;
+            width: 200px;
+            background-color: #ffffff;
+            opacity: 0;
+            transition: all 0.4s ease;
+          }
+          .price-wrap {
+            width: 100%;
+            padding: 0;
+            .btn {
+              border-color: #fd6250;
+            }
+            .add-product {
+              .btn.btn-primary {
+                font-family: 'Montserrat' !important;
+                font-size: 12px;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                letter-spacing: 1.5px;
+                text-align: center;
+                &:after {
+                  content: none;
+                }
+              }
+            }
+          }
+
+        }
+
+      }
+
+      .product-name {
+        width: 180px;
+        padding: 62px 20px 34px 20px;
+        .logo-restaurant {
+          width:100%;
+          height:67px;
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+        h3 {
+          font-family: 'Montserrat' !important;
+          font-size: 13px;
+          font-weight: 500;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: 1.29;
+          letter-spacing: 1.1px;
+          text-transform: uppercase;
+          text-align: left;
+          color: #899195;
+          margin:20px 0px;
+        }
+        span {
+          font-family: 'Raleway' !important;
+          font-size: 14px;
+          font-weight: 500;
+          font-style: normal;
+          font-stretch: normal;
+          letter-spacing: 1.1px;
+          color: #899195;
+          margin-bottom: 20px;
+        }
+        hr {
+          width: 100px;
+          height: 1px;
+          border-top: 1px solid #333 !important;
+          margin:20px 0px;
+        }
+        .delivery-time {
+          display: flex;
+          align-items: center;
+          span {
+            font-family: 'Montserrat' !important;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.29;
+            letter-spacing: 1.2px;
+            margin: 0px 5px;
+            color: #44d481;
+          }
+        }
+      }
+
+      &:hover {
+        .product-pic .background-restaurant {
+          .overlay {
+            opacity: 0.5;
+          }
+        }
+      }
+      .add-product .btn.btn-primary {
+        width: 110px;
+        height: 50px;
+        font-size: 12px;
+        border-radius: 0px;
+      }
+    }
+
+  }
+}
+
+.category-restaurants-container {
+  width: 1185px;
+  padding-top: 70px;
+  display: flex;
+  flex-wrap: wrap;
+  .wrap-product {
+    margin-left: 7px;
+    margin-right:8px;
+    margin-bottom: 40px;
+  }
+}

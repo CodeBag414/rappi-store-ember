@@ -1,0 +1,45 @@
+<main>
+    <!-- .....................  breadcrumbs starts ........................... -->
+    <div class="breadcrumbBox">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ol class="breadcrumb">
+                        <li><a href="#">Inicio</a></li>
+                        <li>{{#link-to routeName storeType}}{{storeTypeName}}{{/link-to}}</li>
+                        <li class="active">Busqueda: {{searchItemsName}}</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ....................  search result heading .......................... -->
+    <div class="page-heading">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h5 class="text-center sub-heading">Resultados de búsqueda para:</h5>
+
+                    <h1 class="text-center page-heading">{{searchItemsName}}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- .....................  product listing starts ........................ -->
+    <div class="product-listing">
+        <div class="container">
+
+            <!-- ................  main product listing .....................  -->
+            <div class="row">
+              {{#each searchItems as |product|}}
+                  <!-- ................  main product listing .....................  -->
+                {{product-card product=product isCartRemoved=isCartRemoved removedProductId=removedProductId}}
+
+              {{else}}
+                  <h2>Lo sentimos :(, no tenemos productos disponibles para este horario y ubicación</h2>
+              {{/each}}
+            </div>
+        </div>
+        <!-- ................  main product listing .....................  -->
+    </div>
+</main>

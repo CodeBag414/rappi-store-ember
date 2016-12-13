@@ -1,0 +1,21 @@
+<div class="popUp-wrapper loginPopup">
+    <div class="popUp-Outer ">
+        <a class="close-global-black" onclick={{action 'closeEmptyBasketPopup'}}></a>
+        <div class="toTable">
+            <div class=" text-center confirmPopup">
+                <div class="formTitle border-bottom padding-popup">
+                    <h1>¿Estás seguro que deseas eliminar
+                        todos los productos de la canasta?</h1>
+                </div>
+                <div class="text-center popup-msg padding-popup">
+                    <p>Estas apunto de vaciar tu canasta, confirma si deseas empezar
+                        una nueva o ignora este mensaje de lo contrario.</p>
+                </div>
+                <p class="btnBox btn-greenMargin padding-popup">
+                    <button type="submit" class="btn btn-primary" {{action 'closeEmptyBasketPopup'}}>NO, CONTINUAR</button>
+                    <button type="submit" class="btn btn-green" {{action 'emptyBasket' shoppingBasket}}>SI, SEGURO</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

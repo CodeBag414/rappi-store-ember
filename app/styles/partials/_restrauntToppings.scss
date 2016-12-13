@@ -1,0 +1,153 @@
+.restrauntTopnings {
+	padding: 30px 0;
+	background: #fff;
+	.blockHeading {
+		font-size: 20px;
+		line-height: 27px;
+		border: none;
+		margin: 0 0 30px;
+		padding: 0;
+	}
+}
+.products-search {
+	position: relative;
+	width: 100%;
+	img {
+		position: absolute;
+		top: 8px;
+		right: 290px;
+		z-index: 10;
+	}
+	input {
+		position: absolute;
+		width: 319.5px;
+		right: 0;
+		padding-left: 45px;
+		background: transparent;
+		border-top: none;
+		border-left: none;
+		border-right: none;
+	}
+	input::-webkit-input-placeholder {
+	   	font-size: 16px;
+	   	font-weight: 500;
+	   	color: #bbbbbb;
+	}
+}
+.logo-restaurant {
+	width: 316px;
+  height: 58px;
+	margin: 0 auto;
+	text-align: center;
+	img {
+		max-width: 316px;
+	  max-height: 58px;
+	}
+}
+.favorsHomePage.bg-block {
+	padding: 0;
+	min-height: 0;
+	height: 380px;
+	margin-top: 120px;
+	&.with-fixed-order-panel {
+		margin-top: 220px;
+	}
+	.container {
+		position: absolute;
+		top: 75px;
+		left: 0;
+		right: 0;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.text-restaurant {
+		max-width: 70%;
+	}
+	.background-restaurant {
+	  height: 100%;
+	  background-size: cover;
+	  background-repeat: no-repeat;
+	  background-position: 50% 50%;
+	  -webkit-filter: brightness(70%);
+	  filter: brightness(70%);
+	}
+	.background-burgerday {
+		-webkit-filter: brightness(100%);
+	  filter: brightness(100%);
+	}
+	.dish-image {
+		width: 338px;
+		height: 338px;
+		background-size: contain;
+	  background-repeat: no-repeat;
+	  background-position: 50% 50%;
+		position: absolute;
+		z-index: 10;
+		left: 153px;
+		top: 105px;
+	}
+	.restaurant-information {
+		width: 320px;
+		position: absolute;
+		top: 127px;
+		right: 336px;
+		.first-line {
+			margin-top: 20px;
+			margin-bottom: 10px;
+			background-color: #ffffff;
+		}
+		.category {
+			margin: 0;
+			opacity: 0.9;
+		  font-family: STIXGeneral !important;
+		  font-size: 22px;
+		  font-weight: normal;
+		  font-style: italic;
+		  font-stretch: normal;
+		  text-align: center;
+		}
+		.second-line {
+			margin-top: 10px;
+			margin-bottom: 10px;
+			background-color: #ffffff;
+		}
+		.delivery-time {
+			font-family: Montserrat !important;
+		  font-size: 14px;
+		  font-weight: normal;
+		  font-style: normal;
+		  font-stretch: normal;
+		  line-height: 1.29;
+		  letter-spacing: 1.5px;
+		  color: #ffffff;
+			margin-top: 39px;
+			text-align: center;
+		}
+	}
+}
+.topingsList {
+	.itemHeading {
+		font-size: 16px;
+		line-height: 22px;
+		margin-bottom: 21px;
+		color: #4d4d4d;
+		margin: 0 0 21px;
+		font-weight: 500;
+	}
+	.listItem {
+		.custome-radio {
+			padding-left: 0;
+		}
+		ul {
+			li {
+				margin-bottom: 7px;
+				label {
+					font-weight: normal;
+					position: relative;
+					padding-left: 30px;
+				}
+			}
+		}
+		margin-bottom: 40px;
+	}
+}

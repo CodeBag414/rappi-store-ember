@@ -1,0 +1,38 @@
+<div class="popUp-wrapper loginPopup">
+    <div class="popUp-Outer padding-popup">
+        <div class="toTable">
+            <div class=" text-center">
+                <div class="formTitle btn-green-width2 inline-block">
+                    <h1>Elige una tarjeta</h1>
+                    {{#if loadingCards}}
+                    <h1>Cargando tus tarjetas ...</h1>
+                    <div class="main-loader"><img src="assets/images/loading.svg"></div>
+                    {{/if}}
+                    <ul class="queries-list">
+                      {{#each creditcardDetails as |ccObj index|}}
+                          <span {{action 'selectCC' ccObj}}>
+                            {{list-cc ccObj index}}
+                          </span>
+                      {{else}}
+                          <span {{action 'selectCC' ccObj}}>
+                            <li class="item coralBox">
+                                <h4>No hay tarjetas para mostrar </h4>
+
+                                <p>Por favor agregue una tarjeta</p>
+                            </li>
+                          </span>
+                      {{/each}}
+                    </ul>
+                  {{#if openAddCCProcess}}
+                      <div class="hvr-pulse-shrink btn btn-green">por favor espera...</div>
+                  {{else}}
+                      <div class="addNewAddress" onClick={{action 'openAddCC'}}>
+                          <button class="btn-qty qty-inc"></button>
+                          <span>añadir nueva tarjeta de crédito </span>
+                      </div>
+                  {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

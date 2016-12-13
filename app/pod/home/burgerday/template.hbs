@@ -1,0 +1,14 @@
+
+<main {{ action "click" }}>
+  <div class="bg-block favorsHomePage">
+      <div class="background-restaurant background-burgerday"
+           style="background-color: #FAFAFA; background-image: url('/assets/images/burger_main_banner.jpg'); background-position: center;">
+      </div>
+  </div>
+  {{#if products}}
+  {{restaurant-menu products=products corridorName=model.subcorridor.store.name corridorId=model.subcorridor.store.id storeId=model.subcorridor.store.store_id}}
+  {{/if}}
+</main>
+<div class="{{if basketOpenned 'basket-overlay' ''}}">
+  {{shopping-basket overflow=overflow storeType=storeType basketOpenned=basketOpenned}}
+</div>

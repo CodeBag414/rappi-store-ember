@@ -1,0 +1,34 @@
+{{#if loginUnsuccess}}
+    <span class=msg-error>{{loginUnsuccessMessage}}</span>
+{{/if}}
+<form class="form form-login" role="search" autocomplete='off'>
+    <div class="form-group">
+      <img class="input-icon" src="/assets/images/mail.svg" alt="" />
+      {{input type="text" class="form-control" placeholder="Correo" key-press="onKeyPress" value=email}}
+      {{#if invalidEmail}}
+          <span class=msg-error>{{emailMessage}}</span>
+      {{/if}}
+    </div>{{password.src}}
+    <div class="form-group">
+      <img class="input-icon" src="/assets/images/candado.svg" alt="" />
+      <img class="input-icon-password" src={{passwordInput.src}} {{action 'setPasswordVisible'}} alt="" />
+      {{input type=passwordInput.type class="form-control password-input" placeholder="Contraseña"  key-press="onKeyPress" value=password}}
+      {{#if invalidPassword}}
+          <span class=msg-error>{{passwordMessage}}</span>
+      {{/if}}
+    </div>
+    <div class="form-group text-right">
+        <a class="recoverPasswordLink"{{action "recoverPassword"}}>¿Olvidaste la contraseña?</a>
+    </div>
+  {{#if authProcess}}
+      <div class="hvr-pulse-shrink btn btn-green">por favor espera...</div>
+  {{else}}
+      <button type="submit" {{action "authenticate"}} class="btn btn-green" style="{{if facebookAuthActive 'cursor: not-allowed;pointer-events: none;opacity: .7;' ''}}">ENTRAR</button>
+  {{/if}}
+    <div class="form-group">
+        <div class="login-custome-radio">
+            <input type="checkbox" id="btnx" name="rememberMe" checked='true'>
+            <label for="btnx">Recordarme</label>
+        </div>
+    </div>
+</form>

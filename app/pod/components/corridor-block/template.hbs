@@ -1,0 +1,19 @@
+<div class="corridor-container">
+  <!-- ................  product listing head .....................  -->
+  <div class="title-block">
+      <h1 {{action 'seeAll' 'home.corridor' corridor.id corridor.rappi_store_id}}>{{corridor.name}}</h1>
+      <hr>
+  </div>
+  <div class="ver-todos-block">
+    <div class="btn-todos" {{action 'seeAll' 'home.corridor' corridor.id corridor.rappi_store_id}}>
+      <p>Ver todos</p>
+      <div class="right-arrow">
+      </div>
+    </div>
+  </div>
+  <div class="corridor-products" id="corridor-{{corridor.id}}-products">
+    {{#each corridor.products as |product|}}
+        {{new-product-card product=product corridorName=corridor.name corridorId=corridor.id rappi_store_id=corridor.rappi_store_id}}
+    {{/each}}
+  </div>
+</div>

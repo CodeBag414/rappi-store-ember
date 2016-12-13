@@ -1,0 +1,22 @@
+<div class="subcorridor-container">
+  <!-- ................  product listing head .....................  -->
+  <div class="title-block">
+      <h1 {{action 'selectSubcorridor' subcorridor.id}}>{{subcorridor.name}}</h1>
+      <hr>
+  </div>
+  <div class="ver-todos-block">
+    {{!-- {{#link-to 'home.subcorridor' subcorridor.id }}
+        ver todos
+    {{/link-to}} --}}
+    <div class="btn-todos" {{action 'selectSubcorridor' subcorridor.id}}>
+      <p>Ver todos</p>
+      <div class="right-arrow">
+      </div>
+    </div>
+  </div>
+  <div class="subcorridor-products" id="subcorridor-{{subcorridor.id}}-products">
+    {{#each subcorridor.products as |product|}}
+        {{new-product-card product=product corridorName=corridorName corridorId=corridorId rappi_store_id=storeId}}
+    {{/each}}
+  </div>
+</div>

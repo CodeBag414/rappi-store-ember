@@ -1,0 +1,51 @@
+{{#unless showModalAlert}}
+  {{promo-banner}}
+  {{landing-page-banner changeStoreType="changeStoreType" currentlyLoading=currentlyLoading searching=searching basketOpenned=basketOpenned setClassToTransform='setClassToTransform'}}
+  {{landing-page-menu changeStoreType="changeStoreType" currentlyLoading=currentlyLoading basketOpenned="basketOpenned" superMenu=model.superMenu expressMenu=model.expressMenu restaurantMenu=model.restaurantMenu farmaciaMenu=model.farmaciaMenu}}
+
+  {{landing-page-explore-sections changeStoreType="changeStoreType"  classToTransform=classToTransform showBurgerDay=showBurgerDay goToBurgerDay="goToBurgerDay"}}
+  {{landing-page-products}}
+  {{landing-page-popular-search-block data=model.popularSearch}}
+  {{footer-block changeStoreType="changeStoreType"}}
+{{/unless}}
+{{#if currentlyLoading}}
+    <div class="main-loader"><img src="assets/images/loading.svg"></div>
+{{/if}}
+{{#each flashMessages.queue as |flash|}}
+    <div class="flash-message">{{flash-message flash=flash}}</div>
+{{/each}}
+{{#if showModalAlert}}
+  {{#modal-dialog container-class='ask-country-parent' translucentOverlay=true}}
+      <div class="popUp-wrapper loginPopup ember-modal-overlay translucent   ember-view ask-country">
+          <div class="popUp-Outer">
+              <div class="toTable">
+                  <div class=" text-center confirmPopup">
+                      <div class="formTitle border-bottom padding-popup">
+                          <h1>Por favor seleccione un país para ir de compras</h1>
+                      </div>
+                      <div>
+                          <select class="comboCountry" id="comboCountry"
+                                  onchange={{action "selectLocation" value="target.value"}}>
+                            {{#each locations as |location index|}}
+                              {{select-option countryCode index location.name}}
+                            {{/each}}
+                          </select>
+                      </div>
+                    {{#if selectCountryProcess}}
+                        <div class="hvr-pulse-shrink btn btn-green">por favor espera...</div>
+                    {{else}}
+                        <button type="submit"
+                                class="btn btn-green btn-greenMargin" {{action 'selectCountry'}}>
+                            Proceder
+                        </button>
+                    {{/if}}
+                  </div>
+              </div>
+          </div>
+      </div>
+  {{/modal-dialog}}
+{{/if}}
+
+<div class="{{if basketOpenned 'basket-overlay' ''}}">
+  {{shopping-basket overflow=overflow storeType=storeType basketOpenned=basketOpenned}}
+</div>

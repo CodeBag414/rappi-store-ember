@@ -1,0 +1,43 @@
+{{#if loadingImg}}
+    <div style="text-align: center;">
+        <img src="assets/images/avatar-red.gif">
+    </div>
+{{else}}
+    <div class="wrapper">
+      {{hamburger-menu addressRoute="paypal.my-accounts.address" hideHeaderContent=myAccountAccessed  changeStoreType="changeStoreType" showOrderStatus="showOrderStatus" cartObject=cartObject showLeftMenu=showLeftMenu showOrderPanel='showOrderPanel' basketOpenned='basketOpenned'}}
+        <div class="inner-wrap">
+          {{#if currentlyLoading}}
+              <div class="main-loader"><img src="assets/images/loading.svg"></div>
+          {{/if}}
+          {{home-header profileRoute='paypal.my-accounts.profile' hideHeaderContent=myAccountAccessed  changeStoreType="changeStoreType" showOrderStatus="showOrderStatus" cartObject=cartObject showLeftMenu=showLeftMenu showOrderPanel='showOrderPanel' basketOpenned='basketOpenned'}}
+          {{#each flashMessages.queue as |flash|}}
+              <div class="flash-message">{{flash-message flash=flash}}</div>
+          {{/each}}
+          {{outlet}}
+          {{footer-block changeStoreType="changeStoreType"}}
+        </div>
+    </div>
+{{/if}}
+
+{{#if showOrderPanel}}
+  {{order-panel closePopUp=showOrderPanel togglePopUp='showOrderPanel' adjustPopUp=true}}
+{{/if}}
+
+<a id="scrolltotop" {{action 'scrollToTop'}}><img src="assets/images/uparrow.png"></a>
+{{#if showLogin}}
+  {{#modal-dialog close="showLogin" translucentOverlay=true}}
+    {{login-register paypalPanel=true showAddressListToUpdate=showAddressListToUpdate showAddAddressToUpdate=showAddAddressToUpdate}}
+  {{/modal-dialog}}
+{{/if}}
+{{#if showAddressListToUpdate}}
+  {{#modal-dialog close='toggleAddressList' translucentOverlay=true}}
+    {{address-change-list toggleAddAddress='toggleAddAddress' showAddressListToUpdate=showAddressListToUpdate}}
+  {{/modal-dialog}}
+{{/if}}
+{{#if showAddAddressToUpdate}}
+  {{#modal-dialog close='toggleAddAddress' translucentOverlay=true}}
+    {{add-address flow='login' showAddAddressToUpdate=showAddAddressToUpdate}}
+  {{/modal-dialog}}
+{{/if}}
+
+

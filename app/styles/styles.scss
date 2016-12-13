@@ -1,0 +1,111 @@
+// Import Bootstrap Compass integration
+//@import "bootstrap-compass";
+
+// Import custom Bootstrap variables
+@import "bootstrap-variables";
+
+// Import Bootstrap for Sass
+//@import "bootstrap";
+
+// Import Mixins
+@import "partials/_mixins";
+@import "partials/_buttons_mixins";
+
+// Import sideTabs page
+@import "partials/_animation-effects";
+
+@import "partials/_animate";
+
+// Designer - 1
+
+// Import headers
+@import "partials/_headers";
+@import "partials/_home-header";
+
+// Import main nav
+@import "partials/_mainNav";
+
+// Import typos
+@import "partials/_typos";
+
+// Import footer
+@import "partials/_footer";
+
+// Import footer
+@import "partials/_basket-bottom";
+
+// Import landing page
+@import "partials/_landing-page";
+
+// Import mexico landing page
+@import "partials/_mexico-landing-page";
+
+// Import landing page
+@import "partials/_product-listing";
+
+// Import landing page
+@import "partials/_misc";
+
+// Import landing page
+@import "partials/_buttons";
+
+// Import login-register popup
+@import "partials/_popupLogin-reg";
+
+// Import miscs popup
+@import "partials/_popup-miscs";
+
+
+// Designer2
+
+// Import favorsHome page
+@import "partials/_favorsHome";
+
+// Import Super Home page
+@import "partials/_superHome.scss";
+
+// Import Super List page
+@import "partials/_superList.scss";
+@import "partials/_superLists.scss";
+
+// Import restaurantsHome page
+@import "partials/_restaurantsHome";
+
+// Import restrauntToppings page
+@import "partials/_restrauntToppings";
+
+
+// Import changePWD page
+@import "partials/_changePWD";
+
+// Import myCards page
+@import "partials/_myCards";
+
+
+// Import sideTabs page
+@import "partials/_sideTabs";
+
+// Import sideTabs page
+@import "partials/_categories";
+
+
+// Import sideTabs page
+@import "partials/_popupChat";
+
+// Import pageNotfound page
+@import "partials/_pageNotFound";
+
+// Import Carrousel css
+@import "partials/_carrousel";
+
+// Import Address Popup css
+@import "partials/_address-popup";
+
+// Import whim css
+@import "partials/_antojos";
+
+// Import responsive css
+@import "partials/_responsive";
+@import "partials/_responsiveRestaurant";
+
+@import "partials/_promo-banner";

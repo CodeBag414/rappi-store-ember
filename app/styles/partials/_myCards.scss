@@ -1,0 +1,112 @@
+.cardItem {
+	border: solid 1px #e6e6e6;
+	padding: 23px 75px 21px 30px;
+	font-size: 16px;
+	position: relative;
+	line-height: 23px;
+	max-width: 505px;
+	margin-bottom: 20px;
+	p {
+		margin: 0;
+		span {
+			display: inline-block;
+		}
+	}
+	.cardUserName {
+		color: #bbbbbb;
+		margin-top: 2px;
+	}
+	.custome-radio {
+		padding-left: 3px;
+		position:relative;
+		input {
+			opacity: 0;
+			margin: 0;
+		}
+		label {
+			pointer-events: none;
+		}
+	}
+	.deleteBtn {
+		background: url("images/app-sprite2x.png");
+		display: inline-block;
+		width: 17px;
+		height: 20px;
+		background-position: -226px -248px;
+		background-size: 450px 450px;
+		margin-right: 12px;
+	}
+}
+.CardBtnBlock {
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	margin-top: -12px;
+}
+.cardsBlockTitle {
+	font-size: 16px;
+	margin-bottom: 20px;
+}
+.otherCards {
+	margin-top: 40px;
+}
+.custome-radio {
+	input[type="radio"] {
+		&:checked {
+			+ {
+				label {
+					&:before {
+						background-position: -226px -172px;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+.myAddressBlock {
+	.cardItem {
+		border: solid 0px #e6e6e6;
+		border-bottom: solid 1px #e6e6e6;
+		padding: 9px 75px 9px 30px;
+	}
+	.directioLabel {
+		color: #bbbbbb;
+		font-size: 12px;
+		line-height: 16px;
+		margin-bottom: 5px;
+	}
+}
+
+.map-myAccount {
+  min-height: 400px;
+  max-height: 400px;
+  overflow: hidden;
+  position: relative;
+}
+
+
+.mapAddress {
+	background-image: url('images/Address-map.jpg');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 400px;
+}
+.custome-radio input[type="radio"]:checked + label:before {
+    background-position: -226px -172px;
+}
+.custome-radio label:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    background-position: -226px -212px;
+}
+
+.no-defaul-card {
+	background: #dedede;
+}

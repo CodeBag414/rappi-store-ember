@@ -1,0 +1,81 @@
+<div class="popUp-wrapper loginPopup">
+    <div class="popUp-Outer text-center">
+      {{#if closeButton}}
+          <a href="javascript:void(0)" data-dismiss="modal" {{action 'closeLoginPopup'}} class="close-global-black"></a>
+      {{/if}}
+        <div class="Table">
+          {{#if paypalPanel}}
+            {{login-register.paypal-panel paypalPanel=paypalPanel showLogin=showLogin showRecoverPassword=showRecoverPassword}}
+          {{else}}
+              <div class="tableCell loginFb" style="background-image: {{urlImage}}">
+                  <img src="assets/images/logo-modal-rappi.svg" alt=""/>
+
+                  <h1>{{wishMessage}}</h1>
+
+                  <p>{{message}}</p>
+                  <hr style="width:80px;border: solid 1px #ffffff;">
+              </div>
+
+              <div class="tableCell loginForm">
+                {{#unless showRecoverPassword}}
+                    <div class="formTitle">
+                        <span></span>
+
+                        <h1 class="{{if showLogin 'selected'}}">
+                          {{#unless showLogin}}
+                              <a href="" {{action "swapPanel"}} id="Ingresa">Ingresa</a>
+                          {{else}}
+                              Ingresa
+                          {{/unless}}
+                        </h1>
+                        <span></span>
+
+                        <h1 class="{{unless showLogin 'selected'}}">
+                          {{#if showLogin}}
+                              <a href="" {{action "swapPanel"}} id="Regístrate">Regístrate</a>
+                          {{else}}
+                              Regístrate
+                          {{/if}}
+                        </h1>
+                        <span></span>
+                    </div>
+                  {{#unless serverUrl.payPalENV}}
+                      <p class="fbBigButton">
+                        {{#if facebookAuthActive}}
+                            <a class="hvr-pulse-shrink">
+                                <span></span>
+
+                                <h1>f</h1>
+                                <span></span>
+
+                                <p>por favor espera...</p>
+                                <span></span>
+                            </a>
+                        {{else}}
+                            <a {{action 'authenticateWithFacebook'}} href="javascript:void(0);">
+                                <span></span>
+
+                                <h1>f</h1>
+                                <span></span>
+
+                                <p>Ingresa con Facebook</p>
+                                <span></span>
+                            </a>
+                        {{/if}}
+                      </p>
+                  {{/unless}}
+                {{/unless}}
+                {{#if showRecoverPassword}}
+                  {{login-register.recover-password showRecoverPassword=showRecoverPassword }}
+                {{else if showLogin}}
+                  {{login-register.login-panel facebookAuthActive=facebookAuthActive loggedIn=loggedIn showModalReg=showModalReg showAddressList=showAddressList loginFrom=loginFrom phoneVerification=phoneVerification
+                  showAddressListToUpdate=showAddressListToUpdate showAddAddressToUpdate=showAddAddressToUpdate showRecoverPassword=showRecoverPassword params=params}}
+                {{else}}
+                  {{login-register.registration-panel facebookAuthActive=facebookAuthActive showModalReg=showModalReg showPhoneNumberVerifyModel=showPhoneNumberVerifyModel loggedIn=loggedIn showAddressList=showAddressList loginFrom=loginFrom phoneVerification=phoneVerification showAddressListToUpdate=showAddressListToUpdate
+                  showAddAddressToUpdate=showAddAddressToUpdate params=params}}
+                {{/if}}
+              </div>
+          {{/if}}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="popUp-wrapper loginPopup">
+    <div class="popUp-Outer text-center">
+      {{#if closeButton}}
+          <a href="javascript:void(0)" data-dismiss="modal" {{action 'closeLoginPopup'}} class="close-global-black"></a>
+      {{/if}}
+        <div class="toTable">
+            <div class="toTable-cell loginForm">
+                <div class="formTitle" style="border-bottom: none;">
+                    <h1>Ingresa un cupón</h1>
+                </div>
+                <form class="form" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="código"
+                        onblur={{action "setVoucher" value="target.value"}}>
+                    </div>
+                    {{#if displayError}}
+                      <span>{{errorMessage}}</span>
+                    {{/if}}
+                    {{#if loading}}
+                      <img width="40px" height="40px" src="assets/images/loading.svg" alt="Loader" />
+                    {{/if}}
+                    {{#if redeemCoupon}}
+                      <h1>{{message}}</h1>
+                      Tu descuento es de ${{value}}
+                    {{/if}}
+                    <button type="submit" {{action "submit" model}}
+                            class="btn btn-green btn-green-width2 btn-greenMargin">Continuar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

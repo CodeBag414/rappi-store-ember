@@ -1,0 +1,165 @@
+<!-- ..................  fixed basket icon .................. -->
+<div class="basket-index">
+    <div class="basket-icon text-center">
+        <div class="container">
+            <a id="product-basket-a" href="#product-basket" role="button" data-toggle="collapse" aria-expanded="false"
+               aria-controls="product-basket"><img src="assets/images/basket.png"
+                                                   alt="basket-rappi" {{action 'collapseEvent'}}></a>
+        </div>
+    </div>
+    <div id="product-basket" class="collapse basket-border">
+        <div class="products-basket">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="productList-footer">
+                            <ul>
+                                <li style={{if isWhimFound 'display:block' 'display:none'}}>
+                                    <div class="toTable">
+                                        <div class="toTable-cell">
+                                            <div class="prod-thumb62 whim-thumb62"><img src='/assets/images/Donut.png'>
+                                            </div>
+                                            <div class="product-name whim-name">
+                                                <h3>{{shoppingBasket.whim.what}}</h3>
+                                                <span>{{shoppingBasket.whim.where}}</span>
+                                            </div>
+
+                                        </div>
+                                        <div class="toTable-cell">
+                                            <div class="cancel-orderWrap">
+                                                <a {{action 'removeWhim' shoppingBasket.whim}}
+                                                        class="cancel-order"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                              {{#each shoppingBasket.cartItems as |product|}}
+                                  <li>
+                                      <div class="toTable">
+                                          <div class="toTable-cell">
+                                              <div class="prod-thumb62"><img src='{{url}}{{product.image}}'>
+                                              </div>
+                                              <div class="product-name">
+                                                  <h3>{{product.name}}</h3>
+                                                  <span>{{product.extras.presentation}}</span>
+                                              </div>
+                                          </div>
+                                          <div class="toTable-cell">
+                                              <div>
+                                                  <button {{action 'removeFromCart' product}}
+                                                          class="btn-qty qty-dec"></button>
+                                                  <span class="qty-footer">{{product.quantity}}</span>
+                                                  <button {{action 'addToCart' product}}
+                                                          class="btn-qty qty-inc"></button>
+                                              </div>
+                                              <div class="priceBasket-footer"><label
+                                                      class="accent-color">{{format-currency product.totalPrice}}</label>
+                                              </div>
+                                              <div class="cancel-orderWrap">
+                                                  <a {{action 'removeProduct' product}}
+                                                          class="cancel-order"></a>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </li>
+                              {{/each}}
+                            </ul>
+                        </div>
+                      {{#if disableCheckout}}
+                          <div class="emptyBasket text-center">
+                              <img src="assets/images/basket-empty.jpg" alt=""/>
+
+                              <h3>Tu canasta está vacia :(</h3>
+
+                              <p>Tu canasta está triste porque no has arrojado ningún producto</p>
+                          </div>
+                      {{else}}
+                          <div class="row actions-product">
+                              <div class="col-sm-4"><a {{action "hideBasket"}} >+ agregar más productos</a></div>
+                              <div class="col-sm-4 text-center"><a style="display:none;">guardar como lista</a></div>
+                              <div class="col-sm-4 text-right"><a
+                                      style={{if cartEmpty 'pointer-events:none;' ''}} {{action 'emptyBasket'}}>eliminar
+                                  todos</a>
+                              </div>
+                          </div>
+                      {{/if}}
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="text-center del-address">
+                            <span>Vas a pedir a la:</span>
+
+                            <address>{{shoppingBasket.order.address.address}}</address>
+                            <!--<address>{{shoppingBasket.perShipping}}</address>-->
+                          {{#if session.isAuthenticated}}
+                              <a class="accent-color" onclick={{action 'changeDirection'}}>cambiar dirección</a>
+                          {{/if}}
+                        </div>
+                        <div class="list-total">
+                            <ul>
+                                <li>
+                                    <span class="col-xs-6">subtotal</span>
+                                    <label class="col-xs-6">{{format-currency (if shoppingBasket.totalPrice shoppingBasket.totalPrice 0.00)}}</label>
+                                </li>
+                                <li>
+                                    <span class="col-xs-6">Domicilio</span>
+                                    <label class="col-xs-6">{{format-currency (if shoppingBasket.shippingCharges shoppingBasket.shippingCharges 0.00)}}</label>
+                                </li>
+                                <li>
+                                    <span class="col-xs-6">Total</span>
+                                    <label class="col-xs-6">{{format-currency (if shoppingBasket.grandTotal shoppingBasket.grandTotal 0.00)}}</label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="order-desp">
+                          {{textarea placeholder="Escribir un comentario"}}
+                            <button disabled={{disableCheckout}} {{action 'placeOrder'}}
+                                            class="btn btn-lg btn-block btn-success
+                            ">HACER PEDIDO
+                            </button>
+                        </div>
+                        <div class="promo-shopping-basket-container">
+                            <img {{action 'toggleShowTermConditions'}}  src="assets/images/promo-shopping-basket.png" alt="" />
+                        </div>
+                        {{#if showTermConditions}}
+                        <div class="overlay-term-conditions" {{action 'toggleShowTermConditions'}}> </div>
+                            <div class="promo-banner-term-conditions">
+                                    <img src={{promoModalUrl}} src="" alt="" />
+                                    <img  class="close-btn" {{action 'toggleShowTermConditions'}} src="assets/images/_icon_close_white.svg" alt="promo-banner">
+                            </div>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{#if showEmptyBasketModal}}
+  {{#modal-dialog close="emptyBasket" translucentOverlay=true}}
+    {{empty-basket shoppingBasket=shoppingBasket showEmptyBasketModal=showEmptyBasketModal}}
+  {{/modal-dialog}}
+{{/if}}
+{{#if showAddressList}}
+  {{#modal-dialog close="changeDirection" translucentOverlay=true}}
+    {{address-list showPopUp=showAddressList isCheckout=false showAddAddress='showAddAddress'}}
+  {{/modal-dialog}}
+{{/if}}
+{{#if showAddAddress}}
+  {{#modal-dialog close="showAddAddress" translucentOverlay=true}}
+    {{add-address removeAddressList=showAddressList showPopUp=showAddAddress isCheckout=true showModalDelevery='showModalDelevery' flow="change-direction"}}
+  {{/modal-dialog}}
+{{/if}}
+{{#if orderAllowed}}
+  {{checkout-process setCartRemoved=setCartRemoved showPopUp=orderAllowed phoneVerification=phoneVerification resetPhoneVerification='resetPhoneVerification' showModalDelevery='showModalDelevery' showAddressListWhenCheckout=showAddressListWhenCheckout togglePopUp='togglePopUp'}}
+{{else if showLoginPopUp}}
+  {{login-flow showModalReg=showLoginPopUp closeAllPopup=showLoginPopUp phoneVerification=phoneVerification showModalDelevery='showModalDelevery' orderAlreadyExists='orderAlreadyExists' toggleLogin='toggleLogin'}}
+{{/if}}
+
+{{#if orderExist}}
+  {{#modal-dialog close="orderAlreadyExists" translucentOverlay=true}}
+    {{order-already-exist showPopup=orderExist showExistingOrder='showExistingOrder' toggleLogin='orderAlreadyExists'}}
+  {{/modal-dialog}}
+{{/if}}
+
+{{#if showExistingOrder}}
+  {{order-panel closePopUp=showExistingOrder adjustPopUp=false togglePopUp='showExistingOrder'}}
+{{/if}}
