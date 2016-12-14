@@ -58,6 +58,9 @@ export default Ember.Component.extend({
           this.set("closePopUp", false);
           this.set("orderRatePanel", false);
           this.rappiOrder.removeOrder(orderId);
+          if (this.get('allowNextOrder')) {
+            this.sendAction('orderAction', true);
+          }
         }).fail(()=> {
           this.set("closePopUp", false);
           this.set("orderRatePanel", false);

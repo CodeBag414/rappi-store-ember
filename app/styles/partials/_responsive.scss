@@ -2179,5 +2179,20 @@ $screen-md-max: ($screen-lg-min - 1);
       }
     }
   }
+  .volver-btn-banner{
+    padding:42px;
+  }
+  .volver-btn{
+    width: 37px;
+    padding: 5px;
+    margin-left: -30px;
+    span{
+      display: none;
+    }
+  }
+  .volver-btn-rest{
+    margin-top: 121px;
+    margin-left: 20px;
+  }
   /* Supercardo Category Page End */
 }

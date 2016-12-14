@@ -114,6 +114,8 @@ export default Ember.Route.extend({
     }, seeAll(route, corridorId, storeId){
       this.storage.set(stStoreId, storeId);
       this.transitionTo(route, corridorId);
+    }, back(){
+      history.back();
     }
   }
 });

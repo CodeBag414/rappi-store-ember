@@ -5,9 +5,15 @@
             <a id="product-basket-a" href="#product-basket" role="button" data-toggle="collapse" aria-expanded="false"
                aria-controls="product-basket"><img src="assets/images/basket.png"
                                                    alt="basket-rappi" {{action 'collapseEvent'}}></a>
+          {{#if shoppingBasket.totalItems}}
+              <span class="shopping-basket-badge">{{shoppingBasket.totalItems}}</span>
+          {{/if}}
         </div>
     </div>
     <div id="product-basket" class="collapse basket-border">
+        <a {{action 'collapseEvent'}} style="position: relative;top: 10px;float: right;right: 10px;">
+            <img src="assets/images/btn-close-grey.svg">
+        </a>
         <div class="products-basket">
             <div class="container">
                 <div class="row">
@@ -111,15 +117,17 @@
                             </ul>
                         </div>
                         <div class="order-desp">
-                          {{textarea placeholder="Escribir un comentario"}}
+                          {{textarea value=orderInstruction placeholder="Escribir un comentario"}}
                             <button disabled={{disableCheckout}} {{action 'placeOrder'}}
                                             class="btn btn-lg btn-block btn-success
                             ">HACER PEDIDO
                             </button>
                         </div>
+                      {{#if showPromoShopingBasketBanner}}
                         <div class="promo-shopping-basket-container">
                             <img {{action 'toggleShowTermConditions'}}  src="assets/images/promo-shopping-basket.png" alt="" />
                         </div>
+                      {{/if}}
                         {{#if showTermConditions}}
                         <div class="overlay-term-conditions" {{action 'toggleShowTermConditions'}}> </div>
                             <div class="promo-banner-term-conditions">
@@ -149,9 +157,9 @@
   {{/modal-dialog}}
 {{/if}}
 {{#if orderAllowed}}
-  {{checkout-process setCartRemoved=setCartRemoved showPopUp=orderAllowed phoneVerification=phoneVerification resetPhoneVerification='resetPhoneVerification' showModalDelevery='showModalDelevery' showAddressListWhenCheckout=showAddressListWhenCheckout togglePopUp='togglePopUp'}}
+  {{checkout-process setCartRemoved=setCartRemoved showPopUp=orderAllowed phoneVerification=phoneVerification resetPhoneVerification='resetPhoneVerification' showModalDelevery='showModalDelevery' showAddressListWhenCheckout=showAddressListWhenCheckout togglePopUp='togglePopUp' orderInstruction=orderInstruction}}
 {{else if showLoginPopUp}}
-  {{login-flow showModalReg=showLoginPopUp closeAllPopup=showLoginPopUp phoneVerification=phoneVerification showModalDelevery='showModalDelevery' orderAlreadyExists='orderAlreadyExists' toggleLogin='toggleLogin'}}
+  {{login-flow showModalReg=showLoginPopUp closeAllPopup=showLoginPopUp phoneVerification=phoneVerification showModalDelevery='showModalDelevery' orderAlreadyExists='orderAlreadyExists' toggleLogin='toggleLogin' orderInstruction=orderInstruction}}
 {{/if}}
 
 {{#if orderExist}}
@@ -161,5 +169,5 @@
 {{/if}}
 
 {{#if showExistingOrder}}
-  {{order-panel closePopUp=showExistingOrder adjustPopUp=false togglePopUp='showExistingOrder'}}
+  {{order-panel closePopUp=showExistingOrder adjustPopUp=false togglePopUp='showExistingOrder' allowNextOrder=true orderAction='placeOrder'}}
 {{/if}}

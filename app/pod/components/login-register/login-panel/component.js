@@ -1,8 +1,8 @@
 import Ember from 'ember';
 import ENV from 'rappi/config/environment';
 const {
-  paypal
-  } = ENV.storageKeys;
+    paypal
+    } = ENV.storageKeys;
 
 export default Ember.Component.extend({
   serverUrl: Ember.inject.service('server-url'),
@@ -84,8 +84,7 @@ export default Ember.Component.extend({
       this.set('authProcess', true);
       if (data === undefined) {
         return this.get('session').authenticate('authenticator:rappi', email, password, currentUrl).then(()=> {
-          fbq("trackCustom","Login",{email:email});
-          mixpanel.track("login");
+          fbq("trackCustom", "Login", {email: email});
           this.send("setDataAfterAuthorize");
         }).catch((reason) => {
           this.send("handleCatchOfAuthorize", reason);
@@ -100,8 +99,7 @@ export default Ember.Component.extend({
           "paypal_tab_id": data.paypal_tab_id,
           "paypal_location_id": data.paypal_location_id
         }, currentUrl).then(()=> {
-          fbq("trackCustom","LoginPaypal",{paypal_customer_id:data.paypal_customer_id});
-          mixpanel.track("login");
+          fbq("trackCustom", "LoginPaypal", {paypal_customer_id: data.paypal_customer_id});
           this.send("setDataAfterAuthorize");
         }).catch((reason) => {
           this.send("handleCatchOfAuthorize", reason);
@@ -110,7 +108,7 @@ export default Ember.Component.extend({
       }
     },
     handleCatchOfAuthorize: function (reason) {
-      this.set('errorMessage', reason.error || reason);
+      this.set('errorMessage', reason && reason.error ? reason.error : reason);
       this.set('loginUnsuccess', true);
       this.set('loginUnsuccessMessage', 'Lo sentimos nombre de usuario o contraseña incorrecta !');
       this.set('color', 'spanColor');
@@ -126,17 +124,26 @@ export default Ember.Component.extend({
 
         if (this.get('session').get('currentUser').get("name")) {
           //When log in
-          mixpanel.track("login",{
-          	"method": this.get('session').get('currentUser').get("email"),
-            "age": this.get('session').get('currentUser').get("age"),
-            "gender": this.get('session').get('currentUser').get("gender"),
-            "name": this.get('session').get('currentUser').get("name")
-          });
+          if (this.serverUrl.isPayPalENV()) {
+            mixpanel.track("paypal_login", {
+              "method": this.get('session').get('currentUser').get("email"),
+              "age": this.get('session').get('currentUser').get("age"),
+              "gender": this.get('session').get('currentUser').get("gender"),
+              "name": this.get('session').get('currentUser').get("name")
+            });
+          } else {
+            mixpanel.track("login", {
+              "method": this.get('session').get('currentUser').get("email"),
+              "age": this.get('session').get('currentUser').get("age"),
+              "gender": this.get('session').get('currentUser').get("gender"),
+              "name": this.get('session').get('currentUser').get("name")
+            });
+          }
         }
       }, 500);
     },
     recoverPassword(){
-      this.set("showRecoverPassword",true);
+      this.sendAction("recoverPassword", this.get('email') );
     }
   }
 });

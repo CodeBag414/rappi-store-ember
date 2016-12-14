@@ -12,7 +12,7 @@ export default Ember.Component.extend({
     var waypoint = new Waypoint({
       element: document.getElementById('restaurant-menu-container'),
       handler: function(direction) {
-        if (direction == "down") {
+        if (direction === "down") {
           Ember.$('.list-view').addClass("fixed");
           Ember.$('.grid-view').addClass("fixed");
           Ember.$('.scroll-progress-bar').fadeIn();
@@ -39,6 +39,31 @@ export default Ember.Component.extend({
       Ember.$('.progress-line').css('height', (scroll - top) / (hH - wH + 120 + 518) * 100 + '%');
 
     });
+
+    var owl = Ember.$(".most-popular-dishes");
+    if (Ember.$(window).width() < 480) {
+      owl.owlCarousel({
+        items : 4,
+        itemsDesktop : [1000,4],
+        itemsDesktopSmall : [900,3],
+        itemsTablet: [600,2],
+        itemsMobile : [479, 1.5],
+        pagination: false,
+        navigation: false,
+        scrollPerPage: false
+      });
+    } else {
+      owl.owlCarousel({
+        items : 4,
+        itemsDesktop : [1000,4],
+        itemsDesktopSmall : [900,3],
+        itemsTablet: [600,2],
+        itemsMobile : [479,1],
+        pagination: false,
+        navigation: true,
+        scrollPerPage: true
+      });
+    }
   },
   willDestroyElement() {
     Waypoint.destroyAll();

@@ -8,7 +8,26 @@ export default Ember.Component.extend({
   currentUser: null,
   sendMessageProcess: false,
   sendMediaMessageProcess: false,
-  init() {
+  didRender() {
+    this._super(...arguments);
+    var _this = this;
+    if (!this.get("eventAddedToTextArea")) {
+      this.set("eventAddedToTextArea",true);
+      $('#chattextarea').on('keydown', function (e) {
+        if (e.which == 13) {
+          e.preventDefault();
+          _this.send("sendMessage");
+        }
+      }).on('input', function () {
+        _this.setHeightOfChatText();
+      });
+    }
+  },
+  setHeightOfChatText(){
+    $("#chattextarea").height(1);
+    var totalHeight = $("#chattextarea").prop('scrollHeight') - parseInt($("#chattextarea").css('padding-top')) - parseInt($("#chattextarea").css('padding-bottom'));
+    $("#chattextarea").height(totalHeight);
+  }, init() {
     this._super(...arguments);
     let orderId = this.get('session').get('activeOrderIds')[0];
     this.set("currentUser", this.get('session').get('currentUser'));
@@ -55,6 +74,7 @@ export default Ember.Component.extend({
       if (Ember.isPresent(orderId) && Ember.isPresent(message) && message.trim().length > 0) {
         var accessToken = this.get('session').get('data.authenticated.access_token');
         this.set('message', '');
+        Ember.run.later(this,this.setHeightOfChatText,100);
         this.set('isLoading', true);
         let currentUrl = this.serverUrl.getUrl();
         let _this = this;
@@ -69,7 +89,11 @@ export default Ember.Component.extend({
           url: `${currentUrl}/${ENV.sendChatMessage}/${orderId}`,
           data: JSON.stringify({message})
         }).then(()=> {
-          mixpanel.track("sent_chat_message");
+          if (_this.serverUrl.isPayPalENV()) {
+            mixpanel.track("paypal_sent_chat_message");
+          } else {
+            mixpanel.track("sent_chat_message");
+          }
           this.set("sendMessageProcess", false);
           this.set('isLoading', false);
         }).fail((err)=> {
@@ -87,6 +111,7 @@ export default Ember.Component.extend({
       var file = event.target.files[0];
       var data = new FormData();
       data.append('image', file);
+      var _this= this;
       if (Ember.isPresent(orderId) && Ember.isPresent(file)) {
         var accessToken = this.get('session').get('data.authenticated.access_token');
         this.set("sendMediaMessageProcess", true);
@@ -103,7 +128,11 @@ export default Ember.Component.extend({
           processData: false
         }).then((resp)=> {
           console.log("resp>>", resp);
-          mixpanel.track("sent_chat_message");
+          if (_this.serverUrl.isPayPalENV()) {
+            mixpanel.track("paypal_sent_chat_message");
+          } else {
+            mixpanel.track("sent_chat_message");
+          }
           this.set("sendMediaMessageProcess", false);
           this.set('isLoading', false);
         }).fail((err)=> {
@@ -115,7 +144,7 @@ export default Ember.Component.extend({
     }
   },
   refreshChatMessages() {
-    let refresher=Ember.run.later(this, function () {
+    let refresher = Ember.run.later(this, function () {
       let userId = this.get('session').get('currentUser').get('id');
       let accessToken = this.get('session').get('data.authenticated.access_token');
       let orderId = this.get('session').get('activeOrderIds')[0];

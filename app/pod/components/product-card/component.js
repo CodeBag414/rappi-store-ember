@@ -50,12 +50,20 @@ export default Ember.Component.extend({
       let addedProduct = this.get('addedProduct');
       this.toggleProperty('isShowingModal');
       this.set('productInfo', productInfo);
+      if(this.serverUrl.isPayPalENV()){
+        mixpanel.track("paypal_glance_view", {
+          "product_code": productInfo.id,
+          "product_name": productInfo.name,
+          "add_to_cart": addedProduct ? true : false
+        });
+      }else{
+        mixpanel.track("glance_view", {
+          "product_code": productInfo.id,
+          "product_name": productInfo.name,
+          "add_to_cart": addedProduct ? true : false
+        });
+      }
 
-      mixpanel.track("glance_view", {
-        "product_code": productInfo.id,
-        "product_name": productInfo.name,
-        "add_to_cart": addedProduct ? true : false
-      });
     },
     addToCart: function (product) {
 
@@ -84,6 +92,7 @@ export default Ember.Component.extend({
           this.sendAction('newCartAdded', this.cart.getCart(storeType));
         }
         //mixpanel events
+        mixpanel.track("Global_add_product");
         if(storeType==="express"){
           mixpanel.track("add_to_cart_express");
         }else if(storeType==="restaurant"){
@@ -91,7 +100,11 @@ export default Ember.Component.extend({
         }else if(storeType==="farmacia"){
           mixpanel.track("add_to_cart_farmica");
         }else if(storeType==="super"){
-          mixpanel.track("add_to_cart_super");
+          if (this.serverUrl.isPayPalENV()) {
+            mixpanel.track("paypal_add_to_cart_super");
+          } else {
+            mixpanel.track("add_to_cart_super");
+          }
         }
 
         Ember.$(`#span_${id}`).removeClass('animated bounceInDown');

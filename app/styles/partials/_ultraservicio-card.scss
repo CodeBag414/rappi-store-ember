@@ -1,0 +1,175 @@
+.ultraservicio-card-container {
+    width: 350px;
+    margin-top: 40px;
+    position: relative;
+    .top-bar {
+        height: 145px;
+        background-color: #fd6250;
+        padding-top: 46px;
+        padding-left: 25px;
+        p {
+            font-family: 'Raleway' !important;
+            font-size: 16px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            letter-spacing: 0.6px;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+        h1 {
+            font-family: 'Montserrat' !important;
+            font-size: 42px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            letter-spacing: 1.7px;
+            color: #ffffff;
+            margin: 0;
+        }
+    }
+    .product-selection-view {
+        height: 269px;
+        background-color: #f0f4f5;
+        position: relative;
+        z-index: 1;
+        .first-product-selection-view {
+            padding-left: 17px;
+            padding-right: 18px;
+            .header-view {
+                height: 43px;
+                border-bottom: solid 1px #e1e1e1;
+                padding-top: 13px;
+                position: relative;
+                p {
+                    font-family: 'Raleway' !important;
+                    font-size: 16px;
+                    font-weight: normal;
+                    font-style: normal;
+                    font-stretch: normal;
+                    letter-spacing: 1.2px;
+                    text-align: center;
+                    color: #899195;
+                    margin: 0;
+                }
+                .btn-to-first-view {
+                    position: absolute;
+                    width: 32px;
+                    height: 32px;
+                    background-image: url('/assets/images/icon-left-arrow-grey.svg');
+                    background-repeat: no-repeat;
+                    top: 5px;
+                    left: 0px;
+                    display: none;
+                }
+            }
+            .amount-choice-view {
+                min-height: 200px;
+                position: relative;
+                overflow: hidden;
+                .first-view {
+                    width: 315px;
+                    position: absolute;
+                    display: flex;
+                    flex-wrap: wrap;
+                    padding-top: 20px;
+                    padding-left: 20px;
+                    .amount-card {
+                        width: 120px;
+                        height: 70px;
+                        border-radius: 100px;
+                        border: solid 1px #e1e1e1;
+                        margin: 10px;
+                        font-family: 'Montserrat' !important;
+                        font-size: 18px;
+                        font-weight: normal;
+                        font-style: normal;
+                        font-stretch: normal;
+                        color: #899195;
+                        text-align: center;
+                        padding-top: 25px;
+                        span {
+                            font-size: 14px;
+                        }
+                        &.selected {
+                            border: none;
+                            color: #ffffff;
+                            background-color: #fd6250;
+                            box-shadow: 0 6px 15px 0 rgba(255, 104, 86, 0.43);
+                        }
+                    }
+                }
+                .second-view {
+                    position: absolute;
+                    display: flex;
+                    width: 100%;
+                    padding-top:72px;
+                    padding-left: 36px;
+                    padding-right: 36px;
+                    left: 315px;
+                    .btn-reduce {
+                        width: 52px;
+                        height: 52px;
+                        background-image: url('/assets/images/bt-less-grey.svg');
+                        background-repeat: no-repeat;
+                    }
+                    .price {
+                        flex-grow: 1;
+                        text-align: center;
+                        font-family: 'Montserrat' !important;
+                        font-size: 21.6px;
+                        font-weight: normal;
+                        font-style: normal;
+                        font-stretch: normal;
+                        color: #899195;
+                        span {
+                            top: -3px;
+                            margin-right: 5px;
+                            font-size: 11.8px;
+                            color: #899195;
+                        }
+                    }
+                    .btn-increase {
+                        width: 52px;
+                        height: 52px;
+                        background-image: url('/assets/images/bt-more-grey.svg');
+                        background-repeat: no-repeat;
+                    }
+                }
+            }
+        }
+    }
+    .button-bar {
+        height: 90px;
+        background-color: #ffffff;
+        position: relative;
+        z-index: 1;
+        overflow: auto;
+        .btn-add {
+            width: 190px;
+            height: 50px;
+            background-color: #fd6250;
+            font-size: 12px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border: none;
+            color: #ffffff;
+            padding: 0;
+            display: block;
+            margin: 20px auto;
+        }
+    }
+    .shadow-box {
+        position: absolute;
+        bottom: 0px;
+        width: 244px;
+        height: 231px;
+        background-color: #ffffff;
+        box-shadow: 0 10px 45px 0 #802828;
+        left: 50%;
+        transform: translate(-50%);
+    }
+}

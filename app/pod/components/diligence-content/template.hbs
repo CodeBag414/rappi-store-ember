@@ -1,0 +1,29 @@
+<div class="diligence-content-container">
+    <div class="title-block">
+        <h1>DILIGENCIAS</h1>
+        <hr>
+        <p>P&iacute;denos cualquier favor y un Rappitendero lo har&aacute; por t&iacute;</p>
+    </div>
+    <div class="diligence-list">
+        {{#each diligences as |diligence index|}}
+            <div class="diligence-block {{if (eq selectedIndex index) 'active' ''}}" {{action 'makeActive' index}}>
+                <div class="index-card">
+                    <div class="top-middle-line"></div>
+                    <div class="index-circle">
+                        <p>{{inc index}}</p>
+                    </div>
+                    <div class="bottom-middle-line"></div>
+                </div>
+                <div class="content-card">
+                    <h1>DILIGENCIA {{inc index}}:</h1>
+                    <div class="diligence-content" contenteditable="true">{{diligence}}</div>
+                    <div class="btn-delete" {{action 'delete' index}}></div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+    <div class="action-block">
+        <div class="btn-add-rappi-favor" {{action 'addDiligence'}}></div>
+        <div class="btn-order" {{action 'addToBasket'}}>HACER PEDIDO</div>
+    </div>
+</div>

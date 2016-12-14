@@ -1620,10 +1620,49 @@ div .logged-userName + .logged-userName {
   }
 }
 
-.display-none{
+.display-none {
   display: none !important;
 }
-.super-paypal{
-background-image: none !important;
-padding-right:0px !important;
+
+.super-paypal {
+  background-image: none !important;
+  padding-right: 0px !important;
+}
+
+.volver-btn-banner {
+  padding: 25px;
+}
+
+.volver-btn-rest {
+  margin-top: 49px;
+  margin-left: 20px;
+}
+
+.volver-btn {
+  border: 1px solid white;
+  width: 160px;
+  padding: 13px;
+  span {
+    color: #ffffff;
+    padding-left: 20px;
+    font-size: 15px;
+    font-stretch: normal;
+    font-weight: 500;
+  }
+}
+
+.remove-bg-image {
+  background-image: none !important;
+}
+
+.volver-subcorridor {
+  position: absolute;
+  top: 22px;
+  left: 20px;
+}
+
+.no-more-whims{
+  text-align: center;
+  font-size: 18px;
+  color: #bbbbbb;
 }

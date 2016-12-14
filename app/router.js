@@ -35,6 +35,7 @@ Router.map(function () {
     this.route('burgerday');
     this.route('lists');
     this.route('list', {path: 'list/:list_id'});
+    this.route('diligence');
   });
 
   //for every undefined route

@@ -2,8 +2,8 @@ import Ember from 'ember';
 import ENV from 'rappi/config/environment';
 
 const {
-  stContent
-  } = ENV.storageKeys;
+    stContent
+    } = ENV.storageKeys;
 
 export default Ember.Component.extend({
   showAddressList: false,
@@ -34,11 +34,12 @@ export default Ember.Component.extend({
       this.set('showModalDelevery', false);
     }
     /*if (this.get('phoneVerification')) {
-      this.verifyPhone();
-    }*/
+     this.verifyPhone();
+     }*/
   },
   verifyPhone(){
     if (typeof window.AccountKit === 'undefined') {
+      this.set('showModalReg', false);
       this.set('showPopUp', false);
       this.set('openLoginView', false);
       this.get('flashMessages').info('Algo salió mal. Por favor, intente después de algún tiempo.');
@@ -74,6 +75,7 @@ export default Ember.Component.extend({
                 self.set('isLoading', false);
               }).catch((err)=> {
                 self.set('isLoading', false);
+                self.set('showModalReg', false);
                 self.set('showPopUp', false);
                 self.get('flashMessages').danger("Algo salió mal.");
               });
@@ -82,6 +84,7 @@ export default Ember.Component.extend({
         }).catch((err)=> {
           console.log("err>>>", err);
           self.set('isLoading', false);
+          self.set('showModalReg', false);
           self.set('showPopUp', false);
           self.get('flashMessages').danger("Algo salió mal.");
         });
@@ -89,12 +92,14 @@ export default Ember.Component.extend({
       else if (response.status === "NOT_AUTHENTICATED") {
         // handle authentication failure
         self.set('isLoading', false);
+        self.set('showModalReg', false);
         self.set('showPopUp', false);
         self.get('flashMessages').danger("NOT_AUTHENTICATED");
       }
       else if (response.status === "BAD_PARAMS") {
         // handle bad parameters
         self.set('isLoading', false);
+        self.set('showModalReg', false);
         self.set('showPopUp', false);
         self.get('flashMessages').danger("BAD_PARAMS");
       }
@@ -104,16 +109,23 @@ export default Ember.Component.extend({
     loggedIn: function () {
       let session = this.get('session');
       let orderCount = this.rappiOrder.get('counter');
-
+      this.set('openLoginView', false);
       if (session.get('currentUser') !== undefined) {
-        if(session.get('currentUser').get("phone") === ''){
+        if (session.get('currentUser').get("phone") === '') {
           this.verifyPhone();
         }
       }
-
       if (orderCount > 0) {
-        this.set('showModalReg', false);
-        this.sendAction('orderAlreadyExists');
+        const activeOrderId = this.get('session').get('activeOrderIds') ? this.get('session').get('activeOrderIds')[0] : undefined;
+        if (Ember.isPresent(activeOrderId)) {
+          this.set('showAddressList', false);
+          const activeOrderObj = this.rappiOrder.getOrder('id', activeOrderId);
+          if (Ember.isPresent(activeOrderObj) && activeOrderObj.get('state') === 'pending_review') {
+            this.set('showExistingOrder', true);
+          } else {
+            this.set('orderExist', true);
+          }
+        }
       }
       //this.send('showModalDelevery');
     },
@@ -158,6 +170,8 @@ export default Ember.Component.extend({
     },
     toggleLogin: function () {
       this.sendAction('toggleLogin');
+    }, showExistingOrder: function () {
+      this.toggleProperty('showExistingOrder');
     }
   }
 

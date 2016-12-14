@@ -1,3 +1,6 @@
+{{#if currentlyLoading}}
+    <div  class="main-loader" style="z-index: 100000000;"><img src="assets/images/loading.svg"></div>
+{{/if}}
 <div class="popUp-wrapper loginPopup reload-warning">
     <div class="popUp-Outer ">
         <a class="close-global-black" {{action 'closePopup'}}></a>

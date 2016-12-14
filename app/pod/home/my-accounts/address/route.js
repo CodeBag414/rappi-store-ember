@@ -5,6 +5,7 @@ const {
   stLat,
   stLng,
   stAddress,
+  stCity,
   stAddressId,
   stStoreType
   } = ENV.storageKeys;
@@ -39,6 +40,7 @@ export default Ember.Route.extend({
           _this.storage.set(stLng, response.get('lng'));
           _this.storage.set(stAddress, response.get('address'));
           _this.storage.set(stAddressId, response.get('id'));
+          _this.storage.set(stCity, response.get('tag'));
           parentController.set('currentlyLoading', false);
         }).catch(()=> {
           parentController.set('currentlyLoading', false);

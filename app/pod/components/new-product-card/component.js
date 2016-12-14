@@ -85,6 +85,7 @@ export default Ember.Component.extend({
           this.sendAction('newCartAdded', this.cart.getCart(storeType));
         }
         //mixpanel events
+        mixpanel.track("Global_add_product");
         if(storeType==="express"){
           mixpanel.track("add_to_cart_express");
         }else if(storeType==="restaurant"){

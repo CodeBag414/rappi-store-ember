@@ -16,6 +16,7 @@ export default Ember.Controller.extend({
   showAddAddressToUpdate: false,
   loadingImg:false,
   flashMessages: Ember.inject.service(),
+  mixpanelScrollEventSent:false,
   actions: {
     cancelConfirmations: function () {
       this.set('confirm', true);
@@ -61,12 +62,18 @@ export default Ember.Controller.extend({
   },
   init() {
     this._super(...arguments);
+    var _this = this;
     Ember.$(window).scroll(function () {
       Ember.$el = Ember.$('#scrolltotop');
       if (Ember.$(this).scrollTop() > 250) {
         Ember.$el.css({'display': 'inline'});
       } else {
         Ember.$el.css({'display': 'none'});
+      }
+
+      if(!_this.get("mixpanelScrollEventSent")){
+        _this.set("mixpanelScrollEventSent",true);
+        mixpanel.track("paypal_home_page_scroll");
       }
     });
   }

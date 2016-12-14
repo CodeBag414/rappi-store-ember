@@ -2,14 +2,15 @@ import Ember from 'ember';
 import ENV from 'rappi/config/environment';
 
 const {
-  stLat,
-  stLng,
-  stAddress,
-  stContent,
-  stStoreType,
-  stShippingCharges,
-  stAddressId
-  } = ENV.storageKeys;
+    stLat,
+    stLng,
+    stAddress,
+    stCity,
+    stContent,
+    stStoreType,
+    stShippingCharges,
+    stAddressId
+    } = ENV.storageKeys;
 
 export default Ember.Component.extend({
   serverUrl: Ember.inject.service('server-url'),
@@ -37,6 +38,7 @@ export default Ember.Component.extend({
   market: null,
   now: null,
   promoModalUrl: 'assets/images/promo-modal.jpg',
+  showPromoShopingBasketBanner: false,
   init() {
     this._super(...arguments);
     let currentUrl = this.serverUrl.getUrl();
@@ -81,16 +83,31 @@ export default Ember.Component.extend({
     this._super(...arguments);
     Ember.$('#product-basket').collapse('hide');
   },
+  didRender(){
+    this._super(...arguments);
+    if (this.storage.get("openPaymentAfterAddressChange")) {
+      if (this.storage.get("openPaymentOnSecondRenderCall")) {
+        this.storage.set("openPaymentAfterAddressChange", false);
+        this.storage.set("openPaymentOnSecondRenderCall", false);
+        this.set("overflow", true);
+        this.send('placeOrder', true);
+      } else {
+        this.storage.set("openPaymentOnSecondRenderCall", true);
+      }
+
+    }
+  },
   willRender() {
     this._super(...arguments);
     let storeType = this.storage.get(stStoreType);
     let completeAddress = this.storage.get(stAddress);
     let latitude = this.storage.get(stLat);
     let longitude = this.storage.get(stLng);
+    let tag = this.storage.get(stCity);
     let addressId = this.storage.get(stAddressId) || 0;
     let cart = this.cart.getCart(storeType);
     if (this._state !== 'destroying' && Ember.isPresent(cart)) {
-      cart.updateShippingAddress({id: addressId, address: completeAddress, lng: longitude, lat: latitude});
+      cart.updateShippingAddress({id: addressId, address: completeAddress, tag: tag, lng: longitude, lat: latitude});
       this.set('shoppingBasket', cart);
       let _this = this;
       cart.on('cartRemoved', function () {
@@ -171,7 +188,11 @@ export default Ember.Component.extend({
       if (!this.get("basketOpenned")) {
         //mixpanel events
         let storeType = this.storage.get(stStoreType);
-        mixpanel.track("open_cart");
+        if (this.serverUrl.isPayPalENV()) {
+          mixpanel.track("paypal_open_cart");
+        } else {
+          mixpanel.track("open_cart");
+        }
         if (window.location.pathname.includes("whims-and-desires") || window.location.hash.includes("whims-and-desires")) {
           mixpanel.track("open_cart_antojos");
         } else if (storeType === "express") {
@@ -181,7 +202,11 @@ export default Ember.Component.extend({
         } else if (storeType === "farmacia") {
           mixpanel.track("open_cart_farmica");
         } else if (storeType === "super") {
-          mixpanel.track("open_cart_super");
+          if (this.serverUrl.isPayPalENV()) {
+            mixpanel.track("paypal_open_cart_super");
+          } else {
+            mixpanel.track("open_cart_super");
+          }
         }
       }
       this.toggleProperty('basketOpenned');
@@ -192,6 +217,7 @@ export default Ember.Component.extend({
     addToCart: function (product) {
       let storeType = this.storage.get(stStoreType);
       //mixpanel events
+      mixpanel.track("Global_add_product");
       if (storeType === "express") {
         mixpanel.track("add_to_cart_express");
       } else if (storeType === "restaurant") {
@@ -199,7 +225,11 @@ export default Ember.Component.extend({
       } else if (storeType === "farmacia") {
         mixpanel.track("add_to_cart_farmica");
       } else if (storeType === "super") {
-        mixpanel.track("add_to_cart_super");
+        if (this.serverUrl.isPayPalENV()) {
+          mixpanel.track("paypal_add_to_cart_super");
+        } else {
+          mixpanel.track("add_to_cart_super");
+        }
       }
       let id = product.id;
       this.cart.pushCart(storeType, {
@@ -227,8 +257,7 @@ export default Ember.Component.extend({
         this.toggleProperty('basketOpenned');
       }
       Ember.$('#product-basket').collapse('hide');
-    }, placeOrder: function () {
-      mixpanel.track("hacer_pedido");
+    }, placeOrder: function (allowNextOrder) {
       let session = this.get('session');
       if (!this.get("overflow")) {
         this.set("overflow", true);
@@ -237,7 +266,9 @@ export default Ember.Component.extend({
         this.set("overflow", false);
         Ember.$("body").css("overflow", "auto");
       }
-      this.toggleProperty('basketOpenned');
+      if (!allowNextOrder) {
+        this.toggleProperty('basketOpenned');
+      }
       let isAuthenticated = session.get('isAuthenticated');
       if (!isAuthenticated) {
         this.set('showLoginPopUp', true);
@@ -252,12 +283,25 @@ export default Ember.Component.extend({
 
         let orderCount = this.rappiOrder.get('counter');
         if (orderCount > 0) {
-          this.set('orderExist', true);
+          const activeOrderId = this.get('session').get('activeOrderIds') ? this.get('session').get('activeOrderIds')[0] : undefined;
+          if (Ember.isPresent(activeOrderId)) {
+            const activeOrderObj = this.rappiOrder.getOrder('id', activeOrderId);
+            if (Ember.isPresent(activeOrderObj) && activeOrderObj.get('state') === 'pending_review') {
+              this.set('showExistingOrder', true);
+            } else {
+              this.set('orderExist', true);
+            }
+          }
           return;
         }
         let phone = false;
         if (session.get('currentUser') !== undefined) {
           phone = session.get('currentUser').get("phone") === '' ? true : false;
+        }
+        if (this.serverUrl.isPayPalENV()) {
+          mixpanel.track("paypal_hacer_pedido");
+        } else {
+          mixpanel.track("hacer_pedido");
         }
         this.set('phoneVerification', phone);
         this.set('orderAllowed', isAuthenticated);
@@ -298,8 +342,8 @@ export default Ember.Component.extend({
           }
         });
       });
-    }, toggleShowTermConditions: function() {
-        this.toggleProperty('showTermConditions');
+    }, toggleShowTermConditions: function () {
+      this.toggleProperty('showTermConditions');
     }
 
   }

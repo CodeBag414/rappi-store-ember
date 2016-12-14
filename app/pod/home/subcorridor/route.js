@@ -35,7 +35,7 @@ export default Ember.Route.extend({
       controller.set('background', imageBase + ENV.rappiWebRestaurantBackgroundImage + model.subcorridor.store.store_id + ".jpg");
       controller.set('logo', imageBase + ENV.rappiWebRestaurantLogoImage + model.subcorridor.store.store_id + ".png");
 
-      if (model.subcorridor.store.categories.length > 0 ) {
+      if (model.subcorridor.store.categories.length > 0) {
         controller.set('categoryName', model.subcorridor.store.categories[0].name);
       } else {
         controller.set('categoryName', '');
@@ -45,29 +45,64 @@ export default Ember.Route.extend({
       if (model.subcorridor.category_products.length == 0) {
         controller.set('products', []);
       } else {
-        let products = model.subcorridor.category_products[0].products;
+        let categoryList = ['entradas', 'sopas', 'platos fuertes', 'ensaladas', 'postres'];
+        let categoryProducts = model.subcorridor.category_products || [];
+        let categoryProductsCopySorted = {};
         let filteredProducts = [];
         let popularProducts = [];
-        products.forEach((product) => {
-          if (product.image !== "NO-IMAGE") {
-            filteredProducts.push(product);
-            if (product.price > 10000) {
-              popularProducts.push(product);
+        let bebidasProducts = [];
+        categoryProducts.forEach((category)=> {
+          let productsObjectForGrid = category;
+          let products = category.products || [];
+          let productArrayForGrid = [];
+          products.forEach((product) => {
+            if (product.image !== "NO-IMAGE") {
+              filteredProducts.push(product);
+              productArrayForGrid.push(product);
+              if (product.price > 10000) {
+                popularProducts.push(product);
+              }
             }
+          });
+          productsObjectForGrid.products = productArrayForGrid;
+          if (Ember.isPresent(productsObjectForGrid.name)) {
+            if(productsObjectForGrid.name.toLowerCase() === 'bebidas'){
+              bebidasProducts = productsObjectForGrid.products;
+            }else{
+              categoryProductsCopySorted[productsObjectForGrid.name.toLowerCase()] = productsObjectForGrid;
+            }
+          } else {
+            categoryProductsCopySorted['other'] = productsObjectForGrid;
           }
         });
-        if(popularProducts[0]){
+        var productsByCategoryName = [];
+        categoryList.forEach((categoryName)=> {
+          if (Ember.isPresent(categoryProductsCopySorted[categoryName])) {
+            productsByCategoryName.push(categoryProductsCopySorted[categoryName]);
+            delete categoryProductsCopySorted[categoryName];
+          }
+        });
+        if (Ember.isPresent(categoryProductsCopySorted['other'])) {
+          productsByCategoryName.push(categoryProductsCopySorted['other']);
+          delete categoryProductsCopySorted['other'];
+        }
+        for (var key in categoryProductsCopySorted) {
+          if (categoryProductsCopySorted.hasOwnProperty(key)) {
+            productsByCategoryName.push(categoryProductsCopySorted[key]);
+          }
+        }
+        if (Ember.isPresent(popularProducts)) {
           controller.set('dishImage', imageBase + '/products/high/' + popularProducts[0].image);
         }
         controller.set('popularProducts', popularProducts);
+        controller.set('bebidasProducts', bebidasProducts);
+        controller.set('allProducts', productsByCategoryName);
         controller.set('products', filteredProducts);
       }
-
     }
     storeType = storeTypes[storeType];
     controller.set("storage", this.storage.get(stContent));
     controller.set('storeTypeName', storeType);
-
     if (!controller.get('isRestaurant')) {
       this.set('corridorId', model.subcorridor.corridor_id);
       controller.set('backupProducts', model.subcorridor.products);
@@ -76,8 +111,8 @@ export default Ember.Route.extend({
       products.forEach(function (product, index) {
         var productId = product.id;
         /*** Remove Product pivot */
-        if ( (productId.split('_')[1] === PRODUCT_PIVOTE_ID || productId.split('_')[1] === PRODUCT_PIVOTE_ID_MX)
-            && index === 0) {
+        if ((productId.split('_')[1] === PRODUCT_PIVOTE_ID || productId.split('_')[1] === PRODUCT_PIVOTE_ID_MX)
+          && index === 0) {
           products.removeObject(product);
         }
         product.store_id = storeId;
@@ -89,23 +124,20 @@ export default Ember.Route.extend({
         }
       });
     }
-
     window.scrollTo(0, 0);
-
     Ember.run.schedule('afterRender', this, function () {
       this._setNumOfProducts();
     });
     Ember.$(window).bind('resize', ()=> {
       this._setNumOfProducts();
     });
-
   },
   _setNumOfProducts() {
     this.controller.set("mobileView", false);
     if (Ember.$(window).width() < 1080) {
       $(".col-product").addClass("product-padding");
       $(".col-product").removeClass("col-product");
-    }else{
+    } else {
       $(".product-padding").addClass("col-product");
       $(".product-padding").removeClass("product-padding");
     }
@@ -124,15 +156,34 @@ export default Ember.Route.extend({
     let storeType = this.storage.get(stStoreType);
     let currentUrl = this.serverUrl.getUrl();
     if (storeType == "restaurant") {
-      return Ember.RSVP.hash({
-        subcorridor: Ember.$.getJSON(`${currentUrl}api/web/stores/${subcorridorId}/products`)
+      return new Ember.RSVP.Promise(function (resolve, reject) {
+        var objectToResolve = {};
+        Ember.RSVP.hashSettled({
+          subcorridor: Ember.$.getJSON(`${currentUrl}api/web/stores/${subcorridorId}/products`)
+        }).then(function (hashResult) {
+          Object.keys(hashResult).forEach(function (key) {
+            if (hashResult[key].state === 'fulfilled') {
+              objectToResolve[key] = hashResult[key].value;
+            } else {
+              objectToResolve[key] = [];
+            }
+          });
+          resolve(objectToResolve);
+        }).catch(function (error) {
+          reject(error);
+        });
       });
     } else {
       return Ember.RSVP.hash({
         subcorridor: Ember.$.getJSON(`${currentUrl}api/web/stores/sub_corridor/${subcorridorId}`)
       });
     }
-
+  },
+  afterModel(model) {
+    var storeType = this.storage.get(stStoreType);
+    if (storeType === "restaurant" && Ember.isEmpty(model.subcorridor)) {
+      this.transitionTo('home.store', storeType);
+    }
   },
   actions: {
     loading(transition) {
@@ -148,6 +199,11 @@ export default Ember.Route.extend({
     change: function () {
       this.controller.set('cartObject', this.cart.getCart(this.storage.get(stStoreType)));
       this.transitionTo('home.store', this.storage.get(stStoreType));
+    },
+    goToRestaurantHome: function () {
+      this.transitionTo('home.store', "restaurant");
+    }, back() {
+      history.back();
     }
   }
 });

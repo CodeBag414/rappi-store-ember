@@ -6,7 +6,7 @@
                     <ul class="clearfix">
                         <li><a{{action 'changeStoreType' "super"}}>SUPERMERCADO</a></li>
                         <li><a{{action 'changeStoreType' "express"}}>TIENDA EXPRESS</a></li>
-                      {{!--<li><a{{action 'changeStoreType' "restaurant"}}>RESTAURANTES Y CAFÉS</a></li>--}}
+                        <li><a{{action 'changeStoreType' "restaurant"}}>RESTAURANTES Y CAFÉS</a></li>
                         <li><a{{action 'changeStoreType' "farmacia"}}>FARMACIA Y BIENESTAR</a></li>
                         <li><a{{action 'changeStoreType' 'whim'}}>ANTOJOS Y DESEOS</a></li>
                     </ul>
@@ -25,9 +25,9 @@
                 <span>&#169; 2016 RAPPI. Todos los derechos reservados</span>
                 <br>
               {{#unless serverUrl.payPalENV}}
-                <a {{action 'privacy'}}>Aviso de privacidad</a> | <a {{action 'terms'}}>Términos y condiciones</a> | <a href="http://blog.rappi.com/" target="_blank">Nuestro Blog</a>
-                  | <a href="http://rappitendero.com/form-view/7" target="_blank">Quiero ser RappiTendero</a>
-                  | <a href="https://jobs.lever.co/rappi" target="_blank">Trabaja con nosotros</a>
+                <a {{action 'privacy'}}>Aviso de privacidad</a> | <a {{action 'terms'}}>Términos y condiciones</a> | <a {{action 'blogLink'}}>Nuestro Blog</a>
+                  | <a {{action 'quiero'}}>Quiero ser RappiTendero</a>
+                  | <a {{action 'nosotros' }}>Trabaja con nosotros</a>
               {{/unless}}
             </div>
             <div class="col-sm-12 text-center" style="color: #bbb;">

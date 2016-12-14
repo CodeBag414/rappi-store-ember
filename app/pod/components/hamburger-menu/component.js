@@ -59,6 +59,8 @@ export default Ember.Component.extend({
     },
     logout: function () {
       this.get('session').invalidate();
+    },goToIndex: function () {
+      this.get('router').transitionTo('index');
     }
   }
 });

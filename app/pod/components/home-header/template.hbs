@@ -1,379 +1,501 @@
 <div class="st-menu">
-  <img class="btn-close" src="/assets/images/icon-delete-grey.svg" width="32" height="32" {{action 'closeMenu'}} />
-  <ul>
-    <li {{action "changeStoreType" "super"}}>Supermercado</li>
-    <li {{action "changeStoreType" "express"}}>Tienda Express</li>
-    <li {{action "changeStoreType" "restaurant"}}>Restaurantes y Caf&eacute;s</li>
-    <li {{action "changeStoreType" "farmacia"}}>Farmacia y bienestar</li>
-    {{#if session.isAuthenticated}}
-    <li {{action 'toggleCoupon'}}>Ingresa Cup&oacute;n</li>
-    <li><a class="btn-logout" {{action 'logout'}}>Cerrar sesi&oacute;n</a></li>
-    {{/if}}
-  </ul>
+    <img class="btn-close" src="/assets/images/icon-delete-grey.svg" width="32" height="32" {{action 'closeMenu'}} />
+    <ul>
+        <li {{action "changeStoreType" "super"}}>Supermercado</li>
+        <li {{action "changeStoreType" "express"}}>Tienda Express</li>
+        <li {{action "changeStoreType" "restaurant"}}>Restaurantes y Caf&eacute;s</li>
+        <li {{action "changeStoreType" "farmacia"}}>Farmacia y bienestar</li>
+      {{#if session.isAuthenticated}}
+          <li {{action 'toggleCoupon'}}>Ingresa Cup&oacute;n</li>
+          <li><a class="btn-logout" {{action 'logout'}}>Cerrar sesi&oacute;n</a></li>
+      {{/if}}
+    </ul>
 </div>
 <div class="home-header-top">
-  {{#if rappiOrder.isNotEmpty}}
-      {{!-- <div {{action 'showOrderPanel'}} class="current-order-panel {{if rappiOrder.isNotEmpty 'fixed-current-order-panel' ''}}">
-          TIENES UN
-          PEDIDO EN CURSO, VER ESTADO DEL PEDIDO
-      </div> --}}
+  {{#if showOrderButton}}
+  {{!-- <div {{action 'showOrderPanel'}} class="current-order-panel {{if rappiOrder.isNotEmpty 'fixed-current-order-panel' ''}}">
+      TIENES UN
+      PEDIDO EN CURSO, VER ESTADO DEL PEDIDO
+  </div> --}}
       <div id=delivery-bar>
-      <div class=delivery-bg>
-        <div class=rappimage>
-          <p>¡Tienes un pedido en curso!</p>
-          <button {{action 'showOrderPanel'}} class="btn btn-green btn-white">Ver Pedido</button>
-        </div>
-        </div>
+          <div class=delivery-bg>
+              <div class=rappimage>
+                  <p>{{upperText}}</p>
+                  <button {{action 'showOrderPanel'}} class="btn btn-green btn-white">{{buttonText}}</button>
+              </div>
+          </div>
       </div>
 
   {{/if}}
-  <div class="home-header-bar">
-    <a id="btn-side-menu-responsive" {{action 'openLeftMenu'}}></a>
-    {{#if session.isAuthenticated}}
-    <a id="btn-side-menu" {{action 'openLeftMenu'}}></a>
-    {{/if}}
-    <a id="logo-rappi" {{action 'goToIndex'}}></a>
-    <div class="search-bar">
-      <div class="category-menu-container">
-          {{#if isWebENV}}
-              <div class="selected-category" {{action "showSearchCategoryMenu"}}>
-                  <p>
-          <span>
-              {{#if (eq storeType 'super')}}
-                  Supermercado
-              {{else if (eq storeType 'express')}}
-                  Tienda Express
-              {{else if (eq storeType 'restaurant')}}
-                  Restaurantes
-              {{else if (eq storeType 'farmacia')}}
-                  Farmacia
-              {{else if (eq storeType 'rappicode')}}
-                  RappiCode
+    <div class="home-header-bar">
+        <a id="btn-side-menu-responsive" {{action 'openLeftMenu'}}></a>
+      {{#if session.isAuthenticated}}
+          <a id="btn-side-menu" {{action 'openLeftMenu'}}></a>
+      {{/if}}
+        <a id="logo-rappi" {{action 'goToIndex'}}></a>
+
+        <div class="search-bar">
+            <div class="category-menu-container">
+              {{#if isWebENV}}
+                  <div class="selected-category" {{action "showSearchCategoryMenu"}}>
+                      <p>
+    <span>
+      {{#if (eq storeType 'super')}}
+          Supermercado
+      {{else if (eq storeType 'express')}}
+          Tienda Express
+      {{else if (eq storeType 'restaurant')}}
+          Restaurantes
+      {{else if (eq storeType 'farmacia')}}
+          Farmacia
+      {{else}}
+          RappiCode
+      {{/if}}
+
+    </span>
+                      </p>
+                  </div>
               {{else}}
-                  Todos
+                  <div class="selected-category"><p><span class="super-paypal">Supermercado</span></p></div>
               {{/if}}
 
-          </span>
-                  </p>
-              </div>
-          {{else}}
-              <div class="selected-category"><p><span class="super-paypal">Supermercado</span></p></div>
-          {{/if}}
-
-        {{#if showSearchCategoryMenu}}
-        <div class="category-list">
-          <div class="category-item" {{action "changeStoreTypeForSearch" "super"}}>
-            <div class="selected-line"></div>
-            <p>Supermercado</p>
-          </div>
-            {{#if isWebENV}}
-            <div class="category-item" {{action "changeStoreTypeForSearch" "express"}}>
-            <div class="selected-line"></div>
-            <p>Tienda Express</p>
-          </div>
-          <div class="category-item" {{action "changeStoreTypeForSearch" "restaurant"}}>
-            <div class="selected-line"></div>
-            <p>Restaurantes</p>
-          </div>
-          <div class="category-item" {{action "changeStoreTypeForSearch" "farmacia"}}>
-            <div class="selected-line"></div>
-            <p>Farmacia</p>
-          </div>
-          <div class="category-item" {{action "changeStoreTypeForSearch" "rappicode"}}>
-            <div class="selected-line"></div>
-            <p>RappiCode</p>
-          </div>
-            {{/if}}
-        </div>
-        {{/if}}
-      </div>
-      <div class="search-input-container">
-        {{input  value=queryField class="form-control" id="headerProductSearchField" class="search-input" placeholder="¿Qué estás buscando?"}}
-
-        <a class="search-button" {{action "search" queryField}}></a>
-        <ul class="auto-complete">
-          {{#if (eq currentType 'restaurant')}}
-            {{#if (or hits.length restaurants.length)}}
-            <div class="restaurant-auto-complete">
-              <div class="restaurant-section">
-                {{#if restaurants.length}}
-                  <h1>Restaurantes</h1>
-                  <div class="restaurant-list">
-                    {{#each restaurants as |restaurant|}}
-                        <p {{action 'goToRestaurant' restaurant.id }} data="{{hit.id}}">
-                            {{restaurant.name}}
-                        </p>
-                    {{/each}}
-                  </div>
-                {{else}}
-                  <h1>Restaurantes </h1>
-                  <div class="no-restaurant">
-                    <p>Pide a:</p>
-                    <p class="search-keyword">{{queryField}}</p>
-                    <button class="btn-ask" {{action "selectMeaning" "place" queryField}}>PEDIR</button>
-                  </div>
-                {{/if}}
-              </div>
-              <div class="divider-line"></div>
-              <div class="product-section">
-                <h1>Productos</h1>
-                <div class="product-list">
-                {{#each hits as |hit|}}
-                    <li {{action 'search' '' hit.name hit.id }} data="{{hit.id}}">
-                        <a href="javascript:void(0);">{{hit.name}}</a>
-                    </li>
-                {{/each}}
-                </div>
-              </div>
-            </div>
-            {{/if}}
-          {{else}}
-            {{#each hits as |hit|}}
-                <li {{action 'search' '' hit.name hit.id }} data="{{hit.id}}">
-                    <div class="selected-line"></div>
-                    <a href="javascript:void(0);">{{hit.name}}</a>
-                </li>
-            {{/each}}
-          {{/if}}
-        </ul>
-
-      </div>
-    </div>
-    <div class="signup-menu">
-      <ul class="clearfix">
-        <li>
-          {{#if session.isAuthenticated}}
-              Hola,  {{#link-to 'home.my-accounts.profile' class='logged-userName'}}{{session.currentUser.first_name}}{{/link-to}}
-          {{else}}
-              <a href="" {{action "showDialog"}} id="ingresar">ingresar</a>
-          {{/if}}
-        </li>
-      </ul>
-
-      {{#if showModalReg}}
-        {{#modal-dialog close='showDialog' translucentOverlay=true}}
-          {{login-register showLogin=true showModalReg=showModalReg showPhoneNumberModel=showPhoneNumberModel showPhoneNumberVerifyModel=showPhoneNumberVerifyModel showAddressListToUpdate=showAddressListToUpdate showAddAddressToUpdate=showAddAddressToUpdate showAddressList=showAddressList}}
-        {{/modal-dialog}}
-      {{/if}}
-    </div>
-    <div class="basket home-basket">
-        <ul class="clearfix">
-            <li class="dropdown" style="{{unless isWebENV 'top:3px' ''}}">
-                <a  {{action 'openBasket'}} class="icon-basket" role="button"
-                                            data-toggle="collapse"
-                                            aria-expanded="false"
-                                            aria-controls="product-basket"> {{#if cartObject.totalItems}}<span
-                        class="home-basket-badge">{{cartObject.totalItems}}</span>{{/if}} </a>
-                <ul id="productMSG" class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-                    <li>
-                        <div class="list-count-wrap">
-                            <h3>Tu orden</h3>
-                            <p class="text-center">Tienes {{if cartObject cartObject.totalItems 0}} <span id="cartPTAG">Producto en la</span> canasta</p>
-                            <button class="btn-view-cart" {{action 'openBasket'}}>IR A CANASTA</button>
+              {{#if showSearchCategoryMenu}}
+                  <div class="category-list">
+                      <div class="category-item" {{action "changeStoreTypeForSearch" "super"}}>
+                          <div class="selected-line"></div>
+                          <p>Supermercado</p>
+                      </div>
+                    {{#if isWebENV}}
+                        <div class="category-item" {{action "changeStoreTypeForSearch" "express"}}>
+                            <div class="selected-line"></div>
+                            <p>Tienda Express</p>
                         </div>
-                    </li>
-                    <div class="products-list">
-                        <li style={{if isWhimAdded 'display:block' 'display:none'}}>
+                        <div class="category-item" {{action "changeStoreTypeForSearch" "restaurant"}}>
+                            <div class="selected-line"></div>
+                            <p>Restaurantes</p>
+                        </div>
+                        <div class="category-item" {{action "changeStoreTypeForSearch" "farmacia"}}>
+                            <div class="selected-line"></div>
+                            <p>Farmacia</p>
+                        </div>
+                        <div class="category-item" {{action "changeStoreTypeForSearch" "rappicode"}}>
+                            <div class="selected-line"></div>
+                            <p>RappiCode</p>
+                        </div>
+                    {{/if}}
+                  </div>
+              {{/if}}
+            </div>
+            <div class="search-input-container">
+              {{input value=queryField class="form-control" id="headerProductSearchField" class="search-input" placeholder="¿Qué estás buscando?"}}
 
-                            <div class="toTable">
-                                <div class="toTable-cell">
-                                    <p class="qty-footer"></p>
-                                </div>
-                                <div class="toTable-cell">
-                                    <div class="product-name">
-                                        <h3>{{cartObject.whim.what}}</h3>
-                                        <p>{{cartObject.whim.where}}</p>
-                                    </div>
-                                </div>
-                                <div class="toTable-cell">
-                                    <p></p>
-                                </div>
+                <a class="search-button" {{action "search" queryField}}></a>
+                <ul class="auto-complete">
+                    {{#if fetching}}
+                    <div class="searching-icon-wrapper">
+                        <i class="searching"></i>
+                    </div>
+                    {{/if}}
+                  {{#if (eq currentType 'restaurant')}}
+                    {{#if (or hits.length restaurants.length)}}
+                        <div class="restaurant-auto-complete">
+                            <div class="restaurant-section">
+                              {{#if restaurants.length}}
+                                  <h1>Restaurantes</h1>
 
+                                  <div class="restaurant-list">
+                                    {{#each restaurants as |restaurant|}}
+                                        <p {{action 'goToRestaurant' restaurant.id }} data="{{hit.id}}">
+                                          {{restaurant.name}}
+                                        </p>
+                                    {{/each}}
+                                  </div>
+                              {{else}}
+                                  <h1>Restaurantes </h1>
+
+                                  <div class="no-restaurant">
+                                      <p>Pide a:</p>
+
+                                      <p class="search-keyword">{{queryField}}</p>
+                                      <button class="btn-ask" {{action "selectMeaning" "place" queryField}}>PEDIR
+                                      </button>
+                                  </div>
+                              {{/if}}
                             </div>
-                            <div class="remove-hover">
-                                <a class="remove-order" {{action 'removeWhim' cartObject.whim}}>X</a>
+                            <div class="divider-line"></div>
+                            <div class="product-section">
+                                <h1>Productos</h1>
+
+                                <div class="product-list">
+                                  {{#each hits as |hit|}}
+                                      <li {{action 'search' '' hit.name hit.id }} data="{{hit.id}}">
+                                          <a href="javascript:void(0);">{{hit.name}}</a>
+                                      </li>
+                                  {{/each}}
+                                </div>
+                            </div>
+                        </div>
+                    {{/if}}
+                  {{else}}
+                    {{#each hits as |hit|}}
+                        <li {{action 'search' '' hit.name hit.id }} data="{{hit.id}}">
+                            <div class="selected-line"></div>
+                            <a href="javascript:void(0);">{{hit.name}}</a>
+                        </li>
+                    {{/each}}
+                  {{/if}}
+                </ul>
+            </div>
+        </div>
+        <div class="signup-menu">
+            <ul class="clearfix">
+                <li>
+                  {{#if session.isAuthenticated}}
+                      Hola,  {{#link-to 'home.my-accounts.profile' class='logged-userName'}}{{session.currentUser.first_name}}{{/link-to}}
+                  {{else}}
+                      <a href="" {{action "showDialog"}} id="ingresar">ingresar</a>
+                  {{/if}}
+                </li>
+            </ul>
+
+          {{#if showModalReg}}
+            {{#modal-dialog close='showDialog' translucentOverlay=true}}
+              {{login-register showLogin=true showModalReg=showModalReg showPhoneNumberModel=showPhoneNumberModel showPhoneNumberVerifyModel=showPhoneNumberVerifyModel showAddressListToUpdate=showAddressListToUpdate showAddAddressToUpdate=showAddAddressToUpdate showAddressList=showAddressList}}
+            {{/modal-dialog}}
+          {{/if}}
+        </div>
+        <div class="basket home-basket">
+            <ul class="clearfix">
+                <li class="dropdown" style="{{unless isWebENV 'top:3px' ''}}">
+                    <a  {{action 'openBasket'}} class="icon-basket" role="button"
+                                                data-toggle="collapse"
+                                                aria-expanded="false"
+                                                aria-controls="product-basket"> {{#if cartObject.totalItems}}
+                        <span
+                                class="home-basket-badge">{{cartObject.totalItems}}</span>{{/if}} </a>
+                    <ul id="productMSG" class="dropdown-menu dropdown-menu-right"
+                        aria-labelledby="dropdownMenu1">
+                        <li>
+                            <div class="list-count-wrap">
+                                <h3>Tu orden</h3>
+
+                                <p class="text-center">Tienes {{if cartObject cartObject.totalItems 0}} <span
+                                        id="cartPTAG">Producto en la</span> canasta</p>
+                                <button class="btn-view-cart" {{action 'openBasket'}}>IR A CANASTA</button>
                             </div>
                         </li>
-                    {{#each cartObject.cartItems as |product|}}
+                        <div class="products-list">
+                            <li style={{if isWhimAdded 'display:block' 'display:none'}}>
+
+                                <div class="toTable">
+                                    <div class="toTable-cell">
+                                        <p class="qty-footer"></p>
+                                    </div>
+                                    <div class="toTable-cell">
+                                        <div class="product-name">
+                                            <h3>{{cartObject.whim.what}}</h3>
+
+                                            <p>{{cartObject.whim.where}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="toTable-cell">
+                                        <p></p>
+                                    </div>
+
+                                </div>
+                                <div class="remove-hover">
+                                    <a class="remove-order" {{action 'removeWhim' cartObject.whim}}>X</a>
+                                </div>
+                            </li>
+                          {{#each cartObject.cartItems as |product|}}
+                              <li>
+                                  <div class="toTable">
+                                      <div class="toTable-cell">
+                                          <p class="qty-footer">{{product.quantity}}</p>
+                                      </div>
+                                      <div class="toTable-cell">
+                                          <div class="product-name">
+                                              <h3>{{product.name}}</h3>
+
+                                              <p>{{product.extras.presentation}}</p>
+                                          </div>
+                                      </div>
+                                      <div class="toTable-cell">
+                                          <p>{{format-currency product.totalPrice}}</p>
+                                      </div>
+
+                                  </div>
+                                  <div class="remove-hover">
+                                      <a class="remove-order" {{action 'removeProduct' product}}>X</a>
+                                  </div>
+                              </li>
+                          {{/each}}
+                        </div>
+                        <li>
+                            <div class="subtotal">
+                                <h3>Subtotal</h3>
+
+                                <p>{{format-currency (if cartObject.totalPrice cartObject.totalPrice 0.00)}}</p>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <ul id="whimMSG" class="dropdown-menu dropdown-menu-right"
+                        aria-labelledby="dropdownMenu1">
                         <li>
                             <div class="toTable">
-                                <div class="toTable-cell">
-                                    <p class="qty-footer">{{product.quantity}}</p>
+                                <div class="thumb35 toTable-cell">
+                                    <img src="assets/images/Donut.png"/>
                                 </div>
-                                <div class="toTable-cell">
-                                    <div class="product-name">
-                                        <h3>{{product.name}}</h3>
-                                        <p>{{product.extras.presentation}}</p>
-                                    </div>
+                                <div class="prod-summery toTable-cell">
+                                    <p class="text-center">Antojo añadido a la
+                                        <strong>canasta</strong>
+                                    </p>
+                                    <a href="javascript:void(0);" {{action 'openBasket'}}
+                                       class="accent-color text-center">ver canasta</a>
                                 </div>
-                                <div class="toTable-cell">
-                                    <p>{{format-currency product.totalPrice}}</p>
-                                </div>
-
-                            </div>
-                            <div class="remove-hover">
-                                <a class="remove-order" {{action 'removeProduct' product}}>X</a>
                             </div>
                         </li>
-                    {{/each}}
+                    </ul>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="home-menu-container {{if isWebENV '' 'display-none'}}">
+        <div class="navigation-bar">
+            <div class="navigation-item" {{action "changeStoreType" "super"}}>
+                <p>Supermercado</p>
+
+                <div class="section-menu">
+                    <ul id="super-menu" class="category-menu">
+                        <div class="pointer"></div>
+                      {{#each superMenu.corridors as |category|}}
+                          <!-- ................  main product listing .....................  -->
+                          <li data-submenu-id="submenu-{{category.id}}"
+                              class="category-item" {{action "goToCategory" "super" category.id 0 superMenu.store_id bubbles=false}}>
+                              <div class="selected-line"></div>
+                              <p>{{category.name}}</p>
+                              <ul id="submenu-{{category.id}}" class="main-subcategory-menu">
+                                  <div class="pointer"></div>
+                                {{#each category.sub_corridors as |subcategory|}}
+                                    <li class="main-subcategory-item" {{action "goToCategory" "super" category.id subcategory.id superMenu.store_id bubbles=false}}>
+                                        <div class="subselected-line"></div>
+                                        <p>{{subcategory.name}}</p>
+                                    </li>
+                                {{/each}}
+                              </ul>
+                          </li>
+                      {{/each}}
+                    </ul>
+                </div>
+            </div>
+            <div class="navigation-item" {{action "changeStoreType" "express"}}>
+                <p>Tienda Express</p>
+
+                <div class="section-menu">
+                    <ul class="category-menu">
+                        <div class="pointer"></div>
+                      {{#each expressMenu.corridors as |category|}}
+                          <!-- ................  main product listing .....................  -->
+                          <li data-submenu-id="submenu-{{category.id}}"
+                              class="category-item" {{action "goToCategory" "express" category.id 0 expressMenu.store_id bubbles=false}}>
+                              <div class="selected-line"></div>
+                              <p>{{category.name}}</p>
+                              <ul id="submenu-{{category.id}}" class="main-subcategory-menu">
+                                  <div class="pointer"></div>
+                                {{#each category.sub_corridors as |subcategory|}}
+                                    <li class="main-subcategory-item" {{action "goToCategory" "express" category.id subcategory.id expressMenu.store_id bubbles=false}}>
+                                        <div class="subselected-line"></div>
+                                        <p>{{subcategory.name}}</p>
+                                    </li>
+                                {{/each}}
+                              </ul>
+                          </li>
+                      {{/each}}
+                    </ul>
+                </div>
+            </div>
+            <div class="navigation-item">
+                <p {{action "changeStoreType" "restaurant"}}>Restaurantes y Cafés</p>
+
+                <div class="section-menu">
+                    <ul class="category-menu">
+                        <div class="pointer"></div>
+                      {{#each restaurantMenu as |resObj|}}
+                          <!-- ................  main product listing .....................  -->
+                          <li {{action 'goToRestaurantCategory' resObj.id}}
+                                  data-submenu-id="submenu-{{resObj.id}}" class="category-item">
+                              <div class="selected-line"></div>
+                              <p class="remove-bg-image">{{resObj.name}}</p>
+                          </li>
+                      {{/each}}
+                    </ul>
+                </div>
+            </div>
+            <div class="navigation-item" {{action "changeStoreType" "farmacia"}}>
+                <p>Farmacia y bienestar</p>
+
+                <div class="section-menu">
+                    <ul class="category-menu">
+                        <div class="pointer"></div>
+                      {{#each farmaciaMenu.corridors as |category|}}
+                          <!-- ................  main product listing .....................  -->
+                          <li data-submenu-id="submenu-{{category.id}}"
+                              class="category-item" {{action "goToCategory" "farmacia" category.id 0 farmaciaMenu.store_id bubbles=false}}>
+                              <div class="selected-line"></div>
+                              <p>{{category.name}}</p>
+                              <ul id="submenu-{{category.id}}" class="main-subcategory-menu">
+                                  <div class="pointer"></div>
+                                {{#each category.sub_corridors as |subcategory|}}
+                                    <li class="main-subcategory-item" {{action "goToCategory" "farmacia" category.id subcategory.id farmaciaMenu.store_id bubbles=false}}>
+                                        <div class="subselected-line"></div>
+                                        <p>{{subcategory.name}}</p>
+                                    </li>
+                                {{/each}}
+                              </ul>
+                          </li>
+                      {{/each}}
+                    </ul>
+                </div>
+            </div>
+            {{!-- <div class="navigation-item antojo-menu-arrow" {{action "changeStoreType" "ultraservicio"}}>
+                <p>RappiCash</p>
+            </div> --}}
+            <div class="navigation-item antojo-menu-arrow" {{action "changeStoreType" "whim"}}>
+                <p>Antojos y deseos</p>
+            </div>
+            {{!-- <div class="navigation-item antojo-menu-arrow" {{action "changeStoreType" "diligencia"}}>
+                <p>Diligencias</p>
+            </div> --}}
+        </div>
+      {{#if showBurgerDay}}
+          <img class="btn-burger-day" src="assets/images/btn-burger-day.png"
+               height="39" {{action "goToBurgerDay"}}/>
+      {{/if}}
+      {{#if session.isAuthenticated}}
+          <div class="bg" {{action 'openAddresslistAfterLogin'}}>
+            {{#if cartAddress}}
+
+              {{header-address-icon storageCity}}
+
+
+                <div class="address-block address-block-height">
+                  <span class="OFICINA">
+                    {{storageCity}}
+                  </span>
+                <span class="CALLE-93-18-51">
+                  {{cartAddress}}
+                </span>
+                </div>
+            {{else}}
+                <img src="assets/images/pin.svg" style="height: 27px"/>
+
+                <div class="address-block">
+                <span class="OFICINA2">
+                  AGREGAR DIRECCIÓN
+                </span>
+                </div>
+            {{/if}}
+              <img src="assets/images/triangle.svg" class="arrow-height">
+          </div>
+          <div id='addressListPopupAfterLogin' class="dropdown-menu dropdown-menu-right address-list">
+              <div class="scroll-bg" style="margin-top: -5px">
+                {{#each addresses as |addressObj|}}
+                    <div {{action 'updateAddress' addressObj}}>
+                      {{header-address-list addressObj}}
                     </div>
-                    <li>
-                        <div class="subtotal">
-                          <h3>Subtotal</h3>
-                          <p>{{format-currency (if cartObject.totalPrice cartObject.totalPrice 0.00)}}</p>
-                        </div>
-                    </li>
-                </ul>
-
-                <ul id="whimMSG" class="dropdown-menu dropdown-menu-right"
-                    aria-labelledby="dropdownMenu1">
-                    <li>
-                        <div class="toTable">
-                            <div class="thumb35 toTable-cell">
-                                <img src="assets/images/Donut.png"/>
-                            </div>
-                            <div class="prod-summery toTable-cell">
-                                <p class="text-center">Antojo añadido a la
-                                    <strong>canasta</strong>
-                                </p>
-                                <a href="javascript:void(0);" {{action 'openBasket'}}
-                                   class="accent-color text-center">ver canasta</a>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-
-            </li>
-        </ul>
-    </div>
-  </div>
-  <div class="home-menu-container {{if isWebENV '' 'display-none'}}">
-    <div class="navigation-bar">
-      <div class="navigation-item" {{action "changeStoreType" "super"}}>
-        <p>Supermercado</p>
-        <div class="section-menu">
-        <ul id="super-menu" class="category-menu">
-        <div class="pointer"></div>
-        {{#each superMenu.corridors as |category|}}
-            <!-- ................  main product listing .....................  -->
-          <li data-submenu-id="submenu-{{category.id}}" class="category-item" {{action "goToCategory" "super" category.id 0 superMenu.store_id bubbles=false}}>
-            <div class="selected-line"></div><p>{{category.name}}</p>
-            <ul id="submenu-{{category.id}}" class="main-subcategory-menu">
-              <div class="pointer"></div>
-              {{#each category.sub_corridors as |subcategory|}}
-                <li class="main-subcategory-item" {{action "goToCategory" "super" category.id subcategory.id superMenu.store_id bubbles=false}}>
-                  <div class="subselected-line"></div><p>{{subcategory.name}}</p>
-                </li>
-              {{/each}}
-            </ul>
-          </li>
-        {{/each}}
-        </ul>
-        </div>
-      </div>
-      <div class="navigation-item" {{action "changeStoreType" "express"}}>
-        <p>Tienda Express</p>
-        <div class="section-menu">
-        <ul class="category-menu">
-        <div class="pointer"></div>
-        {{#each expressMenu.corridors as |category|}}
-            <!-- ................  main product listing .....................  -->
-          <li data-submenu-id="submenu-{{category.id}}" class="category-item" {{action "goToCategory" "express" category.id 0 expressMenu.store_id bubbles=false}}>
-            <div class="selected-line"></div><p>{{category.name}}</p>
-            <ul id="submenu-{{category.id}}" class="main-subcategory-menu">
-              <div class="pointer"></div>
-              {{#each category.sub_corridors as |subcategory|}}
-                <li class="main-subcategory-item" {{action "goToCategory" "express" category.id subcategory.id expressMenu.store_id bubbles=false}}>
-                  <div class="subselected-line"></div><p>{{subcategory.name}}</p>
-                </li>
-              {{/each}}
-            </ul>
-          </li>
-        {{/each}}
-        </ul>
-        </div>
-      </div>
-      <div class="navigation-item" {{action "changeStoreType" "restaurant"}}>
-        <p>Restaurantes y  Cafés</p>
-        <div class="section-menu">
-        <ul class="category-menu">
-        <div class="pointer"></div>
-        {{#if showItemsRestaurant}}
-        {{#each restaurantMenu as |resObj|}}
-            <!-- ................  main product listing .....................  -->
-          <li data-submenu-id="submenu-{{resObj.id}}" class="category-item">
-            <div class="selected-line"></div><p>{{resObj.name}}</p>
-            <ul id="submenu-{{resObj.id}}" class="main-subcategory-menu">
-              <div class="pointer"></div>
-              {{#each resObj.corridors as |corridor|}}
-                {{#each corridor.sub_corridors as |subcorridor|}}
-                <li class="main-subcategory-item" {{action "goToSubcategory" "restaurant" subcorridor.id corridor.rappi_store_id bubbles=false}}>
-                  <div class="subselected-line"></div><p>{{subcorridor.name}}</p>
-                </li>
                 {{/each}}
-              {{/each}}
-            </ul>
-          </li>
-        {{/each}}
+              </div>
+              <div class="new-addr-block new-addr-block-scroll" {{action 'addNewDirection'}}>
+              <span class="nueva-direccin">
+                  NUEVA DIRECCIÓN
+              </span>
+              </div>
+          </div>
+      {{else}}
+        {{#if storageAddress}}
+            <div class="bg" {{action 'openAddresslist'}}>
+              <span class="map-pointer">
+                <img src="assets/images/pin.svg" style="height: 27px"/>
+              </span>
+
+                <div class="address-block">
+                  <span class="OFICINA">
+                    {{storageCity}}
+                  </span>
+                <span class="CALLE-93-18-51">
+                  {{storageAddress}}
+                </span>
+                </div>
+                <img src="assets/images/triangle.svg" class="arrow-height">
+            </div>
+            <div id='addressListPopup' class="dropdown-menu dropdown-menu-right address-list">
+                <div {{action 'openAddresslist' addressObj}}>
+                    <div class="each-address-bg" style="background-color: #32B86B; margin-top: -5px">
+                                    <span class="map-pointer"><img src="assets/images/pin-white.svg"
+                                                                   style="height: 27px"/></span>
+
+                        <div class="address-wrap">
+                          <span class="OFICINA" style="color: #ffffff">
+                            {{storageCity}}
+                          </span>
+                          <span class="CALLE-93-18-51" style="color: #ffffff">
+                            {{storageAddress}}
+                          </span>
+                        </div>
+                    </div>
+                    <span class="separator"></span>
+                </div>
+                <div class="new-addr-block" {{action 'openGreenAddressPopup'}}>
+                <span class="new-addr-link">
+                    CAMBIAR DIRECCIÓN
+                </span>
+                </div>
+            </div>
+        {{else}}
+            <div class="bg2" {{action 'openGreenAddressPopup'}}>
+                <img src="assets/images/pin.svg" style="height: 27px"/>
+
+                <div class="address-block">
+                <span class="OFICINA2">
+                  AGREGAR DIRECCIÓN
+                </span>
+                </div>
+            </div>
         {{/if}}
-        </ul>
-        </div>
-      </div>
-      <div class="navigation-item" {{action "changeStoreType" "farmacia"}}>
-        <p>Farmacia y bienestar</p>
-        <div class="section-menu">
-        <ul class="category-menu">
-        <div class="pointer"></div>
-        {{#each farmaciaMenu.corridors as |category|}}
-            <!-- ................  main product listing .....................  -->
-          <li data-submenu-id="submenu-{{category.id}}" class="category-item" {{action "goToCategory" "farmacia" category.id 0 farmaciaMenu.store_id bubbles=false}}>
-            <div class="selected-line"></div><p>{{category.name}}</p>
-            <ul id="submenu-{{category.id}}" class="main-subcategory-menu">
-              <div class="pointer"></div>
-              {{#each category.sub_corridors as |subcategory|}}
-                <li class="main-subcategory-item" {{action "goToCategory" "farmacia" category.id subcategory.id farmaciaMenu.store_id bubbles=false}}>
-                  <div class="subselected-line"></div><p>{{subcategory.name}}</p>
-                </li>
-              {{/each}}
-            </ul>
-          </li>
-        {{/each}}
-        </ul>
-        </div>
-      </div>
-      <div class="navigation-item antojo-menu-arrow" {{action "changeStoreType" "whim"}}>
-        <p>Antojos y deseos</p>
-      </div>
+      {{/if}}
     </div>
-    {{#if showBurgerDay}}
-      <img class="btn-burger-day" src="assets/images/btn-burger-day.png" height="39" {{action "goToBurgerDay"}}/>
-    {{/if}}
-  </div>
 </div>
 {{#if restaurantsView}}
-<header class="home-header restaurant-home-header {{if rappiOrder.isNotEmpty 'with-fixed-order-panel' ''}}" style="background-image:url('assets/images/main_banner01.jpg');">
-  <img class="main-text" src="assets/images/main_text_banner.png" width="306" />
-  {{#if showBurgerDay}}
-  <img class="btn-burger-restaurants" src="assets/images/bt-burger-restaurantes.png" {{action "goToBurgerDay"}}/>
-  {{/if}}
-
-</header>
+    <header class="home-header restaurant-home-header {{if rappiOrder.isNotEmpty 'with-fixed-order-panel' ''}}"
+            style="background-image:url('assets/images/main_banner01.jpg');">
+        <img class="main-text" src="assets/images/main_text_banner.png" width="306"/>
+      {{#if showBurgerDay}}
+          <img class="btn-burger-restaurants"
+               src="assets/images/bt-burger-restaurantes.png" {{action "goToBurgerDay"}}/>
+      {{/if}}
+    </header>
 {{else if supermarketView}}
-<header class="home-header {{if rappiOrder.isNotEmpty 'with-fixed-order-panel' ''}}" style="background-image:url('assets/images/super_main_banner.jpg');background-position:center 66px;">
+    <header class="home-header {{if rappiOrder.isNotEmpty 'with-fixed-order-panel' ''}}"
+            style="background-image:url('assets/images/super_main_banner.jpg');background-position:center 66px;">
 
-</header>
+    </header>
 {{else if expressView}}
-<header class="home-header {{if rappiOrder.isNotEmpty 'with-fixed-order-panel' ''}}" style="background-image:url('assets/images/main_banner_tienda.jpg');background-position:center 66px;">
+    <header class="home-header {{if rappiOrder.isNotEmpty 'with-fixed-order-panel' ''}}"
+            style="background-image:url('assets/images/main_banner_tienda.jpg');background-position:center 66px;">
 
-</header>
+    </header>
 {{else if pharmacyView}}
-<header class="home-header {{if rappiOrder.isNotEmpty 'with-fixed-order-panel' ''}}" style="background-image:url('assets/images/main_banner_farmacia.jpg');background-position:center 66px;">
-  <img class="main-text farmacia-text" src="assets/images/text_banner_farmacia.jpg" />
-</header>
+    <header class="home-header {{if rappiOrder.isNotEmpty 'with-fixed-order-panel' ''}}"
+            style="background-image:url('assets/images/main_banner_farmacia.jpg');background-position:center 66px;">
+        <img class="main-text farmacia-text" src="assets/images/text_banner_farmacia.jpg"/>
+    </header>
 {{else }}
-<header class="home-header {{if rappiOrder.isNotEmpty 'with-fixed-order-panel' ''}}" style="background-image:url('assets/images/super_main_banner.jpg');background-position:center 66px;">
+    <header class="home-header {{if rappiOrder.isNotEmpty 'with-fixed-order-panel' ''}}"
+            style="background-image:url('assets/images/super_main_banner.jpg');background-position:center 66px;">
 
-</header>
+    </header>
 {{/if}}
 
 {{#if showModalCoupon}}
@@ -389,7 +511,7 @@
 {{/if}}
 {{#if showAddAddressToUpdate}}
   {{#modal-dialog close='toggleAddAddress' translucentOverlay=true}}
-    {{add-address flow='login' showAddAddressToUpdate=showAddAddressToUpdate}}
+    {{add-address flow=flow showAddAddressToUpdate=showAddAddressToUpdate}}
   {{/modal-dialog}}
 {{/if}}
 
@@ -397,4 +519,8 @@
   {{#modal-dialog translucentOverlay=true}}
     {{address-list flow='login' showPopUp=showAddressList showAddAddress='toggleAddAddress'}}
   {{/modal-dialog}}
+{{/if}}
+
+{{#if showAddressPopup}}
+  {{address-popup showAddressPopup=showAddressPopup fromHomeHeader=true showLoginFromAddressPopup='showDialog'}}
 {{/if}}

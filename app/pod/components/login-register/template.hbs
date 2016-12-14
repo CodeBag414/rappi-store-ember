@@ -66,10 +66,10 @@
                   {{/unless}}
                 {{/unless}}
                 {{#if showRecoverPassword}}
-                  {{login-register.recover-password showRecoverPassword=showRecoverPassword }}
+                  {{login-register.recover-password showRecoverPassword=showRecoverPassword recoveryEmail=recoveryEmail}}
                 {{else if showLogin}}
                   {{login-register.login-panel facebookAuthActive=facebookAuthActive loggedIn=loggedIn showModalReg=showModalReg showAddressList=showAddressList loginFrom=loginFrom phoneVerification=phoneVerification
-                  showAddressListToUpdate=showAddressListToUpdate showAddAddressToUpdate=showAddAddressToUpdate showRecoverPassword=showRecoverPassword params=params}}
+                  showAddressListToUpdate=showAddressListToUpdate showAddAddressToUpdate=showAddAddressToUpdate recoverPassword='recoverPassword' params=params}}
                 {{else}}
                   {{login-register.registration-panel facebookAuthActive=facebookAuthActive showModalReg=showModalReg showPhoneNumberVerifyModel=showPhoneNumberVerifyModel loggedIn=loggedIn showAddressList=showAddressList loginFrom=loginFrom phoneVerification=phoneVerification showAddressListToUpdate=showAddressListToUpdate
                   showAddAddressToUpdate=showAddAddressToUpdate params=params}}

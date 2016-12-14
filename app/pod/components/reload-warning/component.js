@@ -13,7 +13,8 @@ export default Ember.Component.extend({
   },
   actions: {
     proceedToUpdate: function () {
-      this.sendAction('addressChangeAction');
+      this.set("currentlyLoading",true)
+      this.sendAction('addressChangeAction',true);
     },
     closePopup: function () {
       this.set('showReloadWarning', false);

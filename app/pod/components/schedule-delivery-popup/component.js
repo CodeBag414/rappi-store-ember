@@ -1,9 +1,9 @@
 import Ember from 'ember';
 import ENV from 'rappi/config/environment';
 const {
-  stStoreType,
-  paypal
-  } = ENV.storageKeys;
+    stStoreType,
+    paypal
+    } = ENV.storageKeys;
 
 export default Ember.Component.extend({
   serverUrl: Ember.inject.service('server-url'),
@@ -17,20 +17,24 @@ export default Ember.Component.extend({
   paypalProcess: false,
   creditProcess: false,
   disablePaypal: false,
-  isTabIdUsed:false,
+  disableCash: false,
+  isTabIdUsed: false,
   init() {
     this._super(...arguments);
     let tipss = this.serverUrl.getDataByCountry()['tip_values'].split(',');
     this.set('tipValues', {"one": tipss[0], "two": tipss[1]});
     this.set("tip", tipss[0]);
-    if(!this.storage.get(paypal)){
-      this.set("isTabIdUsed",true);
+    if (!this.storage.get(paypal)) {
+      this.set("isTabIdUsed", true);
     }
   },
   willRender() {
     this._super(...arguments);
     if (this.storage.get(stStoreType) === "super") {
       this.set('showTime', true);
+    }
+    if (this.storage.get(stStoreType) === "ultraservicio") {
+      this.set('disableCash', true);
     }
   },
   actions: {
@@ -43,6 +47,7 @@ export default Ember.Component.extend({
     },
     creditCard: function (paymentType) {
       let tip = this.get('tip');
+      const orderInstruction = this.get('orderInstruction');
       this.set('showErrorMessage', false);
       if (Ember.isEmpty(tip) || isNaN(tip) || parseInt(tip) < 0) {
         this.set('creditProcess', false);
@@ -66,14 +71,36 @@ export default Ember.Component.extend({
         var accessToken = this.get('session').get('data.authenticated.access_token');
         this.set('creditProcess', true);
         this.set('isLoading', true);
+        this.set("placedOrder", order);
         this.apiService.post(`${currentUrl}${ENV.order}`, order, accessToken).then((resp)=> {
           this.cart.clearCart(this.storage.get(stStoreType));
           this.get('session').set('activeOrderIds', [resp.id]);
+          if (Ember.isPresent(orderInstruction)) {
+            return this.apiService.post(`${currentUrl}/${ENV.sendChatMessage}/${resp.id}`, {message: orderInstruction}, accessToken)
+          }
+        }).then(()=> {
           return this.rappiOrder.syncOrder(accessToken, currentUrl);
         }).then(()=> {
           if (paymentType === 'cash') {
-            mixpanel.track("order_placed");
-            fbq("track","Purchase",{value:"0",currency:"USD",content_ids:this.get('session').get('activeOrderIds')[0]});
+            mixpanel.track("order_placed", {
+              "payment_method": "cash",
+              "amount_purchase": this.get('placedOrder').get('total_charges'),
+              "tip": this.get('placedOrder').get('tip'),
+              "coupon_amount": 0,
+              "coupon_code": "",
+              "number_of_products": 0,
+              "number_of_SKUs": 0,
+              "store_type": "express",
+              "purchase_timestamp": new Date().getTime(),
+              "product_purchased": [],
+              "category": [],
+              "sub_category": []
+            });
+            fbq("track", "Purchase", {
+              value: "0",
+              currency: "USD",
+              content_ids: this.get('session').get('activeOrderIds')[0]
+            });
             this.sendAction('orderPlaced', this.get('session').get('activeOrderIds')[0]);
           } else if (paymentType === 'cc') {
             console.log("cc");
@@ -92,7 +119,6 @@ export default Ember.Component.extend({
           this.set('isLoading', false);
         });
       }
-
     },
     setTip: function (tipName, name) {
       if (name === "otro") {
@@ -108,6 +134,7 @@ export default Ember.Component.extend({
     payPal: function () {
       this.set("disablePaypal", true);
       let tip = this.get('tip');
+      const orderInstruction = this.get('orderInstruction');
       let paymentType = "cash";
       let currentUrl = this.serverUrl.getUrl();
       var accessToken = this.get('session').get('data.authenticated.access_token');
@@ -171,7 +198,7 @@ export default Ember.Component.extend({
       this.set('isLoading', true);
       this.set("errorStatus", "Paypal payment error : ");
       return this.apiService.post(url, data, null).then((rsp)=> {
-        this.storage.set(paypal,null);
+        this.storage.set(paypal, null);
         if (rsp.error !== undefined) {
           this.get('flashMessages').danger(rsp.error);
           this.set('paypalProcess', false);
@@ -189,18 +216,40 @@ export default Ember.Component.extend({
           Ember.set(order, 'whim', storedWhims.text);
         }
         this.set("errorStatus", "Orden error: ");
+        this.set("placedOrder", order);
         return this.apiService.post(`${currentUrl}${ENV.order}`, order, accessToken);
       }).then((resp)=> {
         this.cart.clearCart(this.storage.get(stStoreType));
         this.get('session').set('activeOrderIds', [resp.id]);
+        if (Ember.isPresnt(orderInstruction)) {
+          return this.apiService.post(`${currentUrl}/${ENV.sendChatMessage}/${resp.id}`, {message: orderInstruction}, accessToken)
+        }
+      }).then(()=> {
         return this.rappiOrder.syncOrder(accessToken, currentUrl);
       }).then(()=> {
         this.set('isLoading', false);
-        mixpanel.track("order_placed");
-        fbq("track","Purchase",{value:"0",currency:"USD",content_ids:this.get('session').get('activeOrderIds')[0]});
+        mixpanel.track("paypal_order_placed", {
+          "payment_method": "Paypal",
+          "amount_purchase": this.get('placedOrder').get('total_charges'),
+          "tip": this.get('placedOrder').get('tip'),
+          "coupon_amount": 0,
+          "coupon_code": "",
+          "number_of_products": 0,
+          "number_of_SKUs": 0,
+          "store_type": "express",
+          "purchase_timestamp": new Date().getTime(),
+          "product_purchased": [],
+          "category": [],
+          "sub_category": []
+        });
+        fbq("track", "Purchase", {
+          value: "0",
+          currency: "USD",
+          content_ids: this.get('session').get('activeOrderIds')[0]
+        });
         this.sendAction('orderPlaced', this.get('session').get('activeOrderIds')[0]);
       }).catch((err)=> {
-        this.storage.set(paypal,null);
+        this.storage.set(paypal, null);
         let errMsg = `${err.statusText}: `;
         var error = err.responseText ? JSON.parse(err.responseText) : err;
         this.get('flashMessages').info(this.get("errorStatus") + (error.error ? error.error : error) + " Por favor, esperamos que estamos devolvemos su dinero", {

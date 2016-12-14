@@ -1,47 +1,43 @@
 <div class="wrapper">
-
-  {{hamburger-menu addressRoute="home.my-accounts.address" hideHeaderContent=myAccountAccessed  changeStoreType="changeStoreType" showOrderStatus="showOrderStatus" cartObject=cartObject showLeftMenu=showLeftMenu showOrderPanel='showOrderPanel' basketOpenned='basketOpenned'}}
-    <div class="hamburger-overlay">
-
-    </div>
+    {{hamburger-menu addressRoute="home.my-accounts.address" hideHeaderContent=myAccountAccessed  changeStoreType="changeStoreType" showOrderStatus="showOrderStatus" cartObject=cartObject showLeftMenu=showLeftMenu showOrderPanel='showOrderPanel' basketOpenned='basketOpenned'}}
+    <div class="hamburger-overlay"></div>
     <div class="inner-wrap">
-      {{#if currentlyLoading}}
-          <div class="main-loader"><img src="assets/images/loading.svg"></div>
-      {{/if}}
-      {{home-header profileRoute='home.my-accounts.profile' currentlyLoading=currentlyLoading showBurgerDay=showBurgerDay hideHeaderContent=myAccountAccessed  changeStoreType="changeStoreType" storeType=storeType showOrderStatus="showOrderStatus" cartObject=cartObject showLeftMenu=showLeftMenu showOrderPanel='showOrderPanel' basketOpenned='basketOpenned' superMenu=superMenu expressMenu=expressMenu restaurantMenu=restaurantMenu farmaciaMenu=farmaciaMenu}}
-      {{#each flashMessages.queue as |flash|}}
-          <div class="flash-message">{{flash-message flash=flash}}</div>
-      {{/each}}
-      {{outlet}}
-      {{footer-block changeStoreType="changeStoreType"}}
+        {{#if currentlyLoading}}
+            <div class="main-loader"><img src="assets/images/loading.svg"></div>
+        {{/if}}
+        {{home-header profileRoute='home.my-accounts.profile' currentlyLoading=currentlyLoading showBurgerDay=showBurgerDay hideHeaderContent=myAccountAccessed  changeStoreType="changeStoreType" storeType=storeType showOrderStatus="showOrderStatus" cartObject=cartObject showLeftMenu=showLeftMenu showOrderPanel='showOrderPanel' basketOpenned='basketOpenned' superMenu=superMenu expressMenu=expressMenu restaurantMenu=restaurantMenu farmaciaMenu=farmaciaMenu}}
+        {{#each flashMessages.queue as |flash|}}
+            <div class="flash-message">{{flash-message flash=flash}}</div>
+        {{/each}}
+        {{outlet}}
+        {{footer-block changeStoreType="changeStoreType"}}
     </div>
 </div>
 
 {{#if showOrderPanel}}
-  {{order-panel closePopUp=showOrderPanel togglePopUp='showOrderPanel' adjustPopUp=true}}
+    {{order-panel closePopUp=showOrderPanel togglePopUp='showOrderPanel' adjustPopUp=true}}
 {{/if}}
-
 <a id="scrolltotop" {{action 'scrollToTop'}}><img src="assets/images/uparrow.png"></a>
 {{#if showLogin}}
-  {{#modal-dialog close="showLogin" translucentOverlay=true}}
-    {{login-register showLogin=true showModalReg=showLogin showAddressListToUpdate=showAddressListToUpdate showAddAddressToUpdate=showAddAddressToUpdate showAddressList=showAddressList}}
-  {{/modal-dialog}}
+    {{#modal-dialog close="showLogin" translucentOverlay=true}}
+        {{login-register showLogin=true showModalReg=showLogin showAddressListToUpdate=showAddressListToUpdate showAddAddressToUpdate=showAddAddressToUpdate showAddressList=showAddressList}}
+    {{/modal-dialog}}
 {{/if}}
 {{#if showAddressListToUpdate}}
-  {{#modal-dialog close='toggleAddressList' translucentOverlay=true}}
-    {{address-change-list toggleAddAddress='toggleAddAddress' showAddressListToUpdate=showAddressListToUpdate}}
-  {{/modal-dialog}}
+    {{#modal-dialog close='toggleAddressList' translucentOverlay=true}}
+        {{address-change-list toggleAddAddress='toggleAddAddress' showAddressListToUpdate=showAddressListToUpdate}}
+    {{/modal-dialog}}
 {{/if}}
 {{#if showAddAddressToUpdate}}
-  {{#modal-dialog close='toggleAddAddress' translucentOverlay=true}}
-    {{add-address flow='login' showAddAddressToUpdate=showAddAddressToUpdate}}
-  {{/modal-dialog}}
+    {{#modal-dialog close='toggleAddAddress' translucentOverlay=true}}
+        {{add-address flow='login' showAddAddressToUpdate=showAddAddressToUpdate}}
+    {{/modal-dialog}}
 {{/if}}
 {{#if showAddressList}}
-  {{#modal-dialog translucentOverlay=true}}
-    {{address-list flow='login' showPopUp=showAddressList showAddAddress='toggleAddAddress'}}
-  {{/modal-dialog}}
+    {{#modal-dialog translucentOverlay=true}}
+        {{address-list flow='login' showPopUp=showAddressList showAddAddress='toggleAddAddress'}}
+    {{/modal-dialog}}
 {{/if}}
 {{#if showAddressPopup}}
-{{address-popup showAddressPopup=showAddressPopup setUserAddress=setUserAddress showLoginFromAddressPopup="showLoginFromAddressPopup"}}
+    {{address-popup showAddressPopup=showAddressPopup setUserAddress=setUserAddress showLoginFromAddressPopup="showLoginFromAddressPopup"}}
 {{/if}}

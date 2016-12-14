@@ -702,3 +702,131 @@ h4.form-heading {
   width: 521px;
   top: 100px;
 }
+
+/*new credit card screen*/
+
+.top_modal_address {
+  width: 470px;
+  height: 96px;
+  object-fit: contain;
+  background-image: url('/assets/images/top-modal-address2.svg');
+}
+
+.cc_title {
+  position: absolute;
+  margin-left: 76px;
+  margin-right: 70px;
+  margin-top: 30px;
+  width: inherit;
+}
+
+.icon_card {
+  width: 33px;
+  height: 24px;
+  object-fit: contain;
+  margin-bottom: 5px;
+}
+
+.icon_card2 {
+  width: 22px;
+  height: 16px;
+  object-fit: contain;
+  margin-bottom: 3px;
+  margin-left: 10px;
+}
+
+.custom_radio{
+  padding-left: 3px;
+  position:relative;
+}
+
+.custom_radio {
+  input[type="radio"] {
+    &:checked {
+      + {
+        label {
+          &:before {
+            background-position: -370px -337px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.custom_radio label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  background-position: -226px -212px;
+}
+
+.Tarjeta_de_Crdito {
+  width: 419px;
+  height: 34px;
+  font-family: Avenir Next !important;
+  font-size: 25.2px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  text-align: center;
+  color: #ffffff;
+}
+
+.Tarjeta_VISA {
+  width: 293px;
+  height: 22px;
+  font-family: Avenir Next !important;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  color: #000000;
+  margin-left: 10px;
+}
+
+.cc_list_div {
+  max-height: 172px;
+  overflow: auto;
+}
+
+.add_CC_btn {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.add_CC_txt {
+  margin-left: 10px;
+  font-family: Montserrat !important;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.2;
+  letter-spacing: 1.3px;
+  color: #333333;
+}
+
+.pay_CC {
+  display: block;
+  width: 200px;
+  height: 50px;
+  border-radius: 100px;
+  background-color: #fd6250;
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  text-align: center;
+  color: #ffffff;
+  border: none;
+  margin: 0 auto;
+}
+
+.remove_pointer {
+  cursor: none;
+}

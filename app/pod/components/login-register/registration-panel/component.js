@@ -111,6 +111,7 @@ export default Ember.Component.extend({
       if (isValid) {
         let currentUrl = this.serverUrl.getUrl();
         this.set('authProcess', true);
+        var _this =this;
         Ember.$.ajax({
           type: "POST",
           headers: {
@@ -128,7 +129,11 @@ export default Ember.Component.extend({
           })
         }).then(()=> {
           fbq("track","CompleteRegistration",{content_name:this.get('email')});
-          mixpanel.track("registration");
+          if (_this.serverUrl.isPayPalENV()) {
+            mixpanel.track("paypal_registration");
+          }else {
+            mixpanel.track("registration");
+          }
           this.send("authorize", this.get('email'), this.get('password'));
         }).fail((err)=> {
           this.set('authProcess', false);

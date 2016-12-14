@@ -1,72 +1,79 @@
 <!-- ..................................  main page content starts ..............................  -->
 <main {{ action "click" }}>
-  <!-- ..................................  carousel section .................................... -->
-  {{#if showCarrusel}}
-      <div class="corridor-banner {{if rappiOrder.isNotEmpty 'with-fixed-order-panel' ''}}">
-        <div class="corridor-banner-bg" style="background-image:url('assets/images/category_banners/category_banner_{{model.corridor.id}}.jpg');"></div>
-        <h1>{{model.corridor.name}}</h1>
-      </div>
-      <div class="subcategory-container">
-        <div class="category {{if (eq selectedSubcorridorId 0) 'selected' ''}}" {{action 'selectSubcorridor' 0}}>
-            <div class="icon"></div>
-            <p>Todos</p>
+    <!-- ..................................  carousel section .................................... -->
+    {{#if showCarrusel}}
+        <div class="corridor-banner {{if rappiOrder.isNotEmpty 'with-fixed-order-panel' ''}}">
+            <div class="corridor-banner-bg volver-btn-banner" style="background-image:url('assets/images/category_banners/corridor_{{express-category-name model.corridor.name}}.jpg');">
+                <div class="volver-btn" {{action 'back'}}>
+                    <img src="assets/images/_icon_back_white.svg"/><span>VOLVER</span>
+                </div>
+            </div>
+            <h1>{{model.corridor.name}}</h1>
         </div>
-        {{#each model.corridor.sub_corridors as |subCorridor|}}
-            <div class="category {{if (eq selectedSubcorridorId subCorridor.id) 'selected' ''}}" {{action 'selectSubcorridor' subCorridor.id}}>
-                <div class="icon"></div>
-                <p>{{name-parser subCorridor.name}}</p>
+        <div class="subcategory-container">
+            <div class="category {{if (eq selectedSubcorridorId 0) 'selected' ''}}" {{action 'selectSubcorridor' 0}}>
+                <div class="icon" style="background-image:url('assets/images/iconos_subcategorias/{{express-category-name model.corridor.name}}/ico_todos_green.svg"></div>
+                <p>Todos</p>
             </div>
-        {{/each}}
-      </div>
-      <div class="subcorridors-list" style="{{if (eq selectedSubcorridorId 0) 'display:block;' 'display:none;'}}">
-        {{#each model.corridor.sub_corridors as |subCorridor|}}
-          {{#if subCorridor.products.length}}
-              {{subcorridor-block subcorridor=subCorridor corridorName=model.corridor.name corridorId=model.corridor.id storeId=model.corridor.store.store_id selectSubcorridor="selectSubcorridor"}}
-          {{/if}}
-        {{else}}
-          <div class="product-listing">
-            <div class="container">
-              <h2>Lo sentimos &#9785;, no tenemos productos disponibles para este horario y ubicación</h2>
-            </div>
-          </div>
-        {{/each}}
-      </div>
-      <div class="subcorridor-products-container">
-        <div class="title-block">
             {{#each model.corridor.sub_corridors as |subCorridor|}}
-              {{#if (eq selectedSubcorridorId subCorridor.id)}}
-                <h1>{{name-parser subCorridor.name}}</h1>
-              {{/if}}
+                <div class="category {{if (eq selectedSubcorridorId subCorridor.id) 'selected' ''}}" {{action 'selectSubcorridor' subCorridor.id}}>
+                    <div class="icon" style="background-image:url('assets/images/iconos_subcategorias/{{express-category-name model.corridor.name}}/ico_{{express-category-name subCorridor.name}}_green.svg');"></div>
+                    <p>{{name-parser subCorridor.name}}</p>
+                </div>
             {{/each}}
-            <hr>
         </div>
-        <div class="subcorridors-product-list">
-          {{#if loading}}
-            <div class="searching-icon-wrapper">
-              <i class="searching"></i>
+        <div class="subcorridors-list" style="{{if (eq selectedSubcorridorId 0) 'display:block;' 'display:none;'}}">
+            {{#each model.corridor.sub_corridors as |subCorridor|}}
+                {{#if subCorridor.products.length}}
+                    {{subcorridor-block subcorridor=subCorridor corridorName=model.corridor.name corridorId=model.corridor.id storeId=model.corridor.store.store_id selectSubcorridor="selectSubcorridor"}}
+                {{/if}}
+            {{else}}
+                <div class="product-listing">
+                    <div class="container">
+                        <h2>Lo sentimos &#9785;, no tenemos productos disponibles para este horario y ubicación</h2>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+        <div class="subcorridor-products-container">
+            <div class="title-block">
+                {{#each model.corridor.sub_corridors as |subCorridor|}}
+                    {{#if (eq selectedSubcorridorId subCorridor.id)}}
+                        <h1>{{name-parser subCorridor.name}}</h1>
+                    {{/if}}
+                {{/each}}
+                <hr>
             </div>
-          {{/if}}
-          {{#each products as |product|}}
-            {{new-product-card product=product corridorName=model.corridor.name corridorId=model.corridor.id rappi_store_id=model.corridor.store.store_id}}
-          {{/each}}
+            <div class="subcorridors-product-list">
+                {{#if loading}}
+                    <div class="searching-icon-wrapper">
+                        <i class="searching"></i>
+                    </div>
+                {{/if}}
+                {{#each products as |product|}}
+                    {{new-product-card product=product corridorName=model.corridor.name corridorId=model.corridor.id rappi_store_id=model.corridor.store.store_id}}
+                {{/each}}
+            </div>
         </div>
-      </div>
-
-  {{else}}
-    <div class="corridor-banner {{if rappiOrder.isNotEmpty 'with-fixed-order-panel' ''}}">
-      <div class="corridor-banner-bg" style="background-image:url('assets/images/category_banners/category_banner_{{category.id}}.jpg');"></div>
-      <h1>{{category.name}}</h1>
-    </div>
-    <div class="category-restaurants-container">
-      {{#each stores as |store|}}
-        {{restaurant-home store=store productList='productList' routeName='home.subcorridor'}}
-      {{else}}
-          <h2>No se ha encontrado ningún restaurante aquí</h2>
-      {{/each}}
-    </div>
-    {{dish-recommend products=recommendedProducts}}
-  {{/if}}
+    {{else}}
+        <div class="corridor-banner {{if rappiOrder.isNotEmpty 'with-fixed-order-panel' ''}}">
+            <div class="corridor-banner-bg volver-btn-banner" style="background-image:url('assets/images/category_banners/category_banner_{{category.id}}.jpg');">
+                <div class="volver-btn" {{action 'back'}}>
+                    <img src="assets/images/_icon_back_white.svg"/><span>VOLVER</span>
+                </div>
+            </div>
+            <h1>{{category.name}}</h1>
+        </div>
+        <div class="category-restaurants-container">
+            {{#each stores as |store|}}
+                {{restaurant-home store=store productList='productList' routeName='home.subcorridor'}}
+            {{else}}
+                <h2>No se ha encontrado ningún restaurante aquí</h2>
+            {{/each}}
+        </div>
+        {{dish-recommend products=recommendedProducts}}
+    {{/if}}
 </main>
 <div class="{{if basketOpenned 'basket-overlay' ''}}">
-  {{shopping-basket overflow=overflow basketOpenned=basketOpenned}}
+    {{shopping-basket overflow=overflow basketOpenned=basketOpenned}}
 </div>

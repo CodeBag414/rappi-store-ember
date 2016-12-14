@@ -1,7 +1,7 @@
 {{#if isOrderTaken}}
   {{#if orderRatePanel}}
     {{#modal-dialog close="togglePopUp" translucentOverlay=true}}
-      {{order-rate orderRatePanel=orderRatePanel closePopUp=closePopUp}}
+      {{order-rate orderRatePanel=orderRatePanel closePopUp=closePopUp allowNextOrder=allowNextOrder orderAction='orderAction'}}
     {{/modal-dialog}}
   {{else}}
     {{#modal-dialog close="togglePopUp" translucentOverlay=true}}

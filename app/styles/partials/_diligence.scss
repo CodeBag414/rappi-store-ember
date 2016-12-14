@@ -1,0 +1,190 @@
+.diligence-container {
+    margin-top: 130px;
+    background-image: linear-gradient(97deg, rgba(220, 82, 67, 0.7), rgba(253, 111, 91, 0.8)), url('/assets/images/diligence-bg.jpg');
+    background-repeat: no-repeat, no-repeat;
+    background-size: cover, cover;
+    background-position: center center, center, center;;
+    position: relative;
+    &.with-fixed-order-panel {
+        margin-top: 230px;
+    }
+    .diligence-content-container {
+        width: 800px;
+        margin: 0 auto;
+        overflow: auto;
+        .title-block {
+            padding-top: 38px;
+            padding-bottom: 18px;
+            h1 {
+                font-family: 'Montserrat' !important;
+                font-size: 24px;
+                font-weight: 300;
+                font-style: normal;
+                font-stretch: normal;
+                text-align: center;
+                color: #ffffff;
+                margin: 0;
+            }
+            hr {
+                width: 54px;
+                height: 1px;
+                margin-top: 6px;
+                margin-bottom: 2px;
+                border: none;
+                opacity: 0.43;
+                background-color: #ffffff;
+            }
+            p {
+                font-family: 'Raleway' !important;
+                font-size: 13px;
+                font-weight: 500;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 2.31;
+                letter-spacing: 1.4px;
+                text-align: center;
+                color: #ffffff;
+                margin: 0;
+            }
+        }
+        .diligence-list {
+            position: relative;
+            z-index: 101;
+            .diligence-block {
+                position: relative;
+                padding-top: 10px;
+                .index-card {
+                    position: absolute;
+                    height: 100%;
+                    .top-middle-line {
+                        height: calc(50% - 10px);
+                        width: 1px;
+                        background-color: #e3e3e3;
+                        margin: 0 auto;
+                    }
+                    .index-circle {
+                        width: 40px;
+                        height: 40px;
+                        border: 1px solid rgba(255, 255, 255, 0.5);
+                        border-radius: 20px;
+                        display: flex;
+                        align-items: center;
+                        p {
+                            font-family: 'Raleway' !important;
+                            font-size: 19.2px;
+                            font-weight: normal;
+                            font-style: normal;
+                            font-stretch: normal;
+                            text-align: center;
+                            color: #ffffff;
+                            margin: 0 auto;
+                        }
+                    }
+                    .bottom-middle-line {
+                        height: calc(50% - 30px);
+                        width: 1px;
+                        background-color: #e3e3e3;
+                        margin: 0 auto;
+                    }
+                }
+                .content-card {
+                    margin-left: 58px;
+                    h1 {
+                        opacity: 0.5;
+                        font-family: 'Raleway' !important;
+                        font-size: 13px;
+                        font-weight: normal;
+                        font-style: normal;
+                        font-stretch: normal;
+                        line-height: 1.38;
+                        letter-spacing: 1.4px;
+                        color: #ffffff;
+                        margin-top: 0px;
+                        margin-bottom: 6px;
+                        margin-left: 16px;
+                    }
+                    .diligence-content {
+                        padding: 20px;
+                        border-radius: 4px;
+                        background-color: rgba(255, 255, 255, 0.5);
+                        box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.04);
+                        outline: none;
+                    }
+                    .btn-delete {
+                        width: 24px;
+                        height: 24px;
+                        background-image: url('/assets/images/ic-delete-black.svg');
+                        background-repeat: no-repeat;
+                        background-position: center center;
+                        position: absolute;
+                        top: 40px;
+                        right: 5px;
+                        display: none;
+                    }
+                }
+                &.active {
+                    .index-card {
+                        .index-circle {
+                            border: 3px solid rgba(255, 255, 255, 0.75);
+                        }
+                    }
+                    .content-card {
+                        h1 {
+                            opacity: 1;
+                        }
+                        .diligence-content {
+                            background-color: #ffffff;
+                        }
+                    }
+                    .btn-delete {
+                        display: block;
+                    }
+                }
+                &:first-child {
+                    .top-middle-line {
+                        background-color: transparent;
+                    }
+                }
+                &:last-child {
+                    .bottom-middle-line {
+                        background-color: transparent;
+                    }
+                }
+            }
+        }
+        .action-block {
+            overflow: auto;
+            padding-bottom: 43px;
+            .btn-add-rappi-favor {
+                width: 143px;
+                height: 25px;
+                background-image: url('/assets/images/btn-add-rappi-favor.svg');
+                background-repeat: no-repeat;
+                margin: 25px auto;
+            }
+            .btn-order {
+                width: 210.5px;
+                height: 52px;
+                border-radius: 64.8px;
+                background-color: #44d481;
+                font-family: 'Montserrat' !important;
+                font-size: 12px;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 1.2;
+                letter-spacing: 1.3px;
+                text-align: center;
+                color: #ffffff;
+                padding-top: 20px;
+                margin: 0 auto;
+            }
+        }
+    }
+    .rappitendero {
+        position: absolute;
+        bottom: -30px;
+        right: 0px;
+        z-index: 100;
+    }
+}

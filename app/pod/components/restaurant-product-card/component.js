@@ -112,6 +112,7 @@ export default Ember.Component.extend({
       if (Ember.isEmpty(cart) || Ember.isEmpty(cart.get('lineItems'))) {
         this.sendAction('newCartAdded', this.cart.getCart(storeType));
       }
+      mixpanel.track("Global_add_product");
       mixpanel.track("add_to_cart_restaurant");
       if(this.get("mostPurchased")){
         mixpanel.track("add_los_mas_comprados_res");
@@ -148,6 +149,7 @@ export default Ember.Component.extend({
         if (Ember.isEmpty(cart) || Ember.isEmpty(cart.get('lineItems'))) {
           this.sendAction('newCartAdded', this.cart.getCart(storeType));
         }
+        mixpanel.track("Global_add_product");
         mixpanel.track("add_to_cart_restaurant");
         if(this.get("mostPurchased")){
           mixpanel.track("add_los_mas_comprados_res");

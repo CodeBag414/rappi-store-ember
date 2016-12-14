@@ -43,6 +43,11 @@
 
       <a class="search-button" {{action "search" queryField}}></a>
       <ul class="auto-complete">
+          {{#if fetching}}
+              <div class="searching-icon-wrapper">
+                  <i class="searching"></i>
+              </div>
+          {{/if}}
         {{#if (eq currentType 'restaurant')}}
           {{#if (or hits.length restaurants.length)}}
           <div class="restaurant-auto-complete">
@@ -176,7 +181,7 @@
       </ul>
   </div>
 </div>
-<div class="menu-container">
+<div class="menu-container" style="display: -webkit-box;">
   <div class="navigation-bar">
     <div class="navigation-item" {{action "redirectToHome" "super"}}>
       <p>Supermercado</p>
@@ -222,29 +227,17 @@
       </ul>
       </div>
     </div>
-    <div class="navigation-item" {{action "redirectToHome" "restaurant"}}>
-      <p>Restaurantes y  Cafés</p>
+    <div class="navigation-item" >
+      <p {{action "redirectToHome" "restaurant"}}>Restaurantes y  Cafés</p>
       <div class="section-menu">
       <ul class="category-menu">
       <div class="pointer"></div>
-      {{#if showItemsRestaurant}}
       {{#each restaurantMenu as |resObj|}}
           <!-- ................  main product listing .....................  -->
-        <li data-submenu-id="submenu-{{resObj.id}}" class="category-item">
-          <div class="selected-line"></div><p>{{resObj.name}}</p>
-          <ul id="submenu-{{resObj.id}}" class="main-subcategory-menu">
-            <div class="pointer"></div>
-            {{#each resObj.corridors as |corridor|}}
-              {{#each corridor.sub_corridors as |subcorridor|}}
-              <li class="main-subcategory-item" {{action "goToSubcategory" "restaurant" subcorridor.id corridor.rappi_store_id bubbles=false}}>
-                <div class="subselected-line"></div><p>{{subcorridor.name}}</p>
-              </li>
-              {{/each}}
-            {{/each}}
-          </ul>
+        <li {{action 'goToRestaurantCategory' resObj.id}} data-submenu-id="submenu-{{resObj.id}}" class="category-item">
+          <div class="selected-line"></div><p class="remove-bg-image">{{resObj.name}}</p>
         </li>
       {{/each}}
-      {{/if}}
       </ul>
       </div>
     </div>
@@ -270,8 +263,126 @@
       </ul>
       </div>
     </div>
+    {{!-- <div class="navigation-item antojo-menu-arrow" {{action "changeStoreType" "ultraservicio"}}>
+        <p>RappiCash</p>
+    </div> --}}
     <div class="navigation-item antojo-menu-arrow"  {{action "redirectToHome" "whim"}}>
       <p>Antojos y deseos</p>
     </div>
+    {{!-- <div class="navigation-item antojo-menu-arrow"  {{action "redirectToHome" "diligencia"}}>
+      <p>Diligencias</p>
+    </div> --}}
   </div>
+  {{#if session.isAuthenticated}}
+      <div class="bg" {{action 'openAddresslistAfterLogin'}} style="position: absolute;
+    right: 0px;
+    padding: 10px; background-color: transparent;">
+        {{#if cartAddress}}
+            <span class="map-pointer">
+              {{header-address-icon storageCity}}
+              </span>
+
+            <div class="address-block address-block-height">
+                  <span class="OFICINA">
+                    {{storageCity}}
+                  </span>
+                <span class="CALLE-93-18-51">
+                  {{cartAddress}}
+                </span>
+            </div>
+        {{else}}
+            <img src="assets/images/pin.svg" style="height: 27px"/>
+
+            <div class="address-block">
+                <span class="OFICINA2">
+                  AGREGAR DIRECCIÓN
+                </span>
+            </div>
+        {{/if}}
+          <img src="assets/images/triangle.svg" class="arrow-height">
+      </div>
+      <div id='addressListPopupAfterLogin' class="dropdown-menu dropdown-menu-right address-list">
+          <div class="scroll-bg" style="margin-top: -5px">
+            {{#each addresses as |addressObj|}}
+                <div {{action 'updateAddress' addressObj}}>
+                  {{header-address-list addressObj}}
+                </div>
+            {{/each}}
+          </div>
+          <div class="new-addr-block new-addr-block-scroll" {{action 'addNewDirection'}}>
+              <span class="nueva-direccin">
+                  NUEVA DIRECCIÓN
+              </span>
+          </div>
+      </div>
+  {{else}}
+    {{#if storageAddress}}
+        <div class="bg" {{action 'openAddresslist'}} style="position: absolute;
+    right: 0px;
+    padding: 10px; background-color: transparent;">
+              <span class="map-pointer">
+                <img src="assets/images/pin.svg" style="height: 27px"/>
+              </span>
+
+            <div class="address-block">
+                  <span class="OFICINA">
+                    {{storageCity}}
+                  </span>
+                <span class="CALLE-93-18-51">
+                  {{storageAddress}}
+                </span>
+            </div>
+            <img src="assets/images/triangle.svg" class="arrow-height">
+        </div>
+        <div id='addressListPopup' class="dropdown-menu dropdown-menu-right address-list">
+            <div {{action 'openAddresslist' addressObj}}>
+                <div class="each-address-bg" style="background-color: #32B86B; margin-top: -5px">
+                    <span class="map-pointer"><img src="assets/images/pin-white.svg" style="height: 27px"/></span>
+
+                    <div class="address-wrap">
+                          <span class="OFICINA" style="color: #ffffff">
+                            {{storageCity}}
+                          </span>
+                          <span class="CALLE-93-18-51" style="color: #ffffff">
+                            {{storageAddress}}
+                          </span>
+                    </div>
+                </div>
+                <span class="separator"></span>
+            </div>
+            <div class="new-addr-block" {{action 'openGreenAddressPopup'}}>
+                <span class="new-addr-link">
+                    CAMBIAR DIRECCIÓN
+                </span>
+            </div>
+        </div>
+    {{else}}
+        <div class="bg2" {{action 'openGreenAddressPopup'}} style="position: absolute;
+    right: 0px;
+    padding: 10px;">
+            <img src="assets/images/pin.svg" style="height: 27px"/>
+
+            <div class="address-block">
+                <span class="OFICINA2">
+                  AGREGAR DIRECCIÓN
+                </span>
+            </div>
+        </div>
+    {{/if}}
+  {{/if}}
 </div>
+
+{{#if showAddressPopup}}
+  {{address-popup showAddressPopup=showAddressPopup fromHomeHeader=true showLoginFromAddressPopup='showDialog'}}
+{{/if}}
+
+{{#if showAddAddressToUpdate}}
+  {{#modal-dialog close='toggleAddAddress' translucentOverlay=true}}
+    {{add-address flow=flow showAddAddressToUpdate=showAddAddressToUpdate}}
+  {{/modal-dialog}}
+{{/if}}
+{{#if showAddressList}}
+  {{#modal-dialog translucentOverlay=true}}
+    {{address-list flow='login' showPopUp=showAddressList showAddAddress='toggleAddAddress'}}
+  {{/modal-dialog}}
+{{/if}}

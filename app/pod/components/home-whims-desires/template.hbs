@@ -1,0 +1,82 @@
+<div class="home-antojo-section">
+    <h1>¿No encontraste lo que necesitabas?</h1>
+    <div class="queriesWrapper">
+        <div class="text-center" id="what-div">
+            <div class="queryForm text-center">
+                <h2 class="query-heading" id="ele2">¿Qué quieres?</h2>
+                <div class="antojo-input">
+                    {{textarea rows="5" placeholder="Escribe aqui lo que necesitas. !Cualquier cosa!" value=what}}
+                    {{#if blankField}}
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                <span class={{color}}>
+                                    {{message}}
+                                </span>
+                            </div>
+                        </div>
+                    {{/if}}
+                    <button type="submit" class="btn btn-green antojo-btn" {{action 'addWhat'}}>CONTINUAR</button>
+                </div>
+                <div class="shadow-box"></div>
+            </div>
+            <span class="los-antojos">*LOS ANTOJOS TIENEN UN RECARGO DEL 10%</span>
+        </div>
+        <div class="translate-antojo-where-div text-center" id="where-div">
+            <div class="queryForm text-center">
+                <h2 class="query-heading where-heading" id="ele3">
+                    <img src="assets/images/fill-1.svg" {{action 'backToWhat'}}>
+                    ¿Dónde lo conseguimos?
+                </h2>
+                <div class="antojo-input">
+                    {{textarea rows="5" placeholder="Escribe aquí el sitio donde podemos encontrar lo que necesitas." value=where}}
+                    {{#if blankField}}
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                <span class={{color}}>{{message}}</span>
+                            </div>
+                        </div>
+                    {{/if}}
+                    <button type="submit" class="btn btn-green-profile antojo-btn" {{action 'addWhim'}}>AGREGAR A LA CANASTA</button>
+                </div>
+                <div class="shadow-box"></div>
+            </div>
+            <span class="los-antojos">*LOS ANTOJOS TIENEN UN RECARGO DEL 10%</span>
+        </div>
+    </div>
+    <div class="row favorsHomePage">
+        <div class="col-sm-12 productList-footer">
+            {{#if model.whims}}
+                <h2 class="blockHeading" id="ele4">Antojos / favores anteriores</h2>
+            {{/if}}
+            {{#if loading}}
+                <div class="loading"><img src="assets/images/loading.svg"></div>
+            {{/if}}
+            <ul id="asd" class="scroller">
+                {{#each model.whims as |whim|}}
+                <li>
+                    <div class="toTable">
+                        <div class="toTable-cell">
+                            <div class="product-name">
+                                <h3>{{whim.what}}</h3>
+                                <span>{{whim.where}}</span>
+                            </div>
+                        </div>
+                        <div class="toTable-cell timeLine">
+                            <!--<span>hace 3 semanas</span>-->
+                            <span>{{moment-from-now whim.created interval=1000}}</span>
+                        </div>
+                        <div class="toTable-cell text-right">
+                            <a style={{if whim.isAdded 'pointer-events:none;' ''}} {{action 'addToBasket' whim}} class="accent-color">
+                                {{whim.buttonText}}
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                {{/each}}
+                {{#if noMoreWhims}}
+                    <li><div class="no-more-whims">No más caprichos</div></li>
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+</div>

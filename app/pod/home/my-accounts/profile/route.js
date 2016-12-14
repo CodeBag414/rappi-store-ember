@@ -15,6 +15,12 @@ export default Ember.Route.extend({
     controller.set('phonePrefix', content.phone_prefix);
     controller.set('countryName', content.countryName);
     controller.set('countryFlag', content.code.toLowerCase() === 'co' ? 'ico_flag_colombia.svg' : 'ico_flag_mexico.svg');
+    var profilePic = model.get('pic');
+    if(profilePic.indexOf("profile-") === -1){
+      controller.set('noImage',true);
+    }else{
+      controller.set('noImage',false);
+    }
   },
   model(){
     var currentUser = this.get('session').get('currentUser');

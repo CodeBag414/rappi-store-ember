@@ -5,6 +5,7 @@ const {
   stLat,
   stLng,
   stAddress,
+  stCity,
   stAddressId,
   stContent,
   stStoreType
@@ -89,17 +90,6 @@ export default Ember.Component.extend({
         });
       }
     },
-
-    addDetail(detail) {
-      if (detail !== null && detail.length > 0) {
-        this.set('subAddress', detail);
-        var currAddress = this.get('currentAddress');
-        this.set("addressTextBoxValue", currAddress);
-        currAddress = currAddress + "," + detail;
-        this.set('currentAddress', currAddress);
-      }
-    },
-
     selectTag: function (tag) {
       this.$(".active").removeClass();
       this.set('selectedTag', tag);
@@ -126,10 +116,16 @@ export default Ember.Component.extend({
       var isValid = true;
       let currentUrl = this.serverUrl.getUrl();
       if (Ember.isBlank(this.get('addressTextBoxValue')) || Ember.isBlank(this.get('currentAddress'))) {
-        this.get('flashMessages').info('La dirección no puede dejarse en blanco');
+        this.set("showFaderaddress", true);
+        this.set("messageAddressError", "Por favor selecciona una dirección de la lista");
         isValid = false;
       } else if (this.get('latCurrentAddress') === 0 && this.get('lngCurrentAddress') === 0) {
-        this.get('flashMessages').info('Por favor, seleccione una dirección válida');
+        this.set("showFaderaddress", true);
+        this.set("messageAddressError", 'Por favor selecciona una dirección de la lista');
+        isValid = false;
+      } else if (Ember.isBlank(this.get('aptoAddress'))) {
+        this.set("showFaderDetail", true);
+        this.set("messageAddressDetailError", '¿Oficina, apartamento o casa?');
         isValid = false;
       }
       if (Ember.isBlank(this.get('selectedTag'))) {
@@ -137,6 +133,8 @@ export default Ember.Component.extend({
       }
 
       if (isValid) {
+        var currAddress = this.get('currentAddress') + "," + this.get('aptoAddress');
+        this.set('currentAddress', currAddress);
         this.set('currentlyLoading', true);
         let currentCountry = this.storage.get(stContent) ? this.storage.get(stContent).countryName : ENV.location[0].name;
         var _this = this;
@@ -182,6 +180,7 @@ export default Ember.Component.extend({
                       _this.storage.set(stLng, lng);
                       _this.storage.set(stAddressId, id);
                       _this.storage.set(stAddress, address);
+                      _this.storage.set(stCity, tag);
                       _this.cart.setShippingAddress(storeType, {
                         id,
                         address,
@@ -200,7 +199,6 @@ export default Ember.Component.extend({
                       _this.set('currentlyLoading', false);
                     } else if (_this.get('flow') === 'login' || _this.get('flow') === 'change-direction') {
                       _this.set('resultLogin', result);
-
                       let addLat = result.get('lat') ? Math.abs(Number(result.get('lat'))) : 0;
                       let addLng = result.get('lng') ? Math.abs(Number(result.get('lng'))) : 0;
                       let storageLat = _this.storage.get(stLat) ? Math.abs(_this.storage.get(stLat)) : 0;
@@ -243,6 +241,7 @@ export default Ember.Component.extend({
       this.storage.set(stLng, result.get('lng'));
       this.storage.set(stAddress, result.get('address'));
       this.storage.set(stAddressId, result.get('id'));
+      this.storage.set(stCity, result.get('tag'));
       if (this.get('flow') === 'login') {
         this.storage.set("id", result.get('id'));
 

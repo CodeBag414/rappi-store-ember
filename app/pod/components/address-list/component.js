@@ -7,33 +7,35 @@ const {
   stContent,
   stStoreType,
   stAddress,
+  stCity,
   stShippingCharges,
   stAddressId,
   stAddrPopupShown
   } = ENV.storageKeys;
 
 export default Ember.Component.extend({
+  serverUrl: Ember.inject.service('server-url'),
   showAddAddress: false,
   model: null,
   addressObjCurrent: null,
   activeAddress: null,
-  showRightBgImage:true,
-  willRender(){
+  showRightBgImage: true,
+  willRender() {
     this._super(...arguments);
     let model = this.get('session').get('currentAddress');
     this.set('model', model);
-    let modelCount =0;
+    let modelCount = 0;
     model.forEach((data)=> {
       modelCount++;
       if (data.get('active')) {
         this.set('activeAddress', data);
       }
     });
-    if(modelCount>2){
-      this.set("showRightBgImage",false);
+    if (modelCount > 2) {
+      this.set("showRightBgImage", false);
     }
     let _this = this;
-    this.get('session').on('userAddressUpdated', function(address) {
+    this.get('session').on('userAddressUpdated', function (address) {
       _this.set('model', address);
     });
   },
@@ -73,7 +75,6 @@ export default Ember.Component.extend({
                 activeAddress.set('active', false);
               }
               addressObj.set("active", true);
-
               _this.set('addressObjCurrent', addressObj);
               if (_this.get('showModal') !== undefined) {
                 _this.send('addressChangeAction');
@@ -87,7 +88,10 @@ export default Ember.Component.extend({
               let addLng = addressObj.get('lng') ? Math.abs(addressObj.get('lng')) : 0;
               let storageLat = _this.storage.get(stLat) ? Math.abs(_this.storage.get(stLat)) : 0;
               let storageLng = _this.storage.get(stLng) ? Math.abs(_this.storage.get(stLng)) : 0;
-              if ((Math.abs(addLat - storageLat) > 0.000001 || Math.abs(addLng - storageLng) > 0.000001) && _this.get('cart').getCart(_this.storage.get(stStoreType)) && _this.get('cart').getCart(_this.storage.get(stStoreType)).get('cartItems').length !== 0) {
+              let storeType = _this.storage.get(stStoreType);
+              let cart = _this.get('cart').getCart(storeType);
+              if ((Math.abs(addLat - storageLat) > 0.000001 || Math.abs(addLng - storageLng) > 0.000001) &&
+                cart && ( cart.get('cartItems').length !== 0 || cart.isWhimAdded())) {
                 _this.set('showReloadWarning', true);
               } else {
                 _this.send('addressChangeAction');
@@ -101,7 +105,7 @@ export default Ember.Component.extend({
         });
       });
     },
-    addressChangeAction: function () {
+    addressChangeAction: function (restoreBasket) {
       let addressObj = this.get("addressObjCurrent");
       let storeType = this.storage.get(stStoreType);
       let id = addressObj.get('id');
@@ -113,30 +117,158 @@ export default Ember.Component.extend({
       let active = addressObj.get('active');
       let lastorder = addressObj.get('lastorder');
       addressObj.save().then(()=> {
-        if (this.get('isCheckout')) {
-          this.sendAction('showModalDelevery');
-        } else {
-          this.set('showPopUp', false);
-        }
+
         let storageAddressId = this.storage.get(stAddressId)
         let addLat = lat ? Math.abs(lat) : 0;
         let addLng = lng ? Math.abs(lng) : 0;
         let storageLat = this.storage.get(stLat) ? Math.abs(this.storage.get(stLat)) : 0;
         let storageLng = this.storage.get(stLng) ? Math.abs(this.storage.get(stLng)) : 0;
-
-        if (Ember.isEmpty(storageAddressId) || storageAddressId.toString !== id.toString()) {
+        if (this.get('isCheckout') && storageAddressId && storageAddressId.toString() === id.toString()) {
+          this.sendAction('showModalDelevery');
+        } else {
+          //this.set('showPopUp', false);
+        }
+        if (Ember.isEmpty(storageAddressId) || storageAddressId.toString() !== id.toString()) {
           this.storage.set(stLat, lat);
           this.storage.set(stLng, lng);
           this.storage.set(stAddress, address);
           this.storage.set(stAddressId, id);
+          this.storage.set(stCity, tag);
           if (Ember.isPresent(storeType)) {
             this.cart.setShippingAddress(storeType, {id, address, description, lng, lat, tag, active, lastorder});
           }
-          if ((Math.abs(addLat - storageLat) > 0.000001 || Math.abs(addLng - storageLng) > 0.000001) && this.get('showModal') === undefined) {
-            window.location.reload(true);
+          if ((Math.abs(addLat - storageLat) > 0.000001 || Math.abs(addLng - storageLng) > 0.000001)) {
+            this.send("restoreOrderAndCart", restoreBasket);
           }
         }
       });
+    },
+    restoreOrderAndCart(restoreBasket) {
+
+      let storeType = this.storage.get(stStoreType);
+      let cart = this.cart.getCart(storeType);
+      var whimWhat = "";
+      var whimWhere = "";
+      var cartItems = cart.get("cartItems");
+      var whim = this.cart.getWhim();
+      var productIdArray = [];
+      var productNameArray = [];
+      var productQuantityArray = [];
+      if (restoreBasket && (Ember.isPresent(cartItems) || Ember.isPresent(whim.what))) {
+        let address = this.storage.get(stAddress);
+        let lat = this.storage.get(stLat);
+        let lng = this.storage.get(stLng);
+        let id = this.storage.get(stAddressId);
+        let shippingAddress = {
+          id: id,
+          address: address,
+          lat: lat,
+          lng: lng
+        };
+        if (Ember.isPresent(whim.what)) {
+          whimWhat = whim.what + whimWhat;
+          whimWhere = whimWhere + " " + whim.where;
+        }
+        if (Ember.isPresent(cartItems)) {
+          var productsName = [];
+          cartItems.forEach((product) => {
+            productIdArray.push(this.getFormatedProductID(product.id));
+            productQuantityArray.push(product.quantity);
+            productNameArray.push(" " + product.name);
+          });
+          this.cart.clearCart(storeType);
+          this.cart.createCart(storeType, this.storage.get(stShippingCharges), shippingAddress);
+          var storeTypeForApi = "";
+          if (storeType === "farmacia") {
+            storeTypeForApi = "Farmatodo";
+          } else if (storeType === ENV.defaultStoreType) {
+            storeTypeForApi = "hiper";
+          }
+          if (storeType !== "restaurant") {
+            this.send("getProductsTorestoreCart", productNameArray, productIdArray, lat, lng, storeTypeForApi, whimWhat, whimWhere, productQuantityArray);
+          } else {
+            this.send("finalyRestoreCart", whimWhat, whimWhere, productNameArray);
+          }
+        } else {
+          this.cart.clearCart(storeType);
+          this.cart.createCart(storeType, this.storage.get(stShippingCharges), shippingAddress);
+          this.send("finalyRestoreCart", whimWhat, whimWhere, []);
+        }
+
+      } else {
+        this.cart.clearCart(storeType);
+        window.location.reload(true);
+      }
+    },
+    getProductsTorestoreCart(productNameArray, productIdArray, lat, lng, storeType, whimWhat, whimWhere, productQuantityArray) {
+      let currentUrl = this.serverUrl.getUrl();
+      this.apiService.get(`${currentUrl}${ENV.byLocation}?lat=${lat}&lng=${lng}&store_type=${storeType}`)
+        .then((resp)=> {
+          if (Object.prototype.toString().call(resp) === '[object Object]') {
+            resp = Ember.$.map(resp, (value)=> {
+              return [value];
+            });
+          }
+          if (Ember.isEmpty(resp) && storeType === "hiper") {
+            this.send("getProductsTorestoreCart", productNameArray, productIdArray, lat, lng, "super", whimWhat, whimWhere, productQuantityArray);
+            return;
+          }
+          this.send("keepMatchingProducts", productNameArray, productIdArray, lat, lng,
+            whimWhat, whimWhere, productQuantityArray, resp);
+        }, (error)=> {
+          this.send("finalyRestoreCart", whimWhat, whimWhere, productNameArray)
+        });
+    },
+    keepMatchingProducts(productNameArray, productIdArray, lat, lng, whimWhat, whimWhere, productQuantityArray, resp) {
+      let storeType = this.storage.get(stStoreType);
+      resp.forEach((response)=> {
+        response.corridors.forEach((corr)=> {
+          corr.products.forEach((product)=> {
+            let indexproductIdArray = productIdArray.indexOf(this.getFormatedProductID(product.id));
+            if (indexproductIdArray !== -1) {
+              let id = product.id;
+              let name = product.name;
+              let price = product.price;
+              let presentation = product.presentation;
+              let lowImage = product.imagelow ? product.imagelow.replace(this.get('url'), "") : '';
+              let image = product.image_low || lowImage;
+              let storeId = product.store_id;
+              let saleType = product.sale_type;
+              let storeType = this.storage.get(stStoreType);
+              let addedProduct = this.cart.pushCart(storeType, {
+                id, name, unitPrice: price, image, extras: {presentation, storeId, saleType}
+              });
+              addedProduct.set("quantity", productQuantityArray[indexproductIdArray])
+              productIdArray.splice(indexproductIdArray, 1);
+              productNameArray.splice(indexproductIdArray, 1);
+              productQuantityArray.splice(indexproductIdArray, 1);
+            }
+          });
+        });
+      });
+      this.send("finalyRestoreCart", whimWhat, whimWhere, productNameArray)
+    },
+    finalyRestoreCart(whimWhat, whimWhere, productNameArray) {
+      let storeType = this.storage.get(stStoreType);
+      if (Ember.isPresent(productNameArray)) {
+        whimWhat += "  \"PEDIDO WEB NO COBRAR 10% DE ANTOJO\" " + productNameArray.toString();
+        whimWhere = storeType + " " + whimWhere;
+      }
+      if (!Ember.isEmpty(whimWhat)) {
+        let whimToAddCart = whimWhat + "&whim&" + whimWhere;
+        let whimObj = {
+          text: whimToAddCart, what: whimWhat, where: whimWhere
+        };
+        this.cart.pushWhim(whimObj);
+      }
+      this.storage.set("openPaymentAfterAddressChange", true);
+      window.location.reload(true);
     }
+  },
+  getFormatedProductID: function (productID) {
+    if (productID.split("_")[1]) {
+      productID = productID.split("_")[1];
+    }
+    return productID;
   }
 });

@@ -92,23 +92,6 @@ export default Ember.Component.extend({
         this.set('isOrderTaken', true);
         this.set('isOrderCreated', false);
         this.alertNotification("Taken", "Your order successfully taken");
-
-        /** Register event mix Panel */
-        mixpanel.track("order_placed", {
-          "payment_method": "",
-          "amount_purchase": this.get('orderObj').get('total_charges'),
-          "tip": this.get('orderObj').get('tip'),
-          "coupon_amount": 0,
-          "coupon_code": "",
-          "number_of_products": 0,
-          "number_of_SKUs": 0,
-          "store_type": "express",
-          "purchase_timestamp": new Date().getTime(),
-          "product_purchased": [],
-          "category": [],
-          "sub_category": []
-        });
-
       }
     }
   }, onOrderUpdate(data) {
@@ -174,9 +157,10 @@ export default Ember.Component.extend({
       this.rappiChat.syncChatHistory(accessToken, orderId, userId, this.serverUrl.getUrl());
     }, showOrderPanel() {
       this.sendAction('showOrderPanel');
-    },
-    togglePopUp: function () {
+    }, togglePopUp: function () {
       this.sendAction('togglePopUp');
+    }, orderAction: function (allowNextOrder) {
+      this.sendAction('orderAction', allowNextOrder);
     }
   }
 });

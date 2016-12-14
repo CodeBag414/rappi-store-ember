@@ -1,0 +1,32 @@
+<div class="ultraservicio-card-container">
+    <div class="top-bar">
+        <p>Cantidad que vas a recibir</p>
+        <h1>{{format-currency totalAmount}}</h1>
+    </div>
+    <div class="product-selection-view">
+        <div class="first-product-selection-view">
+            <div class="header-view">
+                <p>&#191;Cu&aacute;nto necesitas&#63;</p>
+                <div class="btn-to-first-view" {{action 'goToFirstView'}}></div>
+            </div>
+            <div class="amount-choice-view">
+                <div class="first-view">
+                    <div class="amount-card {{if (eq firstProductCount 1) 'selected' ''}}" {{action 'selectFirstProduct' 1}}><span>$</span>50.000</div>
+                    <div class="amount-card {{if (eq firstProductCount 2) 'selected' ''}}" {{action 'selectFirstProduct' 2}}><span>$</span>100.000</div>
+                    <div class="amount-card {{if (eq firstProductCount 4) 'selected' ''}}" {{action 'selectFirstProduct' 4}}><span>$</span>200.000</div>
+                    <div class="amount-card" {{action 'goToSecondView'}}>Otro valor</div>
+                </div>
+                <div class="second-view">
+                    <div class="btn-reduce" {{action 'decSecondProduct'}}></div>
+                    <div class="price"><span>$</span>20.000</div>
+                    <div class="btn-increase" {{action 'incSecondProduct'}}></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="button-bar">
+        <button class="btn-add" {{action 'addToCart'}}>agregar</button>
+    </div>
+    <div class="shadow-box">
+    </div>
+</div>

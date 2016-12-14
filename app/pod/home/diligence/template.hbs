@@ -1,0 +1,7 @@
+<div class="diligence-container {{if rappiOrder.isNotEmpty 'with-fixed-order-panel' ''}}">
+    {{diligence-content basketOpenned=basketOpenned}}
+    <img class="rappitendero" src="/assets/images/new-rappitendero.png" />
+</div>
+<div class="{{if basketOpenned 'basket-overlay' ''}}">
+  {{shopping-basket addedWhimObj=addedWhimObj basketOpenned=basketOpenned}}
+</div>

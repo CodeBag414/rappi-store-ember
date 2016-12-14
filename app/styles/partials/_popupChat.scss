@@ -13,7 +13,6 @@
 }
 .chatPopup{
 	max-width: 505px;
-  max-height: 550px;
   overflow: hidden;
 }
 .coralBox {
@@ -165,5 +164,17 @@
 }
 .confirmPopup {
   max-width: 510px;
+}
+
+#chattextarea {
+  max-height: 75px;
+  padding-left: 52px;
+  transition: width 0.25s;
+  resize: none;
+  overflow-y: auto;
+  min-height: 42px;
+  height: 44px;
+  margin-right: 87px;
+  margin-bottom: 5px;
 }
 

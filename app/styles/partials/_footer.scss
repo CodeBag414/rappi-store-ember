@@ -53,6 +53,14 @@
           background-position: -143px -204px;
         }
       }
+      a.linkedin{
+        width: 52px;
+        height: 52px;
+        background-position: -354px -253px;
+        &:hover {
+          background-position: -354px -190px;
+        }
+      }
     }
   }
   float: right;

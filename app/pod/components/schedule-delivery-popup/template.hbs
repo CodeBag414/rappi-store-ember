@@ -70,7 +70,7 @@
                     <button type="submit" class="btn btn-green btn-greenMargin" {{action 'creditCard' 'cc'}}>TARJETA
                         DE CRÉDITO
                     </button>
-                    <button type="submit" class="btn btn-green btn-greenMargin" {{action 'creditCard' 'cash'}}>
+                    <button disabled={{disableCash}} type="submit" class="btn btn-green btn-greenMargin" {{action 'creditCard' 'cash'}}>
                         EFECTIVO
                     </button>
                 {{/if}}

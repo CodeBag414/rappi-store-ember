@@ -1,5 +1,5 @@
 {{#if currentlyLoading}}
-<div class="main-loader"><img src="assets/images/loading.svg"></div>
+    <div class="main-loader"><img src="assets/images/loading.svg"></div>
 {{/if}}
 <div class="popUp-wrapper loginPopup">
     <div class="popUp-Outer text-center">
@@ -29,13 +29,18 @@
                       focusOutCallback="onFocusOut"
                       placeChangedCallback="findLatLong"
                       restrictions=country
-                      
-                      }}
 
+                      }}
+                      {{#if showFaderaddress}}
+                        {{fader-label showFaderLabel=showFaderaddress message=messageAddressError}}
+                      {{/if}}
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="apto/oficina/piso"
-                               onblur={{action "addDetail" value="target.value"}}>
+                        {{input type="text" class="form-control" placeholder="apto/oficina/piso"
+                                value=aptoAddress}}
+                      {{#if showFaderDetail}}
+                        {{fader-label showFaderLabel=showFaderDetail message=messageAddressDetailError}}
+                      {{/if}}
                     </div>
                     <div class="form-group">
                         <textarea class="form-control" placeholder="Instrucción adicional"

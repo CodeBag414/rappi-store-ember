@@ -539,6 +539,7 @@ export default Ember.Route.extend({
         controller.set('currentlyLoading', false);
       });
     }, seeAll(route, corridorId, storeId){
+        mixpanel.track("enter_paypal");
       this.storage.set(stStoreId, storeId);
       this.transitionTo(route, corridorId);
     }

@@ -1,37 +1,70 @@
 <div class="popUp-wrapper loginPopup">
+    <div class="top_modal_address">
+        <div class="popUp-Outer padding-popup">
+            <div class="col-md-12 cc_title">
+                <img src="assets/images/icon-card.svg" class="icon_card">
+                <span class="Tarjeta_de_Crdito">
+                    Tarjeta de Crédito
+                </span>
+            </div>
+        </div>
+        <a href="" {{action 'closeCCPopoup'}} style="position: relative;top: 10px;float: right;right: 10px;">
+            <img src="assets/images/btn-close.svg">
+        </a>
+    </div>
     <div class="popUp-Outer padding-popup">
         <div class="toTable">
-            <div class=" text-center">
-                <div class="formTitle btn-green-width2 inline-block">
-                    <h1>Elige una tarjeta</h1>
-                    {{#if loadingCards}}
-                    <h1>Cargando tus tarjetas ...</h1>
-                    <div class="main-loader"><img src="assets/images/loading.svg"></div>
-                    {{/if}}
-                    <ul class="queries-list">
-                      {{#each creditcardDetails as |ccObj index|}}
-                          <span {{action 'selectCC' ccObj}}>
-                            {{list-cc ccObj index}}
-                          </span>
+            <div>
+              {{#if loadingCards}}
+                  <div class="main-loader"><img src="assets/images/loading.svg"></div>
+              {{/if}}
+              <div class="queries-list" style="text-align: left;">
+                  <div class="cc_list_div">
+                    {{#each creditcardDetails as |ccObj index|}}
+                        <div class="item" style="margin-bottom: 0px;" {{action 'selectCC' ccObj}}>
+                            <div>
+                                <span class="custom_radio" >
+                                  {{#if ccObj.isDefault}}
+                                      <input type="radio" name="a" class="cc-radio" checked
+                                             id={{ccObj.bin}}/>
+                                    <label for="#"></label>
+                                  {{else}}
+                                      <input type="radio" name="a" class="cc-radio"
+                                              id={{ccObj.bin}}/>
+                                    <label for="#"></label>
+                                  {{/if}}
+                                </span>
+                                <img src="assets/images/icon-card-copy.svg" class="icon_card2">
+                              {{list-cc ccObj}}
+                            </div>
+                        </div>
                       {{else}}
-                          <span {{action 'selectCC' ccObj}}>
-                            <li class="item coralBox">
-                                <h4>No hay tarjetas para mostrar </h4>
-
-                                <p>Por favor agregue una tarjeta</p>
-                            </li>
-                          </span>
-                      {{/each}}
-                    </ul>
-                  {{#if openAddCCProcess}}
-                      <div class="hvr-pulse-shrink btn btn-green">por favor espera...</div>
-                  {{else}}
-                      <div class="addNewAddress" onClick={{action 'openAddCC'}}>
-                          <button class="btn-qty qty-inc"></button>
-                          <span>añadir nueva tarjeta de crédito </span>
-                      </div>
-                  {{/if}}
+                        <div class="item" style="cursor: text;">
+                            <span class="Tarjeta_VISA"> No hay tarjetas para mostrar</span>
+                        </div>
+                    {{/each}}
+                  </div>
+                <div class="text-center">
+                    <div class="item">
+                        <a href="" {{action 'openAddCC'}}>
+                            <img src="assets/images/add-button.svg" class="add_CC_btn">
+                        </a>
+                      <span class="add_CC_txt">
+                          NUEVA TARJETA
+                      </span>
+                    </div>
+                    <div class="item" style="padding: 0px;">
+                        <button class="pay_CC" {{action 'pay'}}>
+                            PAGAR
+                        </button>
+                    </div>
+                    <div class="item">
+                      <span class="add_CC_txt" {{action 'closeCCPopoup'}}>
+                          CANCELAR
+                      </span>
+                    </div>
                 </div>
+              </div>
             </div>
         </div>
     </div>

@@ -90,7 +90,8 @@ export default Ember.Component.extend({
       if (Ember.isEmpty(cart) || Ember.isEmpty(cart.get('lineItems'))) {
         this.sendAction('newCartAdded', this.cart.getCart(storeType));
       }
-
+      mixpanel.track("Global_add_product");
+      mixpanel.track("add_to_cart_restaurant");
       if(this.get("ourRecommendProduct")){
         mixpanel.track("add_our_recommend");
       }
@@ -126,6 +127,8 @@ export default Ember.Component.extend({
         if (Ember.isEmpty(cart) || Ember.isEmpty(cart.get('lineItems'))) {
           this.sendAction('newCartAdded', this.cart.getCart(storeType));
         }
+        mixpanel.track("Global_add_product");
+        mixpanel.track("add_to_cart_restaurant");
         if(this.get("ourRecommendProduct")){
           mixpanel.track("add_our_recommend");
         }

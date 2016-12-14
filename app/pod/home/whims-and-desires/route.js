@@ -1,6 +1,12 @@
 import Ember from 'ember';
 import ENV from 'rappi/config/environment';
 
+const {
+    stLat,
+    stLng,
+    stStoreType
+    } = ENV.storageKeys;
+
 export default Ember.Route.extend({
   serverUrl: Ember.inject.service('server-url'),
   flashMessages: Ember.inject.service(),
@@ -16,7 +22,7 @@ export default Ember.Route.extend({
     },
     scrollEnd(){
       let controller = this.get('controller');
-      if (!controller.get('loading')) {
+      if (!controller.get('loading') && !controller.get('noMoreWhims')) {
         this.incrementProperty('page');
         controller.toggleProperty('loading');
         this.send('refreshModel');
@@ -26,7 +32,7 @@ export default Ember.Route.extend({
       let currentUrl = this.serverUrl.getUrl();
       let route = this;
       let controller = this.get('controller');
-      this.apiService.get(`${currentUrl}/${ENV.whimList}1?page=${this.get('page')}&per_page=${this.get('perPage')}`, accessToken).then(function (data) {
+      this.apiService.get(`${currentUrl}/${ENV.whimList}?page=${this.get('page')}&per_page=${this.get('perPage')}`, accessToken).then(function (data) {
         let model = route.get('controller').get('model');
         route.get('controller');
         if (Ember.isPresent(model) && Ember.isPresent(model.whims) && Ember.isPresent(data)) {
@@ -43,6 +49,8 @@ export default Ember.Route.extend({
             });
           });
           Ember.set(model, 'whims', whims.concat(updatedWhims));
+        } else if (Ember.isEmpty(data)) {
+          controller.toggleProperty('noMoreWhims');
         }
         controller.toggleProperty('loading');
         route.get('controller').set('model', model);
@@ -61,7 +69,13 @@ export default Ember.Route.extend({
   },
   setupController: function (controller, model) {
     this._super(controller, model);
+    if (this.get('session').get('isAuthenticated')) {
+      this.controllerFor('home').set('showAddressList', false);
+    } else {
+      this.controllerFor('home').set('showAddressPopup', false);
+    }
     fbq("track", "ViewContent", {content_name: "whims", content_type: "store"});
+    console.log("antojo model", model);
     if (Ember.isPresent(model) && Ember.isPresent(model.whims)) {
       let whims = model.whims;
       let updatedWhims = [];
@@ -80,6 +94,8 @@ export default Ember.Route.extend({
     window.scrollTo(0, 0);
   },
   model: function () {
+    this.storage.set(stStoreType, "restaurant");
+    this.controllerFor('home').set('storeType', "restaurant");
     let authenticated = this.get('session').get('isAuthenticated');
     let currentUrl = this.serverUrl.getUrl();
     if (authenticated) {

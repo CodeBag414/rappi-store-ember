@@ -21,7 +21,11 @@
         <div class="custom-file-upload ">
             <div class="profile-pic thumb74">
                 <a href="">
-                    <img src={{model.pic}} alt="user-rappi">
+                  {{#if noImage}}
+                      <img src="/assets/images/pictogramloader-09.svg" alt="user-rappi">
+                  {{else}}
+                      <img src={{model.pic}} alt="user-rappi">
+                  {{/if}}
                 </a>
             </div>
             <div class=" text-center">

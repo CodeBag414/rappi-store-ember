@@ -3,11 +3,11 @@
 {{/if}}
 {{#if showModalDelevery}}
   {{#modal-dialog close="togglePopUp" translucentOverlay=true}}
-    {{schedule-delivery-popup removeAddressList=showPopUp showModalDelevery=showModalDelevery orderPlaced='orderPlaced' showCreditCardList='showCreditCardList' isLoading=isLoading}}
+    {{schedule-delivery-popup removeAddressList=showPopUp showModalDelevery=showModalDelevery orderPlaced='orderPlaced' showCreditCardList='showCreditCardList' isLoading=isLoading orderInstruction=orderInstruction}}
   {{/modal-dialog}}
 {{else if showCreditCardList}}
   {{#modal-dialog close="togglePopUp" translucentOverlay=true}}
-    {{credit-card-list showCreditCardList=showCreditCardList tip=tipForOrder orderPlaced='orderPlaced' showAddCC='showAddCC' isLoading=isLoading}}
+    {{credit-card-list showCreditCardList='togglePopUp' tip=tipForOrder orderPlaced='orderPlaced' showAddCC='showAddCC' isLoading=isLoading orderInstruction=orderInstruction}}
     {{#if showAddCC}}
       {{#modal-dialog close="showAddCC" translucentOverlay=true}}
         {{credit-card-iframe-popup creditCard=showAddCC redirectURL=CCURL iFrameLoaded='iFrameLoaded'}}

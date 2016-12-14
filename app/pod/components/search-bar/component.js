@@ -39,6 +39,7 @@ export default Ember.Component.extend({
       }
       filterString = filterString.substr(0, filterString.lastIndexOf(" OR "));
       this.set("algoliaFilters", filterString);
+      console.log(this.get("algoliaFilters"));
     }).fail((err)=> {
       console.info("err>> is ...", err);
     });

@@ -11,7 +11,7 @@ export default Ember.Component.extend({
   isWhimOrdered: false,
   orderTotalValueWithTip: 0,
   numberToCall: null,
-  showTermConditions: true,
+  showTermConditions: false,
   promoCheckoutUrl: "assets/images/promo-checkout.jpg",
   load: function () {
     let code = this.storage.get(ENV.storageKeys.stContent).code;

@@ -6,6 +6,12 @@
       <p>{{currentCity}}<span class="arrow-down"></span></p>
 
     </div>
+    {{#if fromHomeHeader}}
+        <a href="" {{action 'closePopup'}} style="background-color: transparent;margin: 0px;padding: 0px;right: 10px;top: -20px;
+        position: relative;">
+            <img src="assets/images/btn-close.svg">
+        </a>
+    {{/if}}
     {{#if showCityList}}
       <ul class="city-list">
         <li {{action 'selectCity' 'Bogotá'}}><div class="selected-line"></div><p>Bogotá</p></li>

@@ -48,9 +48,9 @@
 	padding: 0;
 	min-height: 0;
 	height: 380px;
-	margin-top: 120px;
+	margin-top: 130px;
 	&.with-fixed-order-panel {
-		margin-top: 220px;
+		margin-top: 230px;
 	}
 	.container {
 		position: absolute;
@@ -74,6 +74,20 @@
 	.background-burgerday {
 		-webkit-filter: brightness(100%);
 	  filter: brightness(100%);
+	}
+	.btn-back {
+		width: 120px;
+		height: 50px;
+		position: absolute;
+		top: 20px;
+		left: 23px;
+		background-image: url('/assets/images/bt_back.svg');
+		background-repeat: no-repeat;
+		background-position: center center;
+		transition: all 0.3s ease;
+		&:hover {
+			background-image: url('/assets/images/bt_back_hover.svg');
+		}
 	}
 	.dish-image {
 		width: 338px;

@@ -36,11 +36,13 @@ export default Ember.Component.extend({
         }
         Ember.$(_this.get('classToTransform')).css('transform', 'translateY(-' + (scroll / 5) + 'px)');
         Ember.$('.caption-container').css('transform', 'translateY(-' + (scroll / 5) + 'px)');
-        Ember.$('.section-tiendaexpress div').css('transform', 'translate(-' + ((90 / _this.get('scrollToGo')) * scroll) + 'px, ' + ((80 / _this.get('scrollToGo')) * scroll) + 'px)');
-        Ember.$('.section-restaurantes div').css('transform', 'translate(' + ((100 / _this.get('scrollToGo')) * scroll) + 'px, -' + ((50 / _this.get('scrollToGo')) * scroll) + 'px)');
-        Ember.$('.section-farmacia div').css('transform', 'translate(-' + ((80 / _this.get('scrollToGo')) * scroll) + 'px, -' + ((70 / _this.get('scrollToGo')) * scroll) + 'px)');
-        Ember.$('.section-super div').css('transform', 'translateY(-' + ((100 / _this.get('scrollToGo')) * scroll) + 'px)');
-        Ember.$('.section-antojos div').css('transform', 'translate(-' + ((50 / _this.get('scrollToGo')) * scroll) + 'px, -' + ((100 / _this.get('scrollToGo')) * scroll) + 'px)');
+        if (scroll <= _this.get('scrollToGo')) {
+            Ember.$('.section-tiendaexpress div').css('transform', 'translate(-' + ((70 / _this.get('scrollToGo')) * scroll) + 'px, ' + ((50 / _this.get('scrollToGo')) * scroll) + 'px)');
+            Ember.$('.section-restaurantes div').css('transform', 'translate(' + ((70 / _this.get('scrollToGo')) * scroll) + 'px, -' + ((30 / _this.get('scrollToGo')) * scroll) + 'px)');
+            Ember.$('.section-farmacia div').css('transform', 'translate(-' + ((80 / _this.get('scrollToGo')) * scroll) + 'px, -' + ((70 / _this.get('scrollToGo')) * scroll) + 'px)');
+            Ember.$('.section-super div').css('transform', 'translateY(-' + ((100 / _this.get('scrollToGo')) * scroll) + 'px)');
+            Ember.$('.section-antojos div').css('transform', 'translate(-' + ((50 / _this.get('scrollToGo')) * scroll) + 'px, -' + ((100 / _this.get('scrollToGo')) * scroll) + 'px)');
+        }
       }
     });
   },

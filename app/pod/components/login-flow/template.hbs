@@ -4,11 +4,11 @@
 
 {{#if showModalDelevery}}
   {{#modal-dialog close="toggleLogin" translucentOverlay=true}}
-    {{schedule-delivery-popup removeAddressList=closeAllPopup showModalDelevery=showModalDelevery orderPlaced='orderPlaced' showCreditCardList='showCreditCardList'}}
+    {{schedule-delivery-popup removeAddressList=closeAllPopup showModalDelevery=showModalDelevery orderPlaced='orderPlaced' showCreditCardList='showCreditCardList' orderInstruction=orderInstruction}}
   {{/modal-dialog}}
 {{else if showCreditCardList}}
   {{#modal-dialog close="toggleLogin" translucentOverlay=true}}
-    {{credit-card-list showCreditCardList=showCreditCardList tip=tipForOrder orderPlaced='orderPlaced' showAddCC='showAddCC'}}
+    {{credit-card-list showCreditCardList='toggleLogin' tip=tipForOrder orderPlaced='orderPlaced' showAddCC='showAddCC' orderInstruction=orderInstruction}}
     {{#if showAddCC}}
       {{#modal-dialog close="showAddCC" translucentOverlay=true}}
         {{credit-card-iframe-popup creditCard=showAddCC redirectURL=CCURL}}
@@ -29,4 +29,14 @@
   {{#modal-dialog close="toggleLogin" translucentOverlay=true}}
     {{login-register loggedIn='loggedIn' showLogin=true  showAddressList=showAddressList phoneVerification=phoneVerification loginFrom="checkout"}}
   {{/modal-dialog}}
+{{/if}}
+
+{{#if orderExist}}
+    {{#modal-dialog close="orderAlreadyExists" translucentOverlay=true}}
+        {{order-already-exist showPopup=orderExist showExistingOrder='showExistingOrder' toggleLogin='orderAlreadyExists'}}
+    {{/modal-dialog}}
+{{/if}}
+
+{{#if showExistingOrder}}
+    {{order-panel closePopUp=showExistingOrder adjustPopUp=false togglePopUp='showExistingOrder' allowNextOrder=true orderAction='showAddressList'}}
 {{/if}}

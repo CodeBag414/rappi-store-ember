@@ -61,6 +61,7 @@ export default ArrayProxy.extend({
     let order = RappiOrderModel.create({id: orderId});
     let orderFound = this.findBy('id', get(order, 'id'));
     if (orderFound) {
+      orderFound.trigger('orderRemoved');
       this.removeObject(orderFound);
     }
   },

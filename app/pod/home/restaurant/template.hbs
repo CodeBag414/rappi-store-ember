@@ -1,7 +1,6 @@
 <main {{ action "click" }}>
   <div class="corridor-banner">
-    <div class="corridor-banner-bg" style="background-image:url('assets/images/banner-allRestaurants-min.png');"></div>
-  </div>
+      <div class="corridor-banner-bg volver-btn-banner" style="background-image:url('assets/images/banner-allRestaurants-min.png');"><div class="volver-btn" {{action 'back'}}><img src="assets/images/_icon_back_white.svg" /><span>VOLVER</span></div></div>  </div>
   {{#each categories as |category|}}
     {{restaurant-category-block category=category}}
   {{/each}}

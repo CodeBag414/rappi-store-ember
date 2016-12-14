@@ -2,10 +2,10 @@ import Ember from 'ember';
 import ENV from 'rappi/config/environment';
 
 const {
-  stLat,
-  stLng,
-  stStoreType
-  } = ENV.storageKeys;
+    stLat,
+    stLng,
+    stStoreType
+    } = ENV.storageKeys;
 
 export default Ember.Route.extend({
   serverUrl: Ember.inject.service('server-url'),
@@ -24,6 +24,7 @@ export default Ember.Route.extend({
 
     this.set('productSearched', productName);
     this.set('storeType', storeType);
+    this.controllerFor('home').set('storeType', storeType);
     let result = [];
     let lat = this.storage.get(stLat);
     let lng = this.storage.get(stLng);
@@ -33,6 +34,8 @@ export default Ember.Route.extend({
     }
     if (storeType === "farmacia") {
       storeType = "Farmatodo";
+    } else if (storeType === ENV.defaultStoreType) {
+      storeType = "hiper";
     }
 
     if (storeType === "rappicode") {
@@ -54,12 +57,12 @@ export default Ember.Route.extend({
             crossDomain: true,
             dataType: 'json',
             contentType: "application/json",
-            beforeSend: function(xhr) {
+            beforeSend: function (xhr) {
               xhr.setRequestHeader('Authorization', `Bearer ${accessToken}`);
             },
           }).then((rsp)=> {
             if (Ember.isPresent(rsp)) {
-              result = rsp.result.products;              
+              result = rsp.result.products;
               for (var key in result) {
                 result[key].id = result[key].store_id;
                 result[key].imagelow = ENV.rappiServerURL + ENV.rappiWebBaseImage + '/' + result[key].image;
@@ -88,41 +91,72 @@ export default Ember.Route.extend({
       });
     } else {
       return new Ember.RSVP.Promise(function (resolve, reject) {
+        let objectToResolve = {};
+        let stores = [];
         Ember.RSVP.hashSettled({
           searchedPruduct: Ember.$.getJSON(`${currentUrl}${ENV.storage}lat=${lat}&lng=${lng}&store_types=${storeType}`)
-            .then((rsp)=> {
-              if (Ember.isPresent(rsp)) {
-                let stores = [];
-                for (var key in rsp.stores) {
-                  if (rsp.stores[key].store_id > 0) {
-                    stores.push(rsp.stores[key].store_id.toString());
-                  }
-                }
-                return Ember.$.getJSON(`${currentUrl}${ENV.productSearch}ids=${productId}&stores=${stores}`);
-              }
-            }).then((rsp)=> {
-              if (Ember.isPresent(rsp)) {
-                result = rsp;
-                result.forEach((prod)=> {
-                  prod.id = prod.store_id + "_" + prod.id;
-                });
-              }
-              console.log("result", result);
-              return result;
-            }).fail((err)=> {
-              console.log("err>> is ...", err);
-            })
         }).then(function (hashResult) {
-          var objectToResolve = {};
           Object.keys(hashResult).forEach(function (key) {
             if (hashResult[key].state === 'fulfilled') {
-              objectToResolve[key] = hashResult[key].value;
-            } else if (key === 'popularSearch') {
-              objectToResolve[key] = [];
+              let resp = hashResult[key].value;
+              if (Ember.isPresent(resp)) {
+                for (var key in resp.stores) {
+                  if (resp.stores[key].store_id > 0) {
+                    stores.push(resp.stores[key].store_id.toString());
+                  }
+                }
+              }
             } else {
-              reject(hashResult[key]);
+              objectToResolve[key] = [];
             }
           });
+          if (Ember.isEmpty(objectToResolve['searchedPruduct']) && storeType === "hiper") {
+            return Ember.RSVP.hashSettled({
+              searchedPruduct: Ember.$.getJSON(`${currentUrl}${ENV.storage}lat=${lat}&lng=${lng}&store_types=${ENV.defaultStoreType}`)
+            })
+          }
+        }).then(function (hashResult) {
+          if (Ember.isPresent(hashResult) && Object.keys(hashResult) > 0) {
+            Object.keys(hashResult).forEach(function (key) {
+              if (hashResult[key].state === 'fulfilled') {
+                let resp = hashResult[key].value;
+                if (Ember.isPresent(resp)) {
+                  for (var key in resp.stores) {
+                    if (resp.stores[key].store_id > 0) {
+                      stores.push(resp.stores[key].store_id.toString());
+                    }
+                  }
+                }
+              } else {
+                objectToResolve[key] = [];
+              }
+            });
+          }
+          if (Ember.isPresent(stores)) {
+            return Ember.RSVP.hashSettled({
+              searchedPruduct: Ember.$.getJSON(`${currentUrl}${ENV.productSearch}ids=${productId}&stores=${stores}`)
+            })
+          }
+        }).then(function (hashResult) {
+          if (Ember.isPresent(hashResult) && Object.keys(hashResult).length > 0) {
+            Object.keys(hashResult).forEach(function (key) {
+              if (hashResult[key].state === 'fulfilled') {
+                let rsp = hashResult[key].value;
+                if (Ember.isPresent(rsp)) {
+                  result = rsp;
+                  result.forEach((prod)=> {
+                    prod.id = prod.store_id + "_" + prod.id;
+                  });
+                }
+                console.log("result", result);
+                objectToResolve[key] = result
+              } else {
+                objectToResolve[key] = [];
+              }
+            });
+          } else {
+            objectToResolve['searchedPruduct'] = [];
+          }
           resolve(objectToResolve);
         }).catch(function (error) {
           reject(error);
@@ -150,10 +184,12 @@ export default Ember.Route.extend({
       let controller = this.controllerFor('home');
       let homeController = this.controllerFor('index');
       controller.set('currentlyLoading', true);
+      homeController.set('currentlyLoading', true);
       homeController.set('searching', true);
       transition.promise.finally(function () {
         controller.set('currentlyLoading', false);
         homeController.set('searching', false);
+        homeController.set('currentlyLoading', false);
       });
     }
   }

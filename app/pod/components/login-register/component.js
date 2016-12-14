@@ -1,8 +1,8 @@
 import Ember from 'ember';
 import ENV from 'rappi/config/environment';
 const {
-  paypal
-  } = ENV.storageKeys;
+    paypal
+    } = ENV.storageKeys;
 
 export default Ember.Component.extend({
   serverUrl: Ember.inject.service('server-url'),
@@ -33,6 +33,10 @@ export default Ember.Component.extend({
     }
   },
   actions: {
+    recoverPassword(recoveryEmail){
+      this.toggleProperty('showRecoverPassword');
+      this.set('recoveryEmail', recoveryEmail);
+    },
     swapPanel: function () {
       this.toggleProperty('showLogin');
     },

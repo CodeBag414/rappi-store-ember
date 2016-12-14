@@ -108,7 +108,7 @@ h5.block-subHeading.uppercase {
 }
 
 .pac-container {
-  margin-top: 3px;
+    margin-top: 3px;
 }
 
 .types-store {
@@ -481,6 +481,25 @@ h5.block-subHeading.uppercase {
         left: 0px;
         padding: 0;
         border-radius: 2px;
+        .searching-icon-wrapper {
+          width:65px;
+          height: 65px;
+          background-color: #ffffff;
+          display: flex;
+          align-items: center;
+          margin: 110px auto;
+          position: relative;
+          .searching {
+            height: 65px;
+            width: 65px;
+            animation: rotation 1s infinite linear;
+            border: 2px solid rgba(68, 212, 129, 0.2);
+            border-top-color: rgba(68, 212, 129, 0.7);
+            border-radius: 50%;
+            margin: 0 auto;
+            display: block;
+          }
+        }
         li {
           height: 65px;
           border-width: 0px;
@@ -777,10 +796,29 @@ h5.block-subHeading.uppercase {
       }
       .auto-complete {
         width: 100%;
-        top: 70px;
+        top: 45px;
         left: 0px;
         padding: 0;
         border-radius: 2px;
+        .searching-icon-wrapper {
+          width:65px;
+          height: 65px;
+          background-color: #ffffff;
+          display: flex;
+          align-items: center;
+          margin: 110px auto;
+          position: relative;
+          .searching {
+            height: 65px;
+            width: 65px;
+            animation: rotation 1s infinite linear;
+            border: 2px solid rgba(68, 212, 129, 0.2);
+            border-top-color: rgba(68, 212, 129, 0.7);
+            border-radius: 50%;
+            margin: 0 auto;
+            display: block;
+          }
+        }
         li {
           height: 65px;
           border-width: 0px;
@@ -975,7 +1013,7 @@ h5.block-subHeading.uppercase {
   margin-top: 334px;
   background-color: #f0f4f5;
   border-bottom: 1px solid #e1e1e1;
-  padding: 0px 18.5px 0px 15px;
+  padding: 0px 0px 0px 15px;
   position: relative;
   z-index: 101;
   transition: background 0.5s;
@@ -1052,6 +1090,10 @@ h5.block-subHeading.uppercase {
             padding-left: 22px;
             text-align: left;
             z-index: 102;
+            text-transform: lowercase;
+          }
+          p:first-letter{
+            text-transform: uppercase;
           }
 
           > p {
@@ -1219,8 +1261,8 @@ h5.block-subHeading.uppercase {
       -webkit-transition: transform 0.2s;
       -ms-transition: transform 0.2s;
       position: relative;
-      left: 120px;
-      top: -120px;
+      left: 100px;
+      top: -90px;
     }
     h1 {
       position: absolute;
@@ -1257,8 +1299,8 @@ h5.block-subHeading.uppercase {
       -webkit-transition: transform 0.2s;
       -ms-transition: transform 0.2s;
       position: relative;
-      left: -200px;
-      top: 50px;
+      left: -170px;
+      top: 30px;
     }
     h1 {
       position: absolute;
@@ -1508,7 +1550,7 @@ h5.block-subHeading.uppercase {
 }
 
 .bg-block.block-two {
-  background-image: url("images/imagen.png");
+  background-image: url("images/pink.jpg");
 }
 
 .block-vedio {

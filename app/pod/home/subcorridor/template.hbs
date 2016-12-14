@@ -77,6 +77,7 @@
           <div class="background-restaurant"
                style="background-color: #FAFAFA; background-image: url('{{background}}'); background-position: center;">
           </div>
+          <div class="btn-back" {{action 'goToRestaurantHome'}}></div>
           <div class="dish-image" style="background-image: url('{{dishImage}}');">
           </div>
           <div class="restaurant-information">
@@ -93,8 +94,9 @@
       {{most-popular-dish products=popularProducts corridorName=model.subcorridor.store.name corridorId=model.subcorridor.store.id storeId=model.subcorridor.store.store_id inSpecificRestaurant=true}}
       {{/if}}
       {{#if products}}
-      {{restaurant-menu products=products corridorName=model.subcorridor.store.name corridorId=model.subcorridor.store.id storeId=model.subcorridor.store.store_id inSpecificRestaurant=true}}
+        {{restaurant-menu products=products allProducts=allProducts bebidasProducts=bebidasProducts corridorName=model.subcorridor.store.name corridorId=model.subcorridor.store.id storeId=model.subcorridor.store.store_id inSpecificRestaurant=true categorizedView=true}}
       {{/if}}
+
       {{restaurant-whims-desires where=model.subcorridor.store.name}}
   {{/unless}}
 

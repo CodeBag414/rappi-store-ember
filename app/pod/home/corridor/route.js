@@ -2,13 +2,13 @@ import Ember from 'ember';
 import ENV from 'rappi/config/environment';
 
 const {
-  stLat,
-  stLng,
-  stContent,
-  stStoreType,
-  stStoreId,
-  stSelectedSubcorridorId
-  } = ENV.storageKeys;
+    stLat,
+    stLng,
+    stContent,
+    stStoreType,
+    stStoreId,
+    stSelectedSubcorridorId
+    } = ENV.storageKeys;
 
 /** Product pivot id (Coca-cola)*/
 const PRODUCT_PIVOTE_ID = '42606';
@@ -66,7 +66,7 @@ export default Ember.Route.extend({
         products.forEach(function (product, index) {
           var productId = product.id;
           /*** Remove Product pivot */
-          if ( (productId.split('_')[1] === PRODUCT_PIVOTE_ID || productId.split('_')[1] === PRODUCT_PIVOTE_ID_MX)
+          if ((productId.split('_')[1] === PRODUCT_PIVOTE_ID || productId.split('_')[1] === PRODUCT_PIVOTE_ID_MX)
               && index === 0) {
             products.removeObject(product);
           }
@@ -99,7 +99,7 @@ export default Ember.Route.extend({
               var productId = product.id;
               /*** Remove Product pivot */
               if ((productId.split('_')[1] === PRODUCT_PIVOTE_ID || productId.split('_')[1] === PRODUCT_PIVOTE_ID_MX)
-                && index === 0) {
+                  && index === 0) {
                 products.removeObject(product);
               }
               /*** Add store id if not found in product id */
@@ -117,14 +117,14 @@ export default Ember.Route.extend({
         if (Ember.$(window).width() < 480) {
           var owl = $(".subcategory-container");
           owl.owlCarousel({
-              items : 4,
-              itemsDesktop : [1000,4],
-              itemsDesktopSmall : [900,3],
-              itemsTablet: [600,2],
-              itemsMobile : [479,4],
-              pagination: false,
-              navigation: false,
-              scrollPerPage: false
+            items: 4,
+            itemsDesktop: [1000, 4],
+            itemsDesktopSmall: [900, 3],
+            itemsTablet: [600, 2],
+            itemsMobile: [479, 4],
+            pagination: false,
+            navigation: false,
+            scrollPerPage: false
           });
         }
 
@@ -155,11 +155,27 @@ export default Ember.Route.extend({
     this.set('corridorId', corridorId);
     let currentUrl = this.serverUrl.getUrl();
     var storeType = this.storage.get(stStoreType);
+    this.controllerFor("home").set("storeType", storeType);
     if (storeType == "restaurant") {
       let lat = this.storage.get(stLat);
       let lng = this.storage.get(stLng);
-      return Ember.RSVP.hash({
-        restaurants: Ember.$.getJSON(`${currentUrl}api/web/stores/restaurant/categories/${corridorId}?lng=${lng}&lat=${lat}`)
+
+      return new Ember.RSVP.Promise(function (resolve, reject) {
+        var objectToResolve = {};
+        Ember.RSVP.hashSettled({
+          restaurants: Ember.$.getJSON(`${currentUrl}api/web/stores/restaurant/categories/${corridorId}?lng=${lng}&lat=${lat}`)
+        }).then(function (hashResult) {
+          Object.keys(hashResult).forEach(function (key) {
+            if (hashResult[key].state === 'fulfilled') {
+              objectToResolve[key] = hashResult[key].value;
+            } else {
+              objectToResolve[key] = [];
+            }
+          });
+          resolve(objectToResolve);
+        }).catch(function (error) {
+          reject(error);
+        });
       });
     } else {
       let selectedSubcorridorId = this.storage.get(stSelectedSubcorridorId);
@@ -260,6 +276,12 @@ export default Ember.Route.extend({
       }
     }
   },
+  afterModel(model){
+    var storeType = this.storage.get(stStoreType);
+    if (storeType === "restaurant" && Ember.isEmpty(model.restaurants)) {
+      this.transitionTo('home.store', storeType);
+    }
+  },
   actions: {
     loading(transition) {
       let controller = this.controllerFor('home');
@@ -274,6 +296,8 @@ export default Ember.Route.extend({
     change: function () {
       this.controller.set('cartObject', this.cart.getCart(this.storage.get(stStoreType)));
       this.transitionTo('home.store', this.storage.get(stStoreType));
+    }, back(){
+      history.back();
     }
   }
 });

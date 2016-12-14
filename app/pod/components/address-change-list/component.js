@@ -5,6 +5,7 @@ const {
   stLat,
   stLng,
   stAddress,
+  stCity,
   stContent,
   stStoreType,
   stShippingCharges,
@@ -80,6 +81,7 @@ export default Ember.Component.extend({
                 _this.storage.set(stLng, inactiveModel.get('lng'));
                 _this.storage.set(stAddress, inactiveModel.get('address'));
                 _this.storage.set(stAddressId, inactiveModel.get('id'));
+                _this.storage.set(stCity, inactiveModel.get('tag'));
                 _this.set('showAddressListToUpdate', false);
 
                 let addLat = inactiveModel.get('lat') ? Math.abs(Number(inactiveModel.get('lat'))) : 0;

@@ -121,24 +121,24 @@
                                   <div class="selected-line"></div>
                                   <p>Antojos</p>
                               </div>
-		 <div class="category-item" {{action "selectSearchCategory" "rappicode"}}>
-                    <div class="selected-line"></div>
-                    <p>RappiCode</p>
-                  </div>
+                              <div class="category-item" {{action "selectSearchCategory" "rappicode"}}>
+                                  <div class="selected-line"></div>
+                                  <p>RappiCode</p>
+                              </div>
                           </div>
                       {{/if}}
                     </div>
                   {{#if isWhimSelected}}
-                  <div class="search-input-container">
-                    {{input  value=what id="what1" class="form-control input-dropdown whim-input" placeholder="¿Qué quieres?"}}
-                <button  {{action "toggle" }} class="btn select-button button-whim-1" type="button">
-                    <!--<i class="fa fa-chevron-right" aria-hidden="true"></i>-->
-                    <img class="arrow-button" src="assets/images/arrow-right-new.png">
-                </button>
-                    </div>
+                      <div class="search-input-container">
+                        {{input  value=what id="what1" class="form-control input-dropdown whim-input" placeholder="¿Qué quieres?"}}
+                          <button  {{action "toggle" }} class="btn select-button button-whim-1" type="button">
+                              <!--<i class="fa fa-chevron-right" aria-hidden="true"></i>-->
+                              <img class="arrow-button" src="assets/images/arrow-right-new.png">
+                          </button>
+                      </div>
                   {{else}}
                       <div class="search-input-container">
-                        {{input  value=queryField class="form-control" id="productSearchField" class="search-input" placeholder="¿Que estas buscando?"}}
+                        {{input  value=queryField class="form-control" enter="searchByEnter" id="productSearchField" class="search-input" placeholder="¿Que estas buscando?"}}
                         {{#unless searching}}
                             <a class="search-button" {{action "search" queryField}}></a>
                         {{else}}
@@ -148,41 +148,52 @@
                         {{/unless}}
 
                           <ul class="auto-complete">
+                                {{#if fetching}}
+                                    <div class="searching-icon-wrapper">
+                                        <i class="searching"></i>
+                                    </div>
+                                {{/if}}
                             {{#if (eq currentType 'restaurant')}}
                               {{#if (or hits.length restaurants.length)}}
-                              <div class="restaurant-auto-complete">
-                                <div class="restaurant-section">
-                                  {{#if restaurants.length}}
-                                    <h1>Restaurantes</h1>
-                                    <div class="restaurant-list">
-                                    {{#each restaurants as |restaurant|}}
-                                        <p {{action 'goToRestaurant' restaurant.id }} data="{{hit.id}}">
-                                            {{restaurant.name}}
-                                        </p>
-                                    {{/each}}
-                                    </div>
-                                  {{else}}
-                                    <h1>Restaurantes </h1>
-                                    <div class="no-restaurant">
-                                      <p>Pide a:</p>
-                                      <p class="search-keyword">{{queryField}}</p>
-                                      <button class="btn-ask" {{action "selectMeaning" "place" queryField}}>PEDIR</button>
-                                    </div>
-                                  {{/if}}
+                                  <div class="restaurant-auto-complete">
+                                      <div class="restaurant-section">
+                                        {{#if restaurants.length}}
+                                            <h1>Restaurantes</h1>
 
-                                </div>
-                                <div class="divider-line"></div>
-                                <div class="product-section">
-                                  <h1>Productos</h1>
-                                  <div class="product-list">
-                                  {{#each hits as |hit|}}
-                                      <li {{action 'search' '' hit.name hit.id }} data="{{hit.id}}">
-                                          <a href="javascript:void(0);">{{hit.name}}</a>
-                                      </li>
-                                  {{/each}}
+                                            <div class="restaurant-list">
+                                              {{#each restaurants as |restaurant|}}
+                                                  <p {{action 'goToRestaurant' restaurant.id }} data="{{hit.id}}">
+                                                    {{restaurant.name}}
+                                                  </p>
+                                              {{/each}}
+                                            </div>
+                                        {{else}}
+                                            <h1>Restaurantes </h1>
+
+                                            <div class="no-restaurant">
+                                                <p>Pide a:</p>
+
+                                                <p class="search-keyword">{{queryField}}</p>
+                                                <button class="btn-ask" {{action "selectMeaning" "place" queryField}}>
+                                                    PEDIR
+                                                </button>
+                                            </div>
+                                        {{/if}}
+
+                                      </div>
+                                      <div class="divider-line"></div>
+                                      <div class="product-section">
+                                          <h1>Productos</h1>
+
+                                          <div class="product-list">
+                                            {{#each hits as |hit|}}
+                                                <li {{action 'search' '' hit.name hit.id }} data="{{hit.id}}">
+                                                    <a href="javascript:void(0);">{{hit.name}}</a>
+                                                </li>
+                                            {{/each}}
+                                          </div>
+                                      </div>
                                   </div>
-                                </div>
-                              </div>
                               {{/if}}
                             {{else}}
                               {{#each hits as |hit|}}
@@ -193,16 +204,16 @@
                               {{/each}}
                             {{/if}}
                           </ul>
-
                       </div>
                   {{/if}}
                 </div>
               {{#if isWhimSelected}}
                   <div class="input-group search-bar-container whim-search antojos search-bar-transform-whim">
                     {{input  value=where class="form-control input-dropdown" id="whim1" placeholder="¿Dónde lo conseguimos?"}}
-                <button {{action "addWhim" true}} class="btn btn-success select-button button-whim-2" type="button">
-                    Pedir
-                </button>
+                      <button {{action "addWhim" true}} class="btn btn-success select-button button-whim-2"
+                                                        type="button">
+                          Pedir
+                      </button>
                   </div>
               {{/if}}
             </div>

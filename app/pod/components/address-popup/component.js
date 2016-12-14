@@ -7,10 +7,12 @@ const {
   stAddress,
   stContent,
   stAddressId,
-  stAddrPopupShown
+  stAddrPopupShown,
+  stCity,
   } = ENV.storageKeys;
 
 export default Ember.Component.extend({
+  serverUrl: Ember.inject.service('server-url'),
   country: {country: "CO"},
   selectedCountry: null,
   place: null,
@@ -36,6 +38,7 @@ export default Ember.Component.extend({
         this.set("showAddressHistory", true);
       }
     }
+    this.storage.set(stCity, this.get('currentCity'));
   },
   didRender() {
     this._super(...arguments);
@@ -75,6 +78,7 @@ export default Ember.Component.extend({
     selectCity(city) {
       this.set('showCityList', false);
       this.set('currentCity', city);
+      this.storage.set(stCity, city);
     },
     hideOverlay() {
       Ember.$('.address-popup-overlay').css('display', 'none');
@@ -86,12 +90,12 @@ export default Ember.Component.extend({
       let aptoAddress = Ember.$('#apto').val();
       if (!(lat && lng)) {
         this.set('showFaderLabel', true);
-        this.set('message', "¡Hey! ¡Pss! Tú, porfa ingresa una dirección válida");
+        this.set('message', "Por favor selecciona una dirección de la lista");
         return;
       }
       if (Ember.isBlank(aptoAddress)) {
         this.set('showFaderLabel1', true);
-        this.set('message1', "¡Hey! ¡Pss! Tú, porfa ingresa una dirección válida");
+        this.set('message1', "¿Oficina, apartamento o casa?");
         return;
       }
       let place = this.get('place');
@@ -99,7 +103,11 @@ export default Ember.Component.extend({
         this.send("addAddressHistory", place);
         this.set('place', null);
       }
-      mixpanel.track("address_popup_address_submit");
+      if (this.serverUrl.isPayPalENV()) {
+        mixpanel.track("paypal_address_popup_address_submit");
+      } else {
+        mixpanel.track("address_popup_address_submit");
+      }
       this.storage.set(stLat, lat);
       this.storage.set(stLng, lng);
       this.storage.set(stAddress, completeAddress + ", " + aptoAddress);
@@ -162,7 +170,7 @@ export default Ember.Component.extend({
       e.preventDefault();
       return false;
     },
-    addAddressHistory(place){
+    addAddressHistory(place) {
       if (!place) {
         return;
       }
@@ -176,7 +184,7 @@ export default Ember.Component.extend({
       });
       if (!isAddressHistoryExist) {
         if (addressHistory.length < 4) {
-          addressHistory[addressHistory.length]=place;
+          addressHistory[addressHistory.length] = place;
           this.storage.set("addressHistory", addressHistory);
           this.set("addressHistory", this.storage.get("addressHistory"));
           this.set("showAddressHistory", true);
@@ -215,6 +223,8 @@ export default Ember.Component.extend({
           }
         });
       }
+    }, closePopup: function () {
+      this.set('showAddressPopup', false);
     }
   },
   keyUp: function (e) {
@@ -272,7 +282,7 @@ export default Ember.Component.extend({
       this.set('showCityList', false);
     }
   },
-  focusIn: function(e) {
+  focusIn: function (e) {
     if (e.target.id == "apto") {
 
     } else {
