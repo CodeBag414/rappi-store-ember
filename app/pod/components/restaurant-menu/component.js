@@ -40,32 +40,35 @@ export default Ember.Component.extend({
 
     });
 
-    var owl = Ember.$(".most-popular-dishes");
-    if (Ember.$(window).width() < 480) {
-      owl.owlCarousel({
-        items : 4,
-        itemsDesktop : [1000,4],
-        itemsDesktopSmall : [900,3],
-        itemsTablet: [600,2],
-        itemsMobile : [479, 1.5],
-        pagination: false,
-        navigation: false,
-        scrollPerPage: false
-      });
-    } else {
-      owl.owlCarousel({
-        items : 4,
-        itemsDesktop : [1000,4],
-        itemsDesktopSmall : [900,3],
-        itemsTablet: [600,2],
-        itemsMobile : [479,1],
-        pagination: false,
-        navigation: true,
-        scrollPerPage: true
-      });
+    var owl = Ember.$("#drinks-carousel");
+    if (Ember.isPresent(owl)) {
+      if (Ember.$(window).width() < 480) {
+        owl.owlCarousel({
+          items: 4,
+          itemsDesktop: [1000, 4],
+          itemsDesktopSmall: [900, 3],
+          itemsTablet: [600, 2],
+          itemsMobile: [479, 1.5],
+          pagination: false,
+          navigation: false,
+          scrollPerPage: false
+        });
+      } else {
+        owl.owlCarousel({
+          items: 4,
+          itemsDesktop: [1000, 4],
+          itemsDesktopSmall: [900, 3],
+          itemsTablet: [600, 2],
+          itemsMobile: [479, 1],
+          pagination: false,
+          navigation: true,
+          scrollPerPage: true
+        });
+      }
     }
   },
   willDestroyElement() {
+    this._super(...arguments);
     Waypoint.destroyAll();
   },
   actions: {

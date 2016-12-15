@@ -49,7 +49,7 @@
             <h1>Bebidas</h1>
             <hr>
         </div>
-        <div class="most-popular-dishes">
+        <div id="drinks-carousel" class="most-popular-dishes">
           {{#each bebidasProducts as |bebidas key|}}
               {{restaurant-product-card product=bebidas corridorName=corridorName corridorId=corridorId rappi_store_id=storeId inSpecificRestaurant=inSpecificRestaurant}}
           {{/each}}

@@ -125,6 +125,7 @@ export default Ember.Component.extend({
         let storageLng = this.storage.get(stLng) ? Math.abs(this.storage.get(stLng)) : 0;
         if (this.get('isCheckout') && storageAddressId && storageAddressId.toString() === id.toString()) {
           this.sendAction('showModalDelevery');
+          return;
         } else {
           //this.set('showPopUp', false);
         }
@@ -139,6 +140,8 @@ export default Ember.Component.extend({
           }
           if ((Math.abs(addLat - storageLat) > 0.000001 || Math.abs(addLng - storageLng) > 0.000001)) {
             this.send("restoreOrderAndCart", restoreBasket);
+          }else{
+            this.sendAction('showModalDelevery');
           }
         }
       });

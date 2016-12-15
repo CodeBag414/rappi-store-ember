@@ -48,8 +48,8 @@
           Restaurantes
       {{else if (eq storeType 'farmacia')}}
           Farmacia
-      {{else}}
-          RappiCode
+      <!--{{else}}-->
+          <!--RappiCode-->
       {{/if}}
 
     </span>
@@ -78,10 +78,10 @@
                             <div class="selected-line"></div>
                             <p>Farmacia</p>
                         </div>
-                        <div class="category-item" {{action "changeStoreTypeForSearch" "rappicode"}}>
-                            <div class="selected-line"></div>
-                            <p>RappiCode</p>
-                        </div>
+                        <!--<div class="category-item" {{action "changeStoreTypeForSearch" "rappicode"}}>-->
+                            <!--<div class="selected-line"></div>-->
+                            <!--<p>RappiCode</p>-->
+                        <!--</div>-->
                     {{/if}}
                   </div>
               {{/if}}
