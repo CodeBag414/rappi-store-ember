@@ -82,6 +82,7 @@ export default Ember.Component.extend({
           });
           _this.sendAction('orderPlaced', _this.get('session').get('activeOrderIds')[0]);
         }).catch((err)=> {
+
           _this.set('isLoading', false);
           let errMsg = `${err.statusText}: `;
           if (Ember.isPresent(err.responseJSON) && Ember.isPresent(err.responseJSON.errors)) {
@@ -90,7 +91,13 @@ export default Ember.Component.extend({
               errMsg += ', ' + errors[errKey][0];
             });
           }
-          _this.get('flashMessages').danger(errMsg);
+
+          if (errMsg === "undefined: ") {
+              _this.sendAction('orderPlaced', _this.get('session').get('activeOrderIds')[0]);
+          } else {
+              _this.get('flashMessages').danger(errMsg);
+          }
+
         });
       }, function(error){
         _this.get('flashMessages').danger(error);
